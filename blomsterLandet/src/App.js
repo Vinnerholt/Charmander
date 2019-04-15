@@ -1,11 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
+import BuyButton from './components/BuyButton';
 
 //The main application
 const App = () => {
     const { viewStyle } = styles;
     return (
-        <View style={viewStyle} />
+        <View style={viewStyle} >
+            <BuyButton />
+        </View>
     );
 };
 
