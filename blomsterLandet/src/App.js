@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ImageBackground } from 'react-native';
+import { Image, ImageBackground } from 'react-native';
 import NotificationExpanded from './components/notifications/NotificationExpanded';
 import { Header } from './components/common/index';
 //The main application
@@ -16,16 +16,16 @@ const App = () => (
                         source={require('./resources/images/blomsterlandet_logo.png')}
                 />
                 </Header>
-                <View style={{ flex: 1 }}>
-                    <NotificationExpanded
-                        // eslint-disable-next-line global-require
-                        imageSource={require('./resources/images/tomat.jpg')}
-                        title='Dags att köpa tomater'
-                        description='Nu har det blivit dags att plantera tomaterna
-                        för att kunna njuta av dem i sommar. 
-                        Tryck på köp nu för att få hem plantorna lagom till helgen.'
-                    />
-                </View>
+                
+                <NotificationExpanded
+                    // eslint-disable-next-line global-require
+                    imageSource={require('./resources/images/tomat.jpg')}
+                    title='Dags att köpa tomater'
+                    description='Nu har det blivit dags att plantera tomaterna
+                    för att kunna njuta av dem i sommar. 
+                    Tryck på köp nu för att få hem plantorna lagom till helgen.'
+                />
+                
         </ImageBackground>
     );
 
