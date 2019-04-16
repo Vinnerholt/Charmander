@@ -18,10 +18,12 @@ const App = () => (
                 </Header>
                 <View style={{ flex: 1 }}>
                     <NotificationExpanded
+                        // eslint-disable-next-line global-require
+                        imageSource={require('./resources/images/tomat.jpg')}
                         title='Dags att köpa tomater'
                         description='Nu har det blivit dags att plantera tomaterna
-                        för att kunna njuta av dem i sommar.
-                        Tryck på köp nu för att få hem dem lagom till helgen.'
+                        för att kunna njuta av dem i sommar. 
+                        Tryck på köp nu för att få hem plantorna lagom till helgen.'
                     />
                 </View>
         </ImageBackground>

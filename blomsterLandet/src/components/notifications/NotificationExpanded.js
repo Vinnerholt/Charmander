@@ -1,17 +1,30 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, Image } from 'react-native';
+import { Card, CardSection } from '../common/index';
 
-const NotificationExpanded = ({ title, description }) => {
-    const { containerStyle, titleStyle, descriptionStyle, titleBoxStyle, descriptionBoxStyle } = styles;
+const NotificationExpanded = ({ title, description, imageSource }) => {
+    const {  
+        titleStyle, 
+        descriptionStyle, 
+        imageStyle,
+     } = styles;
     return (
-        <View style={containerStyle}>
-            <View style={titleBoxStyle}>
+        <Card>
+            <CardSection>
+                 <Image
+                    style={imageStyle}
+                    source={imageSource}
+                 />
+            </CardSection>
+            <CardSection>
                 <Text style={titleStyle}>{title}</Text> 
-            </View>
-            <View style={descriptionBoxStyle}>
+            </CardSection>
+
+            <CardSection>
                 <Text style={descriptionStyle}>{description}</Text>
-            </View>
-        </View>
+            </CardSection>
+        </Card>
+
     );
 };
 
@@ -19,29 +32,22 @@ const styles = {
     containerStyle: {
         flex: 1
     },
-    titleBoxStyle: {
-        backgroundColor: 'white',
-        alignSelf: 'center',
-        marginTop: 40,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 8
+    imageContainerStyle: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 13,
+        flex: 1
+    },
+    imageStyle: {
+        marginTop: 15,
+        height: 180, 
+        width: null,
+        flex: 1
     },
     titleStyle: {
         fontSize: 20,
+        fontWeight: 'bold',
         color: '#000'
-    },
-    descriptionBoxStyle: {
-        backgroundColor: 'white',
-        alignSelf: 'center',
-        marginTop: 40,
-        marginLeft: 10,
-        marginRight: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 10
     },
     descriptionStyle: {
         fontSize: 16,
