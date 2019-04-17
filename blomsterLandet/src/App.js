@@ -1,22 +1,43 @@
 import React from 'react';
-import { View } from 'react-native';
-import BuyButton from './components/BuyButton';
+import { Button, View, Text } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation'; // Version can be specified in package.json
+import DetailsScreen from './screens/DetailsScreen';
 
-//The main application
-const App = () => {
-    const { viewStyle } = styles;
-    return (
-        <View style={viewStyle} >
-            <BuyButton />
-        </View>
-    );
-};
-
-const styles = {
-    viewStyle: {
-        backgroundColor: '#99CA3C',
-        flex: 1
+class HomeScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text>Mina Växter</Text>
+                <Button
+                    title="Köp nu"
+                    onPress={() => {
+                        /* 1. Navigate to the Details route with params */
+                        this.props.navigation.navigate('Details', {
+                            itemId: 86,
+                            otherParam: 'anything you want here',
+                        });
+                    }}
+                />
+            </View>
+        );
     }
-};
+}
 
-export default App;
+
+const RootStack = createStackNavigator(
+    {
+        Home: HomeScreen,
+        Details: DetailsScreen,
+    },
+    {
+        initialRouteName: 'Home',
+    }
+);
+
+const AppContainer = createAppContainer(RootStack);
+
+export default class App extends React.Component {
+    render() {
+        return <AppContainer />;
+    }
+}
