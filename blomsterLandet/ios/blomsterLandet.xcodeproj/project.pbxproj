@@ -41,6 +41,7 @@
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		A89D9E826A5F442382BCDC38 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41669EA6DC6C4193ACB1D181 /* libRNGestureHandler.a */; };
 		21CAC682089642D786B29F55 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEE0F0CDC874CECAE2607F2 /* libRNGestureHandler-tvOS.a */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +352,7 @@
 		9ED7E85F138441DEB13A4729 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		41669EA6DC6C4193ACB1D181 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		7CEE0F0CDC874CECAE2607F2 /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; name = "libRNGestureHandler-tvOS.a"; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -592,6 +594,7 @@
 				00E356EF1AD99517003FC87E /* blomsterLandetTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				B84B46711A7C4FE894615105 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -617,6 +620,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		B84B46711A7C4FE894615105 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8961B99B70F344AC841FC7CF /* FOCO.TTF */,
+				60CE3911D0CF411CBA449788 /* FOCOBOLD.TTF */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1064,6 +1077,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				0D87766DD2024131BC5F57A7 /* FOCO.TTF in Resources */,
+				BDDF3BD4BA86485DB85FBCD1 /* FOCOBOLD.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
