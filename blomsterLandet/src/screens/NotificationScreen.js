@@ -1,14 +1,28 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { NotificationList } from '../components/notifications';
+import { View, ScrollView } from 'react-native';
+import { NotificationListItem } from '../components/notifications';
 
 class NotificationScreen extends React.Component {
-    state = { notificationExpanded: false };
+    
+    state = { notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }] };
+
+    listNotifications() {
+        //Returns a map with notificationListItems, the key needs to be reworked as it 
+        //might not always be unique
+        return (this.state.notifications.map(notification =>
+            (<NotificationListItem title={notification.title} key={notification.title}>
+                {notification.title}
+            </NotificationListItem>)
+        )
+        );
+    }
 
     render() {
         return (
             <View>
-                <NotificationList expand={this.expandNotification()} style={{ flex: 1 }} />
+                <ScrollView>
+                    {this.listNotifications()} 
+                </ScrollView>
             </View>
         );
     }
