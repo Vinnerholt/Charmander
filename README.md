@@ -14,7 +14,7 @@ Charmander
 ### Komma igång
 1. Klona repositorien till din dator
 ```
-git clone https://github.com/DorisIT/iMat.git
+git clone https://github.com/Vinnerholt/Charmander.git
 ```
 2. Klart!
 
