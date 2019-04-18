@@ -6,7 +6,7 @@ class NotificationList extends Component {
     state = { notifications: [] };
 
     componentWillMount() {
-        this.setState({ notifications: ["Tomat", "Jord"] });
+        this.setState({ notifications: ['Tomat', 'Jord'] });
     }
 
     renderNotifications() {
@@ -17,12 +17,12 @@ class NotificationList extends Component {
     }
 
     render() {
-        return(
+        return (
             <ScrollView>
                 {this.renderNotifications()}
             </ScrollView>
-        )
-    };
+        );
+    }
 
 }
 
