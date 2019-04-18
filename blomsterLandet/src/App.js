@@ -1,30 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
-import { NotificationList, NotificationListItem } from './components/notifications/';
-import NotificationExpanded from './components/notifications/NotificationExpanded';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
-//The main application
-const App = () => {
-    const { viewStyle, notificationList } = styles;
-    return (
-        <View style={viewStyle}>
-            <NotificationExpanded
-                title='Dags att köpa tomater'
-                description='Nu har det blivit dags att plantera tomaterna för att kunna njuta av dem i sommar. Tryck på köp nu för att få hem dem lagom till helgen.'
-            />
-        </View>
-    );
-};
+import NotificationScreen from './screens/NotificationScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShopScreen from './screens/ShopScreen';
 
-const styles = {
-    viewStyle: {
-        backgroundColor: '#99CA3C',
-        flex: 1
-    },
-    notificationList: {
-        flex: 1,
-        backgroundColor: 'black'
-    }
-};
+const TabNavigator = createBottomTabNavigator({
+    Shop: ShopScreen,
+    Plants: HomeScreen,
+    Notification: NotificationScreen,
+    Profile: ProfileScreen
+});
 
-export default App;
+export default createAppContainer(TabNavigator);
