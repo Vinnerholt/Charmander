@@ -1,11 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { NotificationList } from '../components/notifications';
 
 class NotificationScreen extends React.Component {
+    state = { notificationExpanded: false };
+
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Notification!</Text>
+            <View>
+                <NotificationList expand={this.expandNotification()} style={{ flex: 1 }} />
             </View>
         );
     }
