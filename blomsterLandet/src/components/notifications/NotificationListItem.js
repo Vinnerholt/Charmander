@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const NotificationListItem = ({ onPress, children }) => {
     const { itemStyle, textStyle, arrowStyle } = styles;
@@ -8,9 +9,7 @@ const NotificationListItem = ({ onPress, children }) => {
             <Text style={textStyle}>
                 {children}
             </Text>
-            <Text style={arrowStyle}>
-                >
-            </Text>
+            <Icon name="chevron-right" style={arrowStyle} />
         </TouchableOpacity>
     );
 };
@@ -22,8 +21,10 @@ const styles = {
         fontSize: 16
     },
     arrowStyle: {
+        fontSize: 30,
         paddingRight: 5,
-        flex: 1
+        flex: 1,
+        color: '#000'
     },
     itemStyle: {
         flexDirection: 'row',
