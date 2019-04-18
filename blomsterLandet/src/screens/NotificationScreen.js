@@ -4,7 +4,8 @@ import { NotificationListItem } from '../components/notifications';
 
 class NotificationScreen extends React.Component {
     
-    state = { notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }] };
+    state = { notificationExpanded: false, 
+        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }] };
 
     listNotifications() {
         //Returns a map with notificationListItems, the key needs to be reworked as it 
