@@ -1,9 +1,25 @@
-import React from 'react';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+
+import NotificationScreen from './screens/NotificationScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShopScreen from './screens/ShopScreen';
+
+const TabNavigator = createBottomTabNavigator({
+    Shop: ShopScreen,
+    Plants: HomeScreen,
+    Notification: NotificationScreen,
+    Profile: ProfileScreen
+});
+
+export default createAppContainer(TabNavigator);
+
+/*import React from 'react';
 import { Image, ImageBackground } from 'react-native';
 import NotificationExpanded from './components/notifications/NotificationExpanded';
 import { Header } from './components/common/index';
 //The main application
-const App = () => (
+/*const App = () => (
         <ImageBackground 
             // eslint-disable-next-line global-require
             source={require('./resources/images/page-content-bg.png')}
@@ -28,5 +44,4 @@ const App = () => (
                 
         </ImageBackground>
     );
-
-export default App;
+ */
