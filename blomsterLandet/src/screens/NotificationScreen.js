@@ -48,7 +48,6 @@ class NotificationScreen extends React.Component {
             expandedTitle: title,
             expandedDescription: description
         });
-        console.log(this.state);
     }
 
     render() {
