@@ -5,7 +5,6 @@ import { NotificationListItem } from './index';
 class NotificationList extends Component {
     constructor(props) {
         super(props);
-        console.log(props.expand());
     }
 
     state = { notifications: [] };
