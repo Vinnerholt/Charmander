@@ -17,6 +17,12 @@ class NotificationExpanded extends Component {
             modalVisible: false,
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.modalVisible !== this.state.modalVisible) {
+          this.setState({ modalVisible: nextProps.modalVisible });
+        }
+      }
     
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });

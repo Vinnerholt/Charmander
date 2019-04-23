@@ -2,12 +2,12 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const NotificationListItem = ({ onPress, children }) => {
+const NotificationListItem = ({ pressed, title }) => {
     const { itemStyle, textStyle, arrowStyle } = styles;
     return (
-        <TouchableOpacity onPress={onPress} style={itemStyle}>
+        <TouchableOpacity onPress={() => (pressed(title))} style={itemStyle}>
             <Text style={textStyle}>
-                {children}
+                {title}
             </Text>
             <Icon name="chevron-right" style={arrowStyle} />
         </TouchableOpacity>
