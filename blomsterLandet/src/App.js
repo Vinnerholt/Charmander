@@ -1,4 +1,8 @@
+import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { Image, ImageBackground } from 'react-native';
+import { Header } from './components/common/index';
+import * as firebaseHandler from './firebaseHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -12,36 +16,32 @@ const TabNavigator = createBottomTabNavigator({
     Profile: ProfileScreen
 });
 
-export default createAppContainer(TabNavigator);
+const TabNavigatorContainer = createAppContainer(TabNavigator);
 
-/*import React from 'react';
-import { Image, ImageBackground } from 'react-native';
-import NotificationExpanded from './components/notifications/NotificationExpanded';
-import { Header } from './components/common/index';
 //The main application
-/*const App = () => (
-        <ImageBackground 
-            // eslint-disable-next-line global-require
-            source={require('./resources/images/page-content-bg.png')}
-            style={{ width: '100%', height: '100%' }}
-        >
-            <Header>
-                <Image
-                        style={{ width: 55, height: 36 }}
-                        // eslint-disable-next-line global-require
-                        source={require('./resources/images/blomsterlandet_logo.png')}
-                />
+class App extends React.Component {
+    componentWillMount() {
+        //Connects App to firebase.
+        firebaseHandler.initializeApp();
+    }
+    render() {
+        return (
+            <ImageBackground 
+                // eslint-disable-next-line global-require
+                source={require('./resources/images/page-content-bg.png')}
+                style={{ width: '100%', height: '100%' }}
+            >
+                <Header>
+                    <Image
+                            style={{ width: 55, height: 36 }}
+                            // eslint-disable-next-line global-require
+                            source={require('./resources/images/blomsterlandet_logo.png')}
+                    />
                 </Header>
-                
-                <NotificationExpanded
-                    // eslint-disable-next-line global-require
-                    imageSource={require('./resources/images/tomat.jpg')}
-                    title='Dags att köpa tomater'
-                    description='Nu har det blivit dags att plantera tomaterna
-                    för att kunna njuta av dem i sommar. 
-                    Tryck på köp nu för att få hem plantorna lagom till helgen.'
-                />
-                
-        </ImageBackground>
-    );
- */
+                <TabNavigatorContainer />
+            </ImageBackground>
+        );
+    }
+}
+
+export default App; 
