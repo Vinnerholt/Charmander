@@ -1,30 +1,33 @@
 import React from 'react';
 import { View, ScrollView, Image, Text, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 const PlantDetailScreen = (props) => {
-    const { buttonStyle, nameStyle, imageContainerStyle, viewStyle, topButtonsContainerStyle, imageStyle } = styles;
+    const { topButtonStyle, nameStyle, imageContainerStyle, viewCenterStyle,
+            topButtonsContainerStyle, imageStyle, iconStyle, speciesStyle,
+            waterButtonStyle, waterButtonTextStyle } = styles;
 
     return (
-    <View>
+    <ScrollView>
         <View style={topButtonsContainerStyle}>
-            <TouchableOpacity style={buttonStyle}>
+            <TouchableOpacity style={topButtonStyle}>
                 
 
-                <Image 
-                    style={imageStyle}
-                    source={require('./baseline-border_color-24px.svg')}
+                <Icon
+                    name="arrow-back"
+                    style={iconStyle}
                 />
 
             </TouchableOpacity>
             
-            <TouchableOpacity
-                style={buttonStyle}
-                title="Redigera"
-                color='#000'
-                alignItems='flex-end'
-            />
+            <TouchableOpacity style={topButtonStyle}>
+                <Icon 
+                    name="brush"
+                    style={iconStyle}
+                />
+            </TouchableOpacity>
         </View>
         
         <View style={imageContainerStyle}>
@@ -36,38 +39,57 @@ const PlantDetailScreen = (props) => {
             />
         </View>
         
-        <View style={viewStyle}>
+        <View style={viewCenterStyle}>
             <Text style={nameStyle}>
                 Nils
             </Text>
             
-            <Text>Tomat</Text>
+            <Text style={speciesStyle}>Tomat</Text>
         </View>
-               
 
-    </View>
+        <View style={viewCenterStyle}>
+            <TouchableOpacity style={waterButtonStyle}>
+                <Text style={waterButtonTextStyle}>VATTNA</Text>
+            </TouchableOpacity>
+        </View>      
+
+    </ScrollView>
     );
 };
 
 const styles = {
-    buttonStyle: {
-        width: 100,
+    topButtonStyle: {
+        width: 50,
         height: 50,
-        //backgroundColor: '#ffdd00',
+        backgroundColor: '#ffdd00',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#3e5f36',
         marginLeft: 5,
         marginRight: 5,
-
-        paddingTop: 15
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingLeft: 8,
+        //fungerar inte
+        /*shadowColor: '#050',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        elevation: 2*/
     },
     nameStyle: {
-        fontSize: 20,
+        fontSize: 40,
         fontWeight: 'bold',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        color: '#0055ff'
+        color: '#3e5f36'
+    },
+    speciesStyle: {
+        fontSize: 20,
+        fontStyle: 'italic',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        color: '#3e5f36'
     },
     imageContainerStyle: {
         justifyContent: 'center',
@@ -79,12 +101,12 @@ const styles = {
         width: 250,
         overflow: 'hidden',
         borderRadius: 250/2,
-        borderWidth: 2,
+        borderWidth: 4,
         borderColor: '#3e5f36',
     },
-    viewStyle: {
+    viewCenterStyle: {
         alignItems: 'center',
-        backgroundColor: '#000'
+        justifyContent: ''
     },
 
     topButtonsContainerStyle: {
@@ -92,14 +114,33 @@ const styles = {
         justifyContent: 'space-between',
         paddingTop: 4,
         paddingBottom: 4,
-        shadowColor: '#050',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        elevation: 2
+
     },
     smallImageStyle: {
         width: 20,
         heigth: 20
+    },
+    iconStyle: {
+        fontSize: 30,
+        paddingRight: 5,
+        flex: 1,
+        color: '#3e5f36',
+    },
+    waterButtonStyle: {
+        width: 150,
+        height: 55,
+        backgroundColor: '#005496',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#3e5f36',
+        marginLeft: 5,
+        marginRight: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    waterButtonTextStyle: {
+        fontSize: 30,
+        color: '#fff'
     }
 
 
