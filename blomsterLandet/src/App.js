@@ -5,13 +5,13 @@ import { Header } from './components/common/index';
 import * as firebaseHandler from './firebaseHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
-import HomeScreen from './screens/HomeScreen';
+import PlantDetailScreen from './screens/PlantDetailScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
 
 const TabNavigator = createBottomTabNavigator({
+    Plants: PlantDetailScreen,
     Shop: ShopScreen,
-    Plants: HomeScreen,
     Notification: NotificationScreen,
     Profile: ProfileScreen
 });
