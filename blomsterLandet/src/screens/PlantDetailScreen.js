@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const PlantDetailScreen = (props) => {
     const { topButtonStyle, nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, iconStyle, speciesStyle,
-            waterButtonStyle, waterButtonTextStyle } = styles;
+            waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
+            bottomButtonStyle, bottomButtonTextStyle } = styles;
 
     return (
     <ScrollView>
@@ -51,7 +52,19 @@ const PlantDetailScreen = (props) => {
             <TouchableOpacity style={waterButtonStyle}>
                 <Text style={waterButtonTextStyle}>VATTNA</Text>
             </TouchableOpacity>
-        </View>      
+        </View>  
+
+        <View style={bottomButtonsContainerStyle}>
+            <TouchableOpacity style={bottomButtonStyle}>
+                <Text style={bottomButtonTextStyle}>Information</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={bottomButtonStyle}>
+                <Text style={bottomButtonTextStyle}>Skötselråd</Text>
+            </TouchableOpacity>
+        </View>  
+
+
 
     </ScrollView>
     );
@@ -106,7 +119,8 @@ const styles = {
     },
     viewCenterStyle: {
         alignItems: 'center',
-        justifyContent: ''
+        justifyContent: 'center',
+        paddingTop: 10
     },
 
     topButtonsContainerStyle: {
@@ -141,9 +155,32 @@ const styles = {
     waterButtonTextStyle: {
         fontSize: 30,
         color: '#fff'
-    }
-
-
+    },
+    bottomButtonsContainerStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        paddingTop: 20,
+        paddingBottom: 4,
+    },
+    bottomButtonStyle: {
+        width: 150,
+        height: 55,
+        backgroundColor: '#3e5f36',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#3e5f36',
+        marginLeft: 5,
+        marginRight: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    bottomButtonTextStyle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        color: '#fff'
+    },
 };
 
 export default PlantDetailScreen;
