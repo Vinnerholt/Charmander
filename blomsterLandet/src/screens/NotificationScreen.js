@@ -7,10 +7,10 @@ class NotificationScreen extends React.Component {
 
     state = {
         notificationExpanded: false,
-        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }, { title: 'Jord', description: 'Asdf!' }],
+        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }, { title: 'Jord', description: 'Hej' }],
         notificationMap: [],
         expandedTitle: '',
-        expandedDescription: ''
+        expandedDescription: '',
     };
 
     componentWillMount() {
@@ -54,7 +54,7 @@ class NotificationScreen extends React.Component {
                 <NotificationExpanded
                     title={this.state.expandedTitle}
                     description={this.state.expandedDescription}
-                    modalvisible={this.notificationExpanded}
+                    modalvisible={this.state.notificationExpanded}
                 />
                 <ScrollView>
                     {this.state.notificationMap}
