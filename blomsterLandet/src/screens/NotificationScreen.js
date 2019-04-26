@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Button } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
+import { pushNotifications } from '../services';
 
 class NotificationScreen extends React.Component {
 
@@ -53,6 +54,11 @@ class NotificationScreen extends React.Component {
     render() {
         return (
             <View>
+                <Button 
+                    title='Trigger local notification'
+                    onPress={() => pushNotifications.localNotification(
+                        'Tomatsäsong', 'Dags att köpa tomater!')}
+                />
                 <NotificationExpanded
                     title={this.state.expandedTitle}
                     description={this.state.expandedDescription}

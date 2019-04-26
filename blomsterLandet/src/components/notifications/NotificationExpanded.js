@@ -36,10 +36,6 @@ class NotificationExpanded extends Component {
          } = styles;
          return (
             <View>
-                <Button 
-                    onPress={() => this.setModalVisible(!this.state.modalVisible)} 
-                    title="Notis"
-                />
                 {/*Modal is the Component that becomes visible when the state is set to visible*/}
                 <Modal
                     animationType="slide"
