@@ -7,7 +7,7 @@ class NotificationScreen extends React.Component {
 
     state = {
         notificationExpanded: false,
-        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }],
+        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }, { title: 'Jord', description: 'Asdf!' }],
         notificationMap: [],
         expandedTitle: '',
         expandedDescription: ''
@@ -23,7 +23,7 @@ class NotificationScreen extends React.Component {
         const mapOfNotifications = (this.state.notifications.map(notification =>
             (<NotificationListItem
                 key={notification.title}
-                title={notification.title}
+                notification={notification}
                 pressed={this.openExpandedNotification.bind(this)}
             />)
         ));
@@ -39,14 +39,12 @@ class NotificationScreen extends React.Component {
         return this.state.notificationMap;
     }
 
-    //Opens the expanded notification based on the title of the notification that has been clicked
-    //The key needs to be reworked as it doesn't have to be uniqe right now, which will cause issues
-    openExpandedNotification(title) {
-        const description = this.state.notifications[0].description;
+    //Opens the expanded notification based on the inputted notification
+    openExpandedNotification(notification) {
         this.setState({
             notificationExpanded: true,
-            expandedTitle: title,
-            expandedDescription: description
+            expandedTitle: notification.title,
+            expandedDescription: notification.description
         });
     }
 
