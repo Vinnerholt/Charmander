@@ -15,10 +15,16 @@ class NotificationScreen extends React.Component {
 
     componentWillMount() {
         this.listNotifications();
+        this.checkForOutsideExpandRequest(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
-        const notifId = nextProps.navigation.getParam('notifId', 'NO-ID');
+        this.checkForOutsideExpandRequest(nextProps);
+    }
+
+    checkForOutsideExpandRequest(props) {
+        const notifId = props.navigation.getParam('notifId', 'NO-ID');
+        console.log(notifId);
         //Opens the expanded notification if the new prop contains an id.
         if (notifId !== 'NO-ID') {
             this.openExpandedNotification(notifId);

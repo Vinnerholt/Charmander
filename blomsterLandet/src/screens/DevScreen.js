@@ -9,11 +9,7 @@ import NotifService from '../services/NotifService';
 class DevScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.notif = new NotifService(this.onNotif.bind(this));
-    }
-    //What should happen when the notification is clicked on
-    onNotif(notif) {
-        this.props.navigation.navigate('Notification', { notifId: notif.notifId });
+        this.notif = new NotifService(props.navigation);
     }
     render() {
         return (
@@ -21,7 +17,7 @@ class DevScreen extends React.Component {
                 <Button
                     title='Send Local Notification'
                     onPress={() => this.notif.localNotif('Tomatdags', 
-                    'Nu är det dags att köpa tomatplantor!', 'Tomat')}
+                    'Nu är det dags att odla tomater!', 'Tomat')}
                 />
             </View>
         );

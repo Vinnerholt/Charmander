@@ -10,7 +10,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
 import DevScreen from './screens/DevScreen';
 
-const TabNavigator = createBottomTabNavigator({
+export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
     Plants: HomeScreen,
     Notification: NotificationScreen,

@@ -3,8 +3,8 @@ import PushNotification from 'react-native-push-notification';
 
 export default class NotifService {
 
-  constructor(/*onRegister,*/ onNotification) {
-    this.configure(/*onRegister,*/ onNotification);
+  constructor(navigation) {
+    this.nav = navigation;
   }
 
   configure(/*onRegister,*/ onNotification, gcm = '') {
@@ -28,11 +28,17 @@ export default class NotifService {
    * @param {*} notifId
    */
   localNotif(title, message, notifId) {
+    this.configure(this.navigateToExpandedNotif.bind(this, notifId));
     PushNotification.localNotification({
       /* iOS and Android properties */
       title,
       message,
       notifId
     });
+  }
+
+  navigateToExpandedNotif(notifId) {
+    console.log(notifId);
+    this.nav.navigate('Notification', { notifId });
   }
 }
