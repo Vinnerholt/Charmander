@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, ScrollView, Button } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
-import { pushNotifications } from '../services';
+//import { NotifService } from '../services';
 
 class NotificationScreen extends React.Component {
-
     state = {
         notificationExpanded: false,
         notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }],
@@ -16,6 +15,14 @@ class NotificationScreen extends React.Component {
 
     componentWillMount() {
         this.listNotifications();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const notifId = nextProps.navigation.getParam('notifId', 'NO-ID');
+        //Opens the expanded notification if the new prop contains an id.
+        if (notifId !== 'NO-ID') {
+            this.openExpandedNotification(notifId);
+        }
     }
 
     //Creates a map with notificationListItems, the key needs to be reworked as it 
@@ -54,11 +61,6 @@ class NotificationScreen extends React.Component {
     render() {
         return (
             <View>
-                <Button 
-                    title='Trigger local notification'
-                    onPress={() => pushNotifications.localNotification(
-                        'Tomatsäsong', 'Dags att köpa tomater!')}
-                />
                 <NotificationExpanded
                     title={this.state.expandedTitle}
                     description={this.state.expandedDescription}

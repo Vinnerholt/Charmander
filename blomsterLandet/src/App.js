@@ -8,12 +8,14 @@ import NotificationScreen from './screens/NotificationScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
+import DevScreen from './screens/DevScreen';
 
 const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
     Plants: HomeScreen,
     Notification: NotificationScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    Dev: DevScreen
 });
 
 const TabNavigatorContainer = createAppContainer(TabNavigator);
@@ -33,9 +35,9 @@ class App extends React.Component {
             >
                 <Header>
                     <Image
-                            style={{ width: 55, height: 36 }}
-                            // eslint-disable-next-line global-require
-                            source={require('./resources/images/blomsterlandet_logo.png')}
+                        style={{ width: 55, height: 36 }}
+                        // eslint-disable-next-line global-require
+                        source={require('./resources/images/blomsterlandet_logo.png')}
                     />
                 </Header>
                 <TabNavigatorContainer />
