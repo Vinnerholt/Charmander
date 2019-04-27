@@ -9,6 +9,7 @@ import NotifService from '../services/NotifService';
 class DevScreen extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props.navigation);
         this.notif = new NotifService(props.navigation);
     }
     render() {
@@ -17,7 +18,7 @@ class DevScreen extends React.Component {
                 <Button
                     title='Send Local Notification'
                     onPress={() => this.notif.localNotif('Tomatdags', 
-                    'Nu är det dags att odla tomater!', 'Tomat')}
+                    'Nu är det dags att odla tomater!', 0)}
                 />
             </View>
         );

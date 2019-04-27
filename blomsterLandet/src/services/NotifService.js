@@ -1,8 +1,17 @@
+/**
+ * Notification service used to send notifications from within the app.
+ * The class is likely able to be expanded to also handle remote notifications
+ */
+
 /* eslint-disable max-len */
 import PushNotification from 'react-native-push-notification';
 
 export default class NotifService {
 
+  /**
+   * @param {this.props.navigation} navigation The navigation prop to a screen using react-navigation.
+   * The param is needed to make it possible for the notification to redirect the user to another screen.
+   */
   constructor(navigation) {
     this.nav = navigation;
   }
@@ -21,7 +30,8 @@ export default class NotifService {
   }
 
   /**
-   * Sends a local notification
+   * Sends a local notification, when pressed will take you to the
+   * expanded version of this notification
    * 
    * @param {string} title 
    * @param {string} message 
@@ -38,7 +48,6 @@ export default class NotifService {
   }
 
   navigateToExpandedNotif(notifId) {
-    console.log(notifId);
     this.nav.navigate('Notification', { notifId });
   }
 }
