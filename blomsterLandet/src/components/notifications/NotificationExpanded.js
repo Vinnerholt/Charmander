@@ -13,7 +13,7 @@ class NotificationExpanded extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalVisible: false,
+            modalVisible: props.modalVisible,
             imagePlaceHolder: require('./../../resources/images/tomat.jpg') //imagePlaceHolder has to be fixed to be dynamic
         };
     }

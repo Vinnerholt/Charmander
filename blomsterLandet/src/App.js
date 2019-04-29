@@ -9,12 +9,14 @@ import NotificationScreen from './screens/NotificationScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
+import DevScreen from './screens/DevScreen';
 
-const TabNavigator = createBottomTabNavigator({
+export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
     Plants: HomeScreen,
     Notifications: NotificationScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    Dev: DevScreen
 },
 {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -33,6 +35,9 @@ const TabNavigator = createBottomTabNavigator({
                 tintColor = focused ? '#adc22d' : '#000';
             } else if (routeName === 'Profile') {
                 iconName = 'person';
+                tintColor = focused ? '#adc22d' : '#000';
+            } else if (routeName === 'Dev') {
+                iconName = 'developer-mode';
                 tintColor = focused ? '#adc22d' : '#000';
             }
             return <Icon name={iconName} fontSize={30} flex={1} size={25} color={tintColor} />;
@@ -58,9 +63,9 @@ class App extends React.Component {
             >
                 <Header>
                     <Image
-                            style={{ width: 55, height: 36 }}
-                            // eslint-disable-next-line global-require
-                            source={require('./resources/images/blomsterlandet_logo.png')}
+                        style={{ width: 55, height: 36 }}
+                        // eslint-disable-next-line global-require
+                        source={require('./resources/images/blomsterlandet_logo.png')}
                     />
                 </Header>
                 <TabNavigatorContainer />
