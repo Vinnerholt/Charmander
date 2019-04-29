@@ -4,7 +4,6 @@ import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
 
 class NotificationScreen extends React.Component {
-
     state = {
         notificationExpanded: false,
         notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }, { title: 'Jord', description: 'Hej' }],
@@ -15,6 +14,23 @@ class NotificationScreen extends React.Component {
 
     componentWillMount() {
         this.listNotifications();
+        this.checkForOutsideExpandRequest(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.checkForOutsideExpandRequest(nextProps);
+    }
+
+    //Checks if the navigation to the notification screen was made by
+    //pressing on a push-notification, in which case a specific notification will be shown
+    checkForOutsideExpandRequest(props) {
+        const notifId = props.navigation.getParam('notifId', 'NO-ID');
+        //Opens the expanded notification if the new prop contains an id.
+        if (notifId !== 'NO-ID') {
+            //This is a bad way to identify what notification shall be open.
+            //It should be fixed when a better way has been decided.
+            this.openExpandedNotification(this.state.notifications[notifId]);
+        }
     }
 
     //Creates a map with notificationListItems, the key needs to be reworked as it 
@@ -54,7 +70,7 @@ class NotificationScreen extends React.Component {
                 <NotificationExpanded
                     title={this.state.expandedTitle}
                     description={this.state.expandedDescription}
-                    modalvisible={this.state.notificationExpanded}
+                    modalVisible={this.state.notificationExpanded}
                 />
                 <ScrollView>
                     {this.state.notificationMap}
