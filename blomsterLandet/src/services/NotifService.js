@@ -48,6 +48,6 @@ export default class NotifService {
   }
 
   navigateToExpandedNotif(notifId) {
-    this.nav.navigate('Notification', { notifId });
+    this.nav.navigate('Notifications', { notifId });
   }
 }
