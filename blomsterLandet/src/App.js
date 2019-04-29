@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Image, ImageBackground } from 'react-native';
 import { Header } from './components/common/index';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as firebaseHandler from './firebaseHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
@@ -13,10 +14,37 @@ import DevScreen from './screens/DevScreen';
 export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
     Plants: HomeScreen,
-    Notification: NotificationScreen,
+    Notifications: NotificationScreen,
     Profile: ProfileScreen,
     Dev: DevScreen
-});
+},
+{
+    defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused }) => {
+            const { routeName } = navigation.state;
+            let iconName;
+            let tintColor;
+            if (routeName === 'Shop') {
+                iconName = 'local-grocery-store';
+                tintColor = focused ? '#adc22d' : '#000';
+            } else if (routeName === 'Plants') {
+                iconName = 'local-florist';
+                tintColor = focused ? '#adc22d' : '#000';
+            } else if (routeName === 'Notifications') {
+                iconName = 'notifications';
+                tintColor = focused ? '#adc22d' : '#000';
+            } else if (routeName === 'Profile') {
+                iconName = 'person';
+                tintColor = focused ? '#adc22d' : '#000';
+            } else if (routeName === 'Dev') {
+                iconName = 'developer-mode';
+                tintColor = focused ? '#adc22d' : '#000';
+            }
+            return <Icon name={iconName} fontSize={30} flex={1} size={25} color={tintColor} />;
+        }
+    })
+}
+);
 
 const TabNavigatorContainer = createAppContainer(TabNavigator);
 
