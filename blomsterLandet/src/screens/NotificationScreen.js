@@ -4,17 +4,33 @@ import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
 
 class NotificationScreen extends React.Component {
-
     state = {
         notificationExpanded: false,
-        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }],
+        notifications: [{ title: 'Tomat', description: 'Dags att odla tomater!' }, { title: 'Jord', description: 'Hej' }],
         notificationMap: [],
         expandedTitle: '',
-        expandedDescription: ''
+        expandedDescription: '',
     };
 
     componentWillMount() {
         this.listNotifications();
+        this.checkForOutsideExpandRequest(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.checkForOutsideExpandRequest(nextProps);
+    }
+
+    //Checks if the navigation to the notification screen was made by
+    //pressing on a push-notification, in which case a specific notification will be shown
+    checkForOutsideExpandRequest(props) {
+        const notifId = props.navigation.getParam('notifId', 'NO-ID');
+        //Opens the expanded notification if the new prop contains an id.
+        if (notifId !== 'NO-ID') {
+            //This is a bad way to identify what notification shall be open.
+            //It should be fixed when a better way has been decided.
+            this.openExpandedNotification(this.state.notifications[notifId]);
+        }
     }
 
     //Creates a map with notificationListItems, the key needs to be reworked as it 
@@ -23,7 +39,7 @@ class NotificationScreen extends React.Component {
         const mapOfNotifications = (this.state.notifications.map(notification =>
             (<NotificationListItem
                 key={notification.title}
-                title={notification.title}
+                notification={notification}
                 pressed={this.openExpandedNotification.bind(this)}
             />)
         ));
@@ -39,14 +55,12 @@ class NotificationScreen extends React.Component {
         return this.state.notificationMap;
     }
 
-    //Opens the expanded notification based on the title of the notification that has been clicked
-    //The key needs to be reworked as it doesn't have to be uniqe right now, which will cause issues
-    openExpandedNotification(title) {
-        const description = this.state.notifications[0].description;
+    //Opens the expanded notification based on the inputted notification
+    openExpandedNotification(notification) {
         this.setState({
             notificationExpanded: true,
-            expandedTitle: title,
-            expandedDescription: description
+            expandedTitle: notification.title,
+            expandedDescription: notification.description
         });
     }
 
@@ -56,7 +70,7 @@ class NotificationScreen extends React.Component {
                 <NotificationExpanded
                     title={this.state.expandedTitle}
                     description={this.state.expandedDescription}
-                    modalvisible={this.notificationExpanded}
+                    modalVisible={this.state.notificationExpanded}
                 />
                 <ScrollView>
                     {this.state.notificationMap}

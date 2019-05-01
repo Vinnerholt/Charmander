@@ -9,18 +9,19 @@ import React, { Component } from 'react';
 import { Text, Image, Modal, Button, View } from 'react-native';
 import { Card, CardSection } from '../common/index';
 
-
 class NotificationExpanded extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalVisible: false,
+            modalVisible: props.modalVisible,
+            imagePlaceHolder: require('./../../resources/images/tomat.jpg') //imagePlaceHolder has to be fixed to be dynamic
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.modalVisible !== this.state.modalVisible) {
           this.setState({ modalVisible: nextProps.modalVisible });
+          this.setModalVisible(nextProps.modalVisible);
         }
       }
     
@@ -36,10 +37,6 @@ class NotificationExpanded extends Component {
          } = styles;
          return (
             <View>
-                <Button 
-                    onPress={() => this.setModalVisible(!this.state.modalVisible)} 
-                    title="Notis"
-                />
                 {/*Modal is the Component that becomes visible when the state is set to visible*/}
                 <Modal
                     animationType="slide"
@@ -51,7 +48,7 @@ class NotificationExpanded extends Component {
                     <CardSection>
                         <Image
                             style={imageStyle}
-                            source={this.props.imageSource}
+                            source={this.state.imagePlaceHolder}
                         />
                         <View style={buttonContainer}>
                             <Button 
@@ -82,7 +79,7 @@ const styles = {
     imageStyle: {
         marginTop: 10,
         height: 180, 
-        width: null,
+        width: 200,
         flex: 1
     },
     buttonContainer: {
