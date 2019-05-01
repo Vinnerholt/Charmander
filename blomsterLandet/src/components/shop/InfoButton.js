@@ -1,24 +1,19 @@
 
 
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Button } from 'react-native';
 
 
-const InfoButton = () => {
+const InfoButton = (props) => {
+
     return (
         <View >
             <Button
                 title="Info"
-                onPress={notification}
+                onPress={() => props.navigation.navigate('Details')}
             />
         </View>
     );
 };
-
-function notification() {
-    Alert.alert('Show some cool info');
-    console.log('Order');
-}
-
 
 export default InfoButton;

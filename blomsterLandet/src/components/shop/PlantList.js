@@ -21,7 +21,7 @@ class PlantList extends Component {
 
     renderPlants() {
         return this.state.plants.map(plant =>
-            <PlantCard key={plant.name} plant={plant} />);
+            <PlantCard key={plant.name} plant={plant} navigation={this.props.navigation} />);
     }
 
     render() {
