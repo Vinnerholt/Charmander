@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
-import BuyButton from './BuyButton';
-import InfoButton from './InfoButton';
+import React from 'react';
+import { View } from 'react-native';
+
 
 const PlantCard = (props) => {
     return (
