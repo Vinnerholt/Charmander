@@ -10,8 +10,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
 
 const TabNavigator = createBottomTabNavigator({
-    Plants: PlantDetailScreen,
     Shop: ShopScreen,
+    Plants: PlantDetailScreen,
     Notification: NotificationScreen,
     Profile: ProfileScreen
 });
