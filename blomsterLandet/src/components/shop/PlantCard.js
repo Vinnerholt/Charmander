@@ -21,8 +21,8 @@ const PlantCard = (props) => {
                 }}
             />
             <Text style={styles.plantName}>{props.plant.name}</Text>
-            <Text style={styles.plantDescription}>Här är en liten fin tomat med mustig smak och fina färger. Passar bra till sallader och i grytor</Text>
-            <Text style={styles.priceTag}>39kr St </Text>
+            <Text style={styles.plantDescription}>{props.plant.description}</Text>
+            <Text style={styles.priceTag}>{props.plant.price}kr St </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                 <InfoButton navigation={props.navigation} />
                 <BuyButton title='Köp nu' />
