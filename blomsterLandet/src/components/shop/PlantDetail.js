@@ -3,24 +3,29 @@ import { Text, Image, View } from 'react-native';
 import PlantCard from './PlantCard';
 import BuyButton from './BuyButton';
 import InfoButton from './InfoButton';
+import images from '../../resources/images/index';
 
 
 const PlantDetail = (props) => {
+
+
+    var image = images[props.plant.name];
+
     return (
         <PlantCard>
             <Image
-                source={require('./tomat.jpg')}
+                source={image}
                 style={{
                     width: '100%',
                     height: 150
                 }}
             />
-            <Text style={styles.plantName}>{props.plant.title}</Text>
+            <Text style={styles.plantName}>{props.plant.name}</Text>
             <Text style={styles.plantDescription}>Här är en liten fin tomat med mustig smak och fina färger. Passar bra till sallader och i grytor</Text>
             <Text style={styles.priceTag}>39kr St </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                       <InfoButton />
-                       <BuyButton title='Köp nu' />
+                <InfoButton />
+                <BuyButton title='Köp nu' />
 
             </View>
         </PlantCard>
@@ -35,7 +40,7 @@ const styles = {
         borderWidth: 3,
         borderRadius: 2,
         borderColor: '#333'
- 
+
     },
     plantName: {
         fontSize: 20,
@@ -51,6 +56,6 @@ const styles = {
         fontWeight: 'bold',
         alignSelf: 'center'
     }
- };
- 
+};
+
 export default PlantDetail;
