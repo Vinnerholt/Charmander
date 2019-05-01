@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 //import axios from 'axios';
-import PlantDetail from './PlantDetail';
+import PlantCard from './PlantCard';
 
 let self;
 class PlantList extends Component {
@@ -21,7 +21,7 @@ class PlantList extends Component {
 
     renderPlants() {
         return this.state.plants.map(plant =>
-            <PlantDetail key={plant.name} plant={plant} />);
+            <PlantCard key={plant.name} plant={plant} />);
     }
 
     render() {

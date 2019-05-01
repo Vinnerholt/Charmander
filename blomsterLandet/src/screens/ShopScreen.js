@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import PlantList from '../components/shop/PlantList';
-import PlantCard from '../components/shop/PlantCard';
+
 
 class ShopScreen extends React.Component {
     render() {
