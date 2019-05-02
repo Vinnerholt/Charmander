@@ -14,7 +14,7 @@ const PlantDetailScreen = (props) => {
     return (
         <ScrollView>
             <View style={topButtonsContainerStyle}>
-                <TouchableOpacity style={topButtonStyle}>
+                <TouchableOpacity style={topButtonStyle} onPress={() => props.navigation.navigate('Home')}>
                     <Icon
                         name="arrow-back"
                         style={iconStyle}
@@ -149,6 +149,8 @@ const styles = {
         borderColor: '#3e5f36',
     },
     viewCenterStyle: {
+        flex: 1,
+        width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 10
@@ -199,7 +201,7 @@ const styles = {
         paddingBottom: 20,
     },
     bottomButtonStyle: {
-        width: 380,
+        width: '100%',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
