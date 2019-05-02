@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
+//import axios from 'axios';
 import PlantListItem from './PlantListItem';
 
+let self;
 class PlantList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    state = { notifications: [] };
+    state = { plants: [] };
 
     componentWillMount() {
-        this.setState({ notifications: ['Tomat', 'Jord'] });
+        self = this;
+        let jsonPlants = require('../../resources/data/plants.json');
+
+        self.setState({ plants: jsonPlants.plants.list });
+
     }
 
-    renderNotifications() {
-        return this.state.notifications.map(notification =>
-            <PlantListItem key={notification}>
-                {notification}
-            </PlantListItem>);
+    renderPlants() {
+        return this.state.plants.map(plant =>
+            <PlantListItem key={plant.name} navigation={this.props.navigation} />);
     }
 
     render() {
+
         return (
             <ScrollView>
-                {this.renderNotifications()}
+                {this.renderPlants()}
             </ScrollView>
         );
     }
-
 }
 
 export default PlantList;

@@ -12,7 +12,7 @@ const PlantListItem = (props) => {
                     height: '100%'
             }} />
             <Text style={styles.textStyle}>
-                Hej
+      bfgfg
             </Text>
             <Icon name="chevron-right" style={styles.arrowStyle} />
         </TouchableOpacity>

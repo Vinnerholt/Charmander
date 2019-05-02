@@ -20,7 +20,10 @@ const AppNavigator = createStackNavigator(
         Details: PlantDetailView
     },
     {
-        initialRouteName: "Home"
+        initialRouteName: "Home",
+        cardStyle: {
+            backgroundColor: 'transperent'
+        }
     }
 );
 
