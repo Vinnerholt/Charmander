@@ -3,30 +3,31 @@ import { View, ScrollView, Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
+import SmallButton from '../components/common/SmallButton';
 
 
-const PlantDetailScreen = (props) => {
-    const { topButtonStyle, nameStyle, imageContainerStyle, viewCenterStyle,
-            topButtonsContainerStyle, imageStyle, iconStyle, speciesStyle,
+const PlantDetailScreen = () => {
+    const { nameStyle, imageContainerStyle, viewCenterStyle,
+            topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-            bottomButtonStyle, bottomButtonTextStyle, scrollViewStyle } = styles;
+            bottomButtonStyle, bottomButtonTextStyle, scrollViewStyle, iconStyle } = styles;
 
     return (
         <ScrollView>
             <View style={topButtonsContainerStyle}>
-                <TouchableOpacity style={topButtonStyle}>
+                <SmallButton>
                     <Icon
-                        name="arrow-back"
-                        style={iconStyle}
+                    style={iconStyle} 
+                    name="arrow-back"
                     />
-                </TouchableOpacity>
+                </SmallButton>
                 
-                <TouchableOpacity style={topButtonStyle}>
+                <SmallButton>
                     <Icon 
-                        name="brush"
                         style={iconStyle}
+                        name="brush"
                     />
-                </TouchableOpacity>
+                </SmallButton>
             </View>
 
             <View style={scrollViewStyle}>
@@ -97,24 +98,7 @@ Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`}
 };
 
 const styles = {
-    topButtonStyle: {
-        width: 50,
-        height: 50,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#3e5f36',
-        marginLeft: 5,
-        marginRight: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 8,
-        paddingLeft: 8,
-        shadowColor: '#050',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        elevation: 20
-    },
+
     nameStyle: {
         fontSize: 40,
         fontWeight: 'bold',
@@ -165,12 +149,7 @@ const styles = {
         width: 20,
         heigth: 20
     },
-    iconStyle: {
-        fontSize: 30,
-        paddingRight: 5,
-        flex: 1,
-        color: '#3e5f36',
-    },
+
     waterButtonStyle: {
         width: 150,
         height: 55,
@@ -223,7 +202,13 @@ const styles = {
     },
     scrollViewStyle: {
         alignItems: 'center',
-    }
+    },
+    iconStyle: {
+        fontSize: 30,
+        paddingRight: 5,
+        flex: 1,
+        color: '#3e5f36',
+    },
 };
 
 export default PlantDetailScreen;
