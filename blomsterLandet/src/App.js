@@ -6,14 +6,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as firebaseHandler from './firebaseHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
-import PlantDetailScreen from './screens/PlantDetailScreen';
+import MyPlantScreen from './screens/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/ShopScreen';
 import DevScreen from './screens/DevScreen';
 
 export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
-    Plants: PlantDetailScreen,
+    Plants: MyPlantScreen,
     Notifications: NotificationScreen,
     Profile: ProfileScreen,
     Dev: DevScreen
