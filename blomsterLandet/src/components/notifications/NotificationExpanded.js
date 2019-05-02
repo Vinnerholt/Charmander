@@ -1,47 +1,96 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+/**
+ * This is a notification that "pops-up" with the help of modal, with a card with a close button.
+ * It's triggered with a "notis-button"
+ * Last Modified: 2019-04-16
+ * Authors: Jonathan Köre, Liwia Larsson
+ */
 
-const NotificationExpanded = ({ title, description }) => {
-    const { containerStyle, titleStyle, descriptionStyle, titleBoxStyle, descriptionBoxStyle } = styles;
-    return (
-        <View style={containerStyle}>
-            <View style={titleBoxStyle}>
-                <Text style={titleStyle}>{title}</Text> 
-            </View>
-            <View style={descriptionBoxStyle}>
-                <Text style={descriptionStyle}>{description}</Text>
-            </View>
+import React, { Component } from 'react';
+import { Text, Image, Modal, Button, View } from 'react-native';
+import { Card, CardSection } from '../common/index';
+
+class NotificationExpanded extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalVisible: props.modalVisible,
+            imagePlaceHolder: require('./../../resources/images/tomat.jpg') //imagePlaceHolder has to be fixed to be dynamic
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.modalVisible !== this.state.modalVisible) {
+          this.setState({ modalVisible: nextProps.modalVisible });
+          this.setModalVisible(nextProps.modalVisible);
+        }
+      }
+    
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+    render() {
+        const {  
+            titleStyle, 
+            descriptionStyle, 
+            imageStyle,
+            buttonContainer
+         } = styles;
+         return (
+            <View>
+                {/*Modal is the Component that becomes visible when the state is set to visible*/}
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={this.state.modalVisible}
+                >
+                <View style={{ marginTop: 20 }}>
+                <Card>
+                    <CardSection>
+                        <Image
+                            style={imageStyle}
+                            source={this.state.imagePlaceHolder}
+                        />
+                        <View style={buttonContainer}>
+                            <Button 
+                                onPress={() => this.setModalVisible(false)} 
+                                title="x"
+                            />
+                        </View> 
+                    </CardSection>
+                    <CardSection>
+                        <Text style={titleStyle}>{this.props.title}</Text> 
+                    </CardSection>
+        
+                    <CardSection>
+                        <Text style={descriptionStyle}>{this.props.description}</Text>
+                    </CardSection>
+                </Card>  
+                </View>
+            </Modal>
         </View>
-    );
-};
+        );
+    }   
+}
 
 const styles = {
     containerStyle: {
         flex: 1
     },
-    titleBoxStyle: {
-        backgroundColor: 'white',
-        alignSelf: 'center',
-        marginTop: 40,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 10
+    imageStyle: {
+        marginTop: 10,
+        height: 180, 
+        width: 200,
+        flex: 1
+    },
+    buttonContainer: {
+        position: 'absolute', 
+        top: 0,
+        right: 0
     },
     titleStyle: {
         fontSize: 20,
+        fontWeight: 'bold',
         color: '#000'
-    },
-    descriptionBoxStyle: {
-        backgroundColor: 'white',
-        alignSelf: 'center',
-        marginTop: 40,
-        marginLeft: 10,
-        marginRight: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 10
     },
     descriptionStyle: {
         fontSize: 16,
