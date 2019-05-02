@@ -2,10 +2,13 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const NotificationListItem = ({ pressed, notification }) => {
-    const { itemStyle, textStyle, arrowStyle } = styles;
+const NotificationListItem = ({ pressed, pressedRemoved, notification }) => {
+    const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
     return (
         <TouchableOpacity onPress={() => (pressed(notification))} style={itemStyle}>
+            <TouchableOpacity onPress={() => (pressedRemoved(notification))}>
+                <Icon name="close" style={crossStyle} />
+            </TouchableOpacity>
             <Text style={textStyle}>
                 {notification.title}
             </Text>
@@ -25,6 +28,12 @@ const styles = {
         paddingRight: 5,
         flex: 1,
         color: '#000'
+    },
+    crossStyle: {
+        fontSize: 30,
+        paddingLeft: 5,
+        flex: 1,
+        color: 'grey'
     },
     itemStyle: {
         flexDirection: 'row',

@@ -1,7 +1,7 @@
 {
     "notifications": [
         {
-            "notifid": 1,
+            "notifId": 1,
             "title": "Dags att odla tomater",
             "description": "Nu har vintern precis tagit slut och det är dags att odla tomater",
             "icon": "local-florist",
