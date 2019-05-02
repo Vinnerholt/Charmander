@@ -13,7 +13,7 @@ class PlantList extends Component {
       }*/
     componentWillMount() {
         self = this;
-        let jsonPlants = require('../../resources/plants.json');
+        let jsonPlants = require('../../resources/data/plants.json');
 
         self.setState({ plants: jsonPlants.plants.list });
 
