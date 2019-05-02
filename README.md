@@ -62,7 +62,17 @@ Om du vill stagea och commita alla dina ändringar med ett kommando, look no fur
 ```
 git commit -am "ditt meddelande"
 ```
-
+#### Pull request
+- Ha allt committat i din lokala branch och stå i den. (kallar den branch1 som exempel)
+```
+ > git fetch origin
+ > git rebase origin/master
+```
+- Hantera om konflikter uppstår och comitta
+```
+ > git push
+```
+- Gå in på github (i webbläsaren) och gå in på branch1 -> tryck på den gröna knappen " Create pull request "
 #### Desperata åtgärder
 
 ##### Quitting Vim

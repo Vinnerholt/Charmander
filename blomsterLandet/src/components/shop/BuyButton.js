@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Alert } from 'react-native';
 
 
 const BuyButton = () => {
@@ -9,14 +9,15 @@ const BuyButton = () => {
         <View >
             <Button
                 title="Köp nu"
-                onPress={caroline}
+                onPress={notification}
             />
         </View>
     );
 };
 
-function caroline() {
-    console.log('asdasdsad');
+function notification() {
+    Alert.alert('Din order har tagits emot');
+    console.log('Order');
 }
 
 
