@@ -46,9 +46,10 @@ class NotificationScreen extends React.Component {
     mapNotifications() {
         const mapOfNotifications = (self.state.notifications.map(notification =>
             (<NotificationListItem
-                key={notification.title}
+                key={notification.notifId}
                 notification={notification}
                 pressed={self.openExpandedNotification.bind(self)}
+                pressedRemoved={self.removeNotification.bind(self)}
             />)
         ));
         self.setState({ notificationMap: mapOfNotifications });
@@ -72,6 +73,14 @@ class NotificationScreen extends React.Component {
         });
     }
 
+    removeNotification(notification) {
+        let mapOfNotifications = self.state.notificationMap;
+        console.log(mapOfNotifications);
+        //very not working
+        //mapOfNotifications = mapOfNotifications.delete(notification.notifId);
+        self.setState({ notificationMap: mapOfNotifications });
+    }
+
     render() {
         return (
             <View>
@@ -82,7 +91,6 @@ class NotificationScreen extends React.Component {
                 />
                 <ScrollView>
                     {self.state.notificationMap}
-                    {console.log(self.state.notifications)}
                 </ScrollView>
             </View>
         );
