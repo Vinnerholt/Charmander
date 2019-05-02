@@ -15,8 +15,8 @@ const SmallButton = (props) => {
 
 const styles = {
     topButtonStyle: {
-        width: 50,
-        height: 50,
+        width: '80%',
+        height: '100%',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
@@ -26,7 +26,9 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 8,
+        paddingBottom: 8,
         paddingLeft: 8,
+        paddingRight: 8,
         shadowColor: '#050',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
