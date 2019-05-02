@@ -63,11 +63,10 @@ Om du vill stagea och commita alla dina ändringar med ett kommando, look no fur
 git commit -am "ditt meddelande"
 ```
 #### Pull request
-- Ha allt committat i din lokala branch. (kallar den branch1 som exempel)
+- Ha allt committat i din lokala branch och stå i den. (kallar den branch1 som exempel)
 ```
- > git checkout master
- > git pull
- > git rebase branch1
+ > git fetch origin
+ > git rebase origin/master
 ```
 - Hantera om konflikter uppstår och comitta
 ```
