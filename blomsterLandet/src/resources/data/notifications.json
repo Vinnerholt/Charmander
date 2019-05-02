@@ -1,0 +1,14 @@
+{
+    "notifications": [
+        {
+            "notifid": 1,
+            "title": "Dags att odla tomater",
+            "description": "Nu har vintern precis tagit slut och det är dags att odla tomater",
+            "icon": "local-florist",
+            "imageURL": "../../resources/images/tomat.jpg",
+            "type": "Product",
+            "pointer": 0,
+            "read": false
+        }
+    ]
+}
