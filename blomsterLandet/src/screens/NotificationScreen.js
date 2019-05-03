@@ -2,6 +2,7 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
+import NotificationContext from '../services/NotificationContext';
 
 let self;
 class NotificationScreen extends React.Component {
@@ -87,19 +88,26 @@ class NotificationScreen extends React.Component {
         });
     }
 
+    addNotification(notification) {
+        //self.setState({ notifications: self.notifications.push(notification) });
+        console.log('hej');
+    }
+
     render() {
         return (
-            <View>
-                <NotificationExpanded
-                    title={self.state.expandedTitle}
-                    description={self.state.expandedDescription}
-                    modalVisible={self.state.notificationExpanded}
-                    closeModal={self.closeExpandedNotification.bind(self)}
-                />
-                <ScrollView>
-                    {self.state.notificationMap}
-                </ScrollView>
-            </View>
+            <NotificationContext.Provider>
+                <View>
+                    <NotificationExpanded
+                        title={self.state.expandedTitle}
+                        description={self.state.expandedDescription}
+                        modalVisible={self.state.notificationExpanded}
+                        closeModal={self.closeExpandedNotification.bind(self)}
+                    />
+                    <ScrollView>
+                        {self.state.notificationMap}
+                    </ScrollView>
+                </View>
+            </NotificationContext.Provider>
         );
     }
 }
