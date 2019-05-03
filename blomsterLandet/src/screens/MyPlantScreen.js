@@ -15,7 +15,7 @@ class MyPlantScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', }}>
+            <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row' }}>
                 <PlantList navigation={self.props.navigation} />
             </View>
         );
