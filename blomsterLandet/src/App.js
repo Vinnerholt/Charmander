@@ -4,6 +4,7 @@ import { Image, ImageBackground } from 'react-native';
 import { Header } from './components/common/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as firebaseHandler from './firebaseHandler';
+import * as notifHandler from './notifHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
 import PlantDetailScreen from './screens/PlantDetailScreen';
@@ -53,6 +54,13 @@ class App extends React.Component {
     componentWillMount() {
         //Connects App to firebase.
         firebaseHandler.initializeApp();
+    }
+    componentDidMount() {
+        notifHandler.initNotifications();
+        notifHandler.mountListeners();
+    }
+    componentWillUnmount() {
+        notifHandler.unmountListeners();
     }
     render() {
         return (
