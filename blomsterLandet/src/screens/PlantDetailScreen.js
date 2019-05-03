@@ -6,24 +6,26 @@ import SmallButton from '../components/common/SmallButton';
 import CollapseButton from '../components/common/CollapseButton';
 
 
-const PlantDetailScreen = () => {
+const PlantDetailScreen = (props) => {
     const { nameStyle, imageContainerStyle, viewCenterStyle,
-            topButtonsContainerStyle, imageStyle, speciesStyle,
-            waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-            scrollViewStyle, iconStyle } = styles;
+        topButtonsContainerStyle, imageStyle, speciesStyle,
+        waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
+        scrollViewStyle, iconStyle } = styles;
 
     return (
         <ScrollView>
             <View style={topButtonsContainerStyle}>
-                <SmallButton>
+
+                <SmallButton onPress={() => props.navigation.navigate('Home')}>
+
                     <Icon
-                        style={iconStyle} 
+                        style={iconStyle}
                         name="arrow-back"
                     />
                 </SmallButton>
-                
+
                 <SmallButton>
-                    <Icon 
+                    <Icon
                         style={iconStyle}
                         name="brush"
                     />
@@ -32,14 +34,14 @@ const PlantDetailScreen = () => {
 
             <View style={scrollViewStyle}>
                 <View style={imageContainerStyle}>
-                    <Image 
+                    <Image
                         style={imageStyle}
                         // eslint-disable-next-line global-require
                         source={require('../resources/images/tomat.jpg')}
                     />
                 </View>
             </View>
-            
+
             <View style={viewCenterStyle}>
                 <Text style={nameStyle}>Nils</Text>
 
@@ -50,29 +52,29 @@ const PlantDetailScreen = () => {
                 <TouchableOpacity style={waterButtonStyle}>
                     <Text style={waterButtonTextStyle}>VATTNA</Text>
                 </TouchableOpacity>
-            </View>  
+            </View>
 
             <View style={bottomButtonsContainerStyle}>
                 <View style={[viewCenterStyle]}>
                     <CollapseButton
-                    header={'Information'}
-                    body={'Ger en riklig mängd tomater med god smak. Finns flera olika sorter. KRAV-odlade.'}
+                        header={'Information'}
+                        body={'Ger en riklig mängd tomater med god smak. Finns flera olika sorter. KRAV-odlade.'}
                     />
                 </View>
 
                 <View style={viewCenterStyle}>
                     <CollapseButton
-                    header={'Skötselråd'}
-                    body={`Läge: Sol 
+                        header={'Skötselråd'}
+                        body={`Läge: Sol 
 Vatten: Mycket 
 Höjd: 100 - 200 cm
 Mognadstid: Juli, augusti, september och oktober.
 Jordprodukter: Tomatjord, grönsaksjord, p-jord och u-jord.
 Näring: Naturgödsel och trädgårdsgödsel.
 Växtsätt: Upprätt.
-Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`} 
+Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`}
                     />
-                </View>  
+                </View>
             </View>
         </ScrollView>
     );
@@ -96,9 +98,9 @@ const styles = {
     imageContainerStyle: {
         justifyContent: 'center',
         width: 200,
-        alignItems: 'center', 
+        alignItems: 'center',
         paddingTop: 0,
-        borderRadius: 200/2,
+        borderRadius: 200 / 2,
         shadowColor: '#050',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
@@ -108,11 +110,13 @@ const styles = {
         height: 200,
         width: 200,
         overflow: 'hidden',
-        borderRadius: 200/2,
+        borderRadius: 200 / 2,
         borderWidth: 4,
         borderColor: '#3e5f36',
     },
     viewCenterStyle: {
+        flex: 1,
+        width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 10
