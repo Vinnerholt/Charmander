@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const PlantListItem = (props) => {
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Details')} style={styles.itemStyle}>
-            <Image 
+            <Image
                 source={require('../../resources/images/tomat.jpg')}
                 style={{
                     width: '10%',
                     height: '100%'
-            }} />
+                }} />
             <Text style={styles.textStyle}>
-      bfgfg
+                {props.plant.name}
             </Text>
             <Icon name="chevron-right" style={styles.arrowStyle} />
         </TouchableOpacity>
