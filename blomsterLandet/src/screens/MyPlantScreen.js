@@ -5,7 +5,7 @@ import PlantList from '../components/myplants/PlantList';
 
 import PlantDetailScreen from '../screens/PlantDetailScreen';
 
-var self; 
+var self;
 
 class MyPlantScreen extends React.Component {
 
@@ -16,7 +16,7 @@ class MyPlantScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', }}>
-                <PlantList navigation={this.props.navigation}/>
+                <PlantList navigation={self.props.navigation} />
             </View>
         );
     }
@@ -34,8 +34,8 @@ const AppNavigator = createStackNavigator(
         cardStyle: {
             backgroundColor: 'transperent'
         }
-    }    
-    
+    }
+
 );
 
 export default createAppContainer(AppNavigator);

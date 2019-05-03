@@ -10,13 +10,11 @@ class PlantList extends Component {
     componentWillMount() {
         self = this;
         let jsonPlants = require('../../resources/data/myPlants.json');
-        console.log(jsonPlants.myPlants);
         self.setState({ myPlants: jsonPlants.myPlants.list });
-
     }
 
     renderPlants() {
-        return this.state.myPlants.map(plant =>
+        return self.state.myPlants.map(plant =>
             <PlantListItem key={plant.name} plant={plant} navigation={this.props.navigation} />);
     }
 
@@ -24,7 +22,7 @@ class PlantList extends Component {
 
         return (
             <ScrollView>
-                {this.renderPlants()}
+                {self.renderPlants()}
             </ScrollView>
         );
     }
