@@ -73,12 +73,15 @@ class NotificationScreen extends React.Component {
         });
     }
 
+    closeExpandedNotification() {
+        self.setState({ notificationExpanded: false });
+    }
+
+    //Removes the notification from the notification map based on the notifId, then updates the list of notifications displayed
     removeNotification(notification) {
-        let mapOfNotifications = self.state.notificationMap;
-        console.log(mapOfNotifications);
-        //very not working
-        //mapOfNotifications = mapOfNotifications.delete(notification.notifId);
-        self.setState({ notificationMap: mapOfNotifications });
+        self.setState({ notifications: self.state.notifications.filter(notif => notif.notifId !== notification.notifId) }, () => {
+            self.mapNotifications();
+        });
     }
 
     render() {
@@ -88,6 +91,7 @@ class NotificationScreen extends React.Component {
                     title={self.state.expandedTitle}
                     description={self.state.expandedDescription}
                     modalVisible={self.state.notificationExpanded}
+                    closeModal={self.closeExpandedNotification.bind(self)}
                 />
                 <ScrollView>
                     {self.state.notificationMap}
