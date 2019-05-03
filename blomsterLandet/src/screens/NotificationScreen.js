@@ -79,7 +79,10 @@ class NotificationScreen extends React.Component {
 
     //Removes the notification from the notification map based on the notifId, then updates the list of notifications displayed
     removeNotification(notification) {
-        self.setState({ notifications: self.state.notifications.filter(notif => notif.notifId !== notification.notifId) }, () => {
+        self.setState({
+            notifications: self.state.notifications.filter(notif =>
+                notif.notifId !== notification.notifId)
+        }, () => {
             self.mapNotifications();
         });
     }
