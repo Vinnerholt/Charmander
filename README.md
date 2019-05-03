@@ -73,6 +73,7 @@ git commit -am "ditt meddelande"
  > git push
 ```
 - Gå in på github (i webbläsaren) och gå in på branch1 -> tryck på den gröna knappen " Create pull request "
+- Om det går så välj Rebase, men annars Merge. Om det har blivit konflikter verkar inte rebase fungera.
 #### Desperata åtgärder
 
 ##### Quitting Vim
