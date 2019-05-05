@@ -4,23 +4,36 @@
  */
 import React from 'react';
 import { View, Button } from 'react-native';
-import NotifService from '../services/NotifService';
+import firebase from 'react-native-firebase';
 
 class DevScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props.navigation);
-        this.notif = new NotifService(props.navigation);
-    }
+
+    sendLocalNotif = () => {
+        const localNotification = new firebase.notifications.Notification()
+        .setNotificationId('notificationId')
+        .setTitle('My notification title')
+        .setBody('My notification body')
+        .setData({
+            key1: 'value1',
+            key2: 'value2',
+        })
+        .android.setChannelId('test-channel')
+        .android.setSmallIcon('ic_launcher')
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+
+        firebase.notifications().displayNotification(localNotification);
+    };
+
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Button
-                    title='Send Local Notification'
-                    onPress={() => this.notif.localNotif('Tomatdags', 
-                    'Nu är det dags att odla tomater!', 0)}
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+                <Button 
+                    title='Send local Notif v22'
+                    onPress={() => this.sendLocalNotif()} 
                 />
             </View>
+            
         );
     }
 }

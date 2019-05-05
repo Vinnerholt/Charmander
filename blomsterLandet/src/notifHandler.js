@@ -1,6 +1,5 @@
 import firebase, { Notification } from 'react-native-firebase';
-
-export async function initNotifications() {
+export async function initNotifications () {
     let enabled = await firebase.messaging().hasPermission();
     if (enabled) {
         // user has permissions

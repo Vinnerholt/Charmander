@@ -118,7 +118,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
@@ -139,7 +139,6 @@ android {
 
 dependencies {
     implementation project(':react-native-firebase')
-    implementation project(':react-native-push-notification')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

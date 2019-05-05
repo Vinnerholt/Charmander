@@ -6,7 +6,7 @@ import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -29,7 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNFirebasePackage(),
-            new ReactNativePushNotificationPackage(),
             new RNGestureHandlerPackage(),
             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage()
