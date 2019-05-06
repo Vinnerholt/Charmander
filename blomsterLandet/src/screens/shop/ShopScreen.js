@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import PlantList from '../components/shop/PlantList';
+import PlantList from '../../components/shop/PlantList';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import PlantDetailView from '../components/shop/PlantDetailView';
+
+import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 
 class ShopScreen extends React.Component {
     render() {
@@ -17,10 +18,13 @@ class ShopScreen extends React.Component {
 const AppNavigator = createStackNavigator(
     {
         Home: ShopScreen,
-        Details: PlantDetailView
+        Details: ShopItemPreviewScreen
     },
     {
-        initialRouteName: "Home"
+        initialRouteName: "Home",
+        cardStyle: {
+            backgroundColor: 'transperent'
+        }
     }
 );
 

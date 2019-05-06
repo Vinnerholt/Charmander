@@ -1,0 +1,24 @@
+{
+    "notifications": [
+        {
+            "notifId": 1,
+            "title": "Dags att odla tomater",
+            "description": "Nu har vintern precis tagit slut och det är dags att odla tomater",
+            "icon": "local-florist",
+            "imageURL": "../../resources/images/tomat.jpg",
+            "type": "Product",
+            "pointer": 0,
+            "read": false
+        },
+        {
+            "notifId": 2,
+            "title": "Dags att vattna tomater",
+            "description": "Nu får du ta och vattna dina tomater dom är torra.",
+            "icon": "local-florist",
+            "imageURL": "../../resources/images/tomat.jpg",
+            "type": "Product",
+            "pointer": 0,
+            "read": false
+        }
+    ]
+}

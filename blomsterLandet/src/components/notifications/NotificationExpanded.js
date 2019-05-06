@@ -29,6 +29,12 @@ class NotificationExpanded extends Component {
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
     }
+
+    close() {
+        this.setModalVisible(false);
+        this.props.closeModal();
+    }
+
     render() {
         const {  
             titleStyle, 
@@ -53,7 +59,7 @@ class NotificationExpanded extends Component {
                         />
                         <View style={buttonContainer}>
                             <Button 
-                                onPress={() => this.setModalVisible(false)} 
+                                onPress={() => { this.close(); }} 
                                 title="x"
                             />
                         </View> 
