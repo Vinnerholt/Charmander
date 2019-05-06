@@ -29,7 +29,7 @@ function checkPermissions() {
 function createChannel() {
     //Sets up a channel where notifications can be received
     const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', 
-        firebase.notifications.Android.Importance.High).setDescription('My apps test channel');
+        firebase.notifications.Android.Importance.Max).setDescription('My apps test channel');
 
     // Create the channel
     firebase.notifications().android.createChannel(channel);
@@ -41,12 +41,14 @@ function mountNotifListeners() {
         // Process your notification as required
         // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
         console.log('Received');
+        console.log(notification.notificationId);
     });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
         // Process your notification as required
 
         //Hit kommer du när du väl får notisen, och så väljer den olika inställningar
         //beroende på vilken platform du är på.
+        console.log("gyggygy");
         if (Platform.OS === 'android') {
             const localNotification = new firebase.notifications.Notification()
                 .setNotificationId(notification.notificationId)

@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { Image, ImageBackground } from 'react-native';
+import { Image, ImageBackground, Platform } from 'react-native';
+import firebase from 'react-native-firebase';
 
 import { Header } from './components/common/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
