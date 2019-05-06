@@ -8,6 +8,13 @@ import PlantDetailScreen from '../screens/PlantDetailScreen';
 var self;
 
 class MyPlantScreen extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            myplant: { name: 'Klas' }
+        };        
+    }
 
     componentWillMount() {
         self = this;

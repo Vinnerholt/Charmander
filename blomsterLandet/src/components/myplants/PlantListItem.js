@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PlantListItem = (props) => {
     return (
-        <TouchableOpacity onPress={() => props.navigation.navigate('Details')} style={styles.itemStyle}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Details', { plant: props.plant })} style={styles.itemStyle}>
             <Image
                 source={require('../../resources/images/tomat.jpg')}
                 style={{
