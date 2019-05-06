@@ -66,33 +66,35 @@ class PlantDetailScreen extends Component {
                             </View>
                     </AnimatedGaugeProgress>
                     </View>
-                </View>
 
-                <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').name}</Text>
 
-                    <Text style={speciesStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').type}</Text>
-                </View>
+                    <View style={viewCenterStyle}>
+                        <Text style={nameStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').name}</Text>
 
-                <View style={viewCenterStyle}>
-                    <TouchableOpacity style={waterButtonStyle}>
-                        <Text style={waterButtonTextStyle}>VATTNA</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={bottomButtonsContainerStyle}>
-                    <View style={[viewCenterStyle]}>
-                        <CollapseButton
-                            header={'Information'}
-                            body={this.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
-                        />
+                        <Text style={speciesStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').type}</Text>
                     </View>
 
                     <View style={viewCenterStyle}>
-                        <CollapseButton
-                            header={'Skötselråd'}
-                            body={this.props.navigation.getParam('plant', 'Det funkar ej').advice}
-                        />
+                        <TouchableOpacity style={waterButtonStyle}>
+                            <Text style={waterButtonTextStyle}>VATTNA</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={bottomButtonsContainerStyle}>
+                        <View style={[viewCenterStyle]}>
+                            <CollapseButton
+                                header={'Information'}
+                                body={this.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
+                            />
+                        </View>
+
+                        <View style={viewCenterStyle}>
+                            <CollapseButton
+                                header={'Skötselråd'}
+                                body={this.props.navigation.getParam('plant', 'Det funkar ej').advice}
+                            />
+                        </View>
+                
                     </View>
                 </View>
             </ScrollView>
@@ -140,7 +142,7 @@ const styles = {
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 10
+        paddingTop: 10,
     },
     topButtonsContainerStyle: {
         flex: 1,
@@ -170,9 +172,11 @@ const styles = {
         color: '#fff'
     },
     bottomButtonsContainerStyle: {
+        width: '100%',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
         paddingTop: 10,
         paddingBottom: 20,
     },
