@@ -1,84 +1,90 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, ScrollView, Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SmallButton from '../components/common/SmallButton';
 import CollapseButton from '../components/common/CollapseButton';
 
+let self;
+class PlantDetailScreen extends Component {
+    
 
-const PlantDetailScreen = (props) => {
-    const { nameStyle, imageContainerStyle, viewCenterStyle,
-        topButtonsContainerStyle, imageStyle, speciesStyle,
-        waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-        scrollViewStyle, iconStyle } = styles;
+    componentDidMount(){
+        self = this;
+    }
+    render() {
+        const { nameStyle, imageContainerStyle, viewCenterStyle,
+            topButtonsContainerStyle, imageStyle, speciesStyle,
+            waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
+            scrollViewStyle, iconStyle } = styles;
 
-    return (
-        <ScrollView>
-            <View style={topButtonsContainerStyle}>
+        return (
+            <ScrollView>
+                <View style={topButtonsContainerStyle}>
+                    <SmallButton onPress={() => self.props.navigation.navigate('Home')}>
 
-                <SmallButton onPress={() => props.navigation.navigate('Home')}>
+                        <Icon
+                            style={iconStyle}
+                            name="arrow-back"
+                        />
+                    </SmallButton>
 
-                    <Icon
-                        style={iconStyle}
-                        name="arrow-back"
-                    />
-                </SmallButton>
-
-                <SmallButton>
-                    <Icon
-                        style={iconStyle}
-                        name="brush"
-                    />
-                </SmallButton>
-            </View>
-
-            <View style={scrollViewStyle}>
-                <View style={imageContainerStyle}>
-                    <Image
-                        style={imageStyle}
-                        // eslint-disable-next-line global-require
-                        source={require('../resources/images/tomat.jpg')}
-                    />
+                    <SmallButton>
+                        <Icon
+                            style={iconStyle}
+                            name="brush"
+                        />
+                    </SmallButton>
                 </View>
-            </View>
 
-            <View style={viewCenterStyle}>
-                <Text style={nameStyle}>Nils</Text>
-
-                <Text style={speciesStyle}>Tomat</Text>
-            </View>
-
-            <View style={viewCenterStyle}>
-                <TouchableOpacity style={waterButtonStyle}>
-                    <Text style={waterButtonTextStyle}>VATTNA</Text>
-                </TouchableOpacity>
-            </View>
-
-            <View style={bottomButtonsContainerStyle}>
-                <View style={[viewCenterStyle]}>
-                    <CollapseButton
-                        header={'Information'}
-                        body={'Ger en riklig mängd tomater med god smak. Finns flera olika sorter. KRAV-odlade.'}
-                    />
+                <View style={scrollViewStyle}>
+                    <View style={imageContainerStyle}>
+                        <Image
+                            style={imageStyle}
+                            // eslint-disable-next-line global-require
+                            source={require('../resources/images/tomat.jpg')}
+                        />
+                    </View>
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <CollapseButton
-                        header={'Skötselråd'}
-                        body={`Läge: Sol 
-Vatten: Mycket 
-Höjd: 100 - 200 cm
-Mognadstid: Juli, augusti, september och oktober.
-Jordprodukter: Tomatjord, grönsaksjord, p-jord och u-jord.
-Näring: Naturgödsel och trädgårdsgödsel.
-Växtsätt: Upprätt.
-Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`}
-                    />
+                    <Text style={nameStyle}>Nils</Text>
+
+                    <Text style={speciesStyle}>Tomat</Text>
                 </View>
-            </View>
-        </ScrollView>
-    );
-};
+
+                <View style={viewCenterStyle}>
+                    <TouchableOpacity style={waterButtonStyle}>
+                        <Text style={waterButtonTextStyle}>VATTNA</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={bottomButtonsContainerStyle}>
+                    <View style={[viewCenterStyle]}>
+                        <CollapseButton
+                            header={'Information'}
+                            body={'Ger en riklig mängd tomater med god smak. Finns flera olika sorter. KRAV-odlade.'}
+                        />
+                    </View>
+
+                    <View style={viewCenterStyle}>
+                        <CollapseButton
+                            header={'Skötselråd'}
+                            body={`Läge: Sol 
+    Vatten: Mycket 
+    Höjd: 100 - 200 cm
+    Mognadstid: Juli, augusti, september och oktober.
+    Jordprodukter: Tomatjord, grönsaksjord, p-jord och u-jord.
+    Näring: Naturgödsel och trädgårdsgödsel.
+    Växtsätt: Upprätt.
+    Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
+        );
+    }
+}
 
 const styles = {
     nameStyle: {
