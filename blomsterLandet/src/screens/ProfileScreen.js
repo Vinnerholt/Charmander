@@ -33,7 +33,7 @@ class ProfileScreen extends React.Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>Olle Innebandysson</Text>
+                    <Text style={nameStyle}>Kalle Kuling</Text>
 
                 </View>
 
@@ -55,8 +55,9 @@ class ProfileScreen extends React.Component {
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
-                            header={'Inställningar'}
-                            body={'Diverse inställningar osv.'}
+                            header={'Om mig'}
+                            body={`Hur mycket jag är intresserad av blommor och växter på en skala 1-10.
+Andra relevanta saker.`}
                         />
                     </View>
                 </View>
