@@ -1,5 +1,6 @@
 import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
+import RNFS from 'react-native-fs';
 
 export function initNotifications() {
     checkPermissions();
@@ -42,13 +43,26 @@ function mountNotifListeners() {
         // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
         console.log('Received');
         console.log(notification.notificationId);
+        
+        const notifObject = {
+            notifId: notification.notificationId,
+            title: notification.title,
+            description: notification.body,
+            icon: 'default',
+            imageURL: `../../resources/images/${notification.data.imageURL}`,
+            type: notification.data.type,
+            pointer: 0,
+            read: false
+        };
+        writeNotifToJSON(notifObject);
+        
     });
+
     this.notificationListener = firebase.notifications().onNotification((notification) => {
         // Process your notification as required
 
         //Hit kommer du när du väl får notisen, och så väljer den olika inställningar
         //beroende på vilken platform du är på.
-        console.log("gyggygy");
         if (Platform.OS === 'android') {
             const localNotification = new firebase.notifications.Notification()
                 .setNotificationId(notification.notificationId)
@@ -83,4 +97,15 @@ function mountNotifListeners() {
 export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  
+}
+
+function writeNotifToJSON(notification) {
+ 
+}
+
+function readNotif() {
+    RNFS.readFile(RNFS.DocumentDirectoryPath + '/test.json', 'utf8').then(result => {
+        console.log(result[0]);
+        return result;
+    });
 }
