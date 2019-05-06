@@ -4,14 +4,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SmallButton from '../components/common/SmallButton';
 import CollapseButton from '../components/common/CollapseButton';
+import images from '../resources/images/index';
 
 let self;
+let image;
+
 class PlantDetailScreen extends Component {
-    
 
     componentDidMount(){
         self = this;
+        image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
     }
+    
     render() {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
@@ -38,11 +42,11 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 <View style={scrollViewStyle}>
-                    <View style={imageContainerStyle}>
+                    <View stylre={imageContainerStyle}>
                         <Image
                             style={imageStyle}
                             // eslint-disable-next-line global-require
-                            source={require('../resources/images/tomat.jpg')}
+                            source={this.props.navigation.getParam('plant', 'Det funkar ej').image}
                         />
                     </View>
                 </View>
@@ -63,21 +67,14 @@ class PlantDetailScreen extends Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Information'}
-                            body={'Ger en riklig mängd tomater med god smak. Finns flera olika sorter. KRAV-odlade.'}
+                            body={this.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Skötselråd'}
-                            body={`Läge: Sol 
-    Vatten: Mycket 
-    Höjd: 100 - 200 cm
-    Mognadstid: Juli, augusti, september och oktober.
-    Jordprodukter: Tomatjord, grönsaksjord, p-jord och u-jord.
-    Näring: Naturgödsel och trädgårdsgödsel.
-    Växtsätt: Upprätt.
-    Jordmån: Näringsrik jord, mullrik jord och väldränerad jord.`}
+                            body={this.props.navigation.getParam('plant', 'Det funkar ej').advice}
                         />
                     </View>
                 </View>
