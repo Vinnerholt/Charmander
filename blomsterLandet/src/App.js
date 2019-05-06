@@ -12,10 +12,11 @@ import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
 
 export const TabNavigator = createBottomTabNavigator({
-    Shop: ShopScreen,
+    Profile: ProfileScreen,
+    // BYT TILLBAKA
     Plants: MyPlantScreen,
     Notifications: NotificationScreen,
-    Profile: ProfileScreen,
+    Shop: ShopScreen,
     Dev: DevScreen
 },
     // Adding icons to the navigation bar.
