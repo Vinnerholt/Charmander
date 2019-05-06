@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
 import SmallButton from '../components/common/SmallButton';
 import CollapseButton from '../components/common/CollapseButton';
 import images from '../resources/images/index';
@@ -20,7 +21,7 @@ class PlantDetailScreen extends Component {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-            scrollViewStyle, iconStyle } = styles;
+            scrollViewStyle, iconStyle, gaugeImageContainerStyle } = styles;
 
         return (
             <ScrollView>
@@ -41,13 +42,29 @@ class PlantDetailScreen extends Component {
                     </SmallButton>
                 </View>
 
+                
+
                 <View style={scrollViewStyle}>
-                    <View stylre={imageContainerStyle}>
-                        <Image
-                            style={imageStyle}
-                            // eslint-disable-next-line global-require
-                            source={this.props.navigation.getParam('plant', 'Det funkar ej').image}
-                        />
+                    <View style={imageContainerStyle}>
+                    <AnimatedGaugeProgress
+                        size={250}
+                        width={15}
+                        fill={100}
+                        rotation={90}
+                        cropDegree={90}
+                        tintColor="#4682b4"
+                        delay={0}
+                        backgroundColor="#b0c4de"
+                        stroke={[2, 2]} //For a equally dashed line
+                        strokeCap="circle" 
+                        >
+                            <View style={gaugeImageContainerStyle}>
+                                <Image 
+                                    style={imageStyle}
+                                    source={this.props.navigation.getParam('plant', 'Det funkar ej').image} 
+                                />  
+                            </View>
+                    </AnimatedGaugeProgress>
                     </View>
                 </View>
 
@@ -101,6 +118,7 @@ const styles = {
     imageContainerStyle: {
         justifyContent: 'center',
         width: 200,
+        height: 200,
         alignItems: 'center',
         paddingTop: 0,
         borderRadius: 200 / 2,
@@ -167,6 +185,15 @@ const styles = {
         flex: 1,
         color: '#3e5f36',
     },
+    gaugeImageContainerStyle: {
+        position: 'absolute',
+        top: 25,
+        left: 25,
+        width: 200,
+        height: 200,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 };
 
 export default PlantDetailScreen;
