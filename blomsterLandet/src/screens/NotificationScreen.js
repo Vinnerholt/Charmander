@@ -19,7 +19,7 @@ class NotificationScreen extends React.Component {
         //Loads notifications from json
         let jsonNotifications = require('../resources/data/notifications.json');
         //Sets notification state, when asynch call is completed, functions using state are called
-        self.setState({ notifications: jsonNotifications.notifications }, () => {
+        self.setState({ notifications: jsonNotifications }, () => {
             self.listNotifications();
             self.checkForOutsideExpandRequest(self.props);
         });

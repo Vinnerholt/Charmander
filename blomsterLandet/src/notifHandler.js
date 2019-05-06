@@ -54,7 +54,7 @@ function mountNotifListeners() {
             pointer: 0,
             read: false
         };
-        writeNotifToJSON(notifObject);
+        //writeNotifToJSON(notifObject);
         
     });
 
