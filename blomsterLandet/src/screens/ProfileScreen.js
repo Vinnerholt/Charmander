@@ -75,13 +75,6 @@ const styles = {
         alignItems: 'flex-end',
         color: '#3e5f36'
     },
-    speciesStyle: {
-        fontSize: 20,
-        fontStyle: 'italic',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        color: '#3e5f36'
-    },
     imageContainerStyle: {
         justifyContent: 'center',
         width: 200,
@@ -115,26 +108,6 @@ const styles = {
         justifyContent: 'flex-end',
         paddingTop: 4,
         paddingBottom: 4,
-    },
-    waterButtonStyle: {
-        width: 150,
-        height: 55,
-        backgroundColor: '#005496',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#3e5f36',
-        marginLeft: 5,
-        marginRight: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#050',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        elevation: 5
-    },
-    waterButtonTextStyle: {
-        fontSize: 30,
-        color: '#fff'
     },
     bottomButtonsContainerStyle: {
         width: '100%',
