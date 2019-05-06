@@ -87,19 +87,29 @@ class NotificationScreen extends React.Component {
         });
     }
 
+    //Adds a notification presuming it is correctly formatted
+    addNotification(notification) {
+        const notifList = self.state.notifications;
+        notifList.push(notification);
+        self.setState({ notifications: notifList }, () => {
+            self.mapNotifications();
+        });
+    }
+
     render() {
+        
         return (
-            <View>
-                <NotificationExpanded
-                    title={self.state.expandedTitle}
-                    description={self.state.expandedDescription}
-                    modalVisible={self.state.notificationExpanded}
-                    closeModal={self.closeExpandedNotification.bind(self)}
-                />
-                <ScrollView>
-                    {self.state.notificationMap}
-                </ScrollView>
-            </View>
+                <View>
+                    <NotificationExpanded
+                        title={self.state.expandedTitle}
+                        description={self.state.expandedDescription}
+                        modalVisible={self.state.notificationExpanded}
+                        closeModal={self.closeExpandedNotification.bind(self)}
+                    />
+                    <ScrollView>
+                        {self.state.notificationMap}
+                    </ScrollView>
+                </View>
         );
     }
 }
