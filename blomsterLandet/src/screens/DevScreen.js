@@ -18,23 +18,13 @@ class DevScreen extends React.Component {
 
     render() {
         return (
-            <NotificationContext.Cosumer>
-                {(n) => (
-
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Button
-                            title='Send Local Notification'
-                            onPress={() => this.notif.localNotif('Tomatdags',
-                                'Nu är det dags att odla tomater!', 0)}
-                        />
-                        <Button
-                            title='Add notification'
-                            onPress={() => n.addNotification()}
-                        />
-                    </View>
-
-                )}
-            </NotificationContext.Cosumer>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Button
+                    title='Send Local Notification'
+                    onPress={() => this.notif.localNotif('Tomatdags',
+                        'Nu är det dags att odla tomater!', 0)}
+                />
+            </View>
         );
     }
 }
