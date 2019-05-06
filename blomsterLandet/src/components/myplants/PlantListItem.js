@@ -1,12 +1,17 @@
 import React from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import images from '../../resources/images';
 
 const PlantListItem = (props) => {
+
+    var image = images[props.plant.type];
+    props.plant.image = image;
+
     return (
-        <TouchableOpacity onPress={() => props.navigation.navigate('Details')} style={styles.itemStyle}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Details', { plant: props.plant })} style={styles.itemStyle}>
             <Image
-                source={require('../../resources/images/tomat.jpg')}
+                source={image}
                 style={{
                     width: '10%',
                     height: '100%'

@@ -24,7 +24,7 @@ const CollapseButton = ({ header, body }) => {
 
 const styles = {
     collapseButtonStyle: {
-        width: '90%',
+        width: '100%',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
