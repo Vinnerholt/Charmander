@@ -42,22 +42,21 @@ class ProfileScreen extends React.Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Personuppgifter'}
-                            body={`E-mail: innebandy_pingis@hotmail.com
-Adress: Genvägen 12`}
+                            body={'E-mail: innebandy_pingis@hotmail.com \nAdress: Genvägen 12'}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Tidigare ordar'}
-                            body={`Här ska du kunna se dina tidigare ordrar.`}
+                            body={'Här ska du kunna se dina tidigare ordrar.'}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Inställningar'}
-                            body={`Diverse inställningar osv.`}
+                            body={'Diverse inställningar osv.'}
                         />
                     </View>
                 </View>
