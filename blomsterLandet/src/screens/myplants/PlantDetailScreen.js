@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { View, ScrollView, Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import SmallButton from '../components/common/SmallButton';
-import CollapseButton from '../components/common/CollapseButton';
-import images from '../resources/images/index';
+import SmallButton from '../../components/common/SmallButton';
+import CollapseButton from '../../components/common/CollapseButton';
+import images from '../../resources/images/index';
 
 let self;
 let image;
 
 class PlantDetailScreen extends Component {
 
-    componentDidMount(){
+    componentWillMount() {
         self = this;
         image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
     }
@@ -46,15 +46,19 @@ class PlantDetailScreen extends Component {
                         <Image
                             style={imageStyle}
                             // eslint-disable-next-line global-require
-                            source={this.props.navigation.getParam('plant', 'Det funkar ej').image}
+                            source={self.props.navigation.getParam('plant', 'Det funkar ej').image}
                         />
                     </View>
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').name}</Text>
+                    <Text style={nameStyle}>
+                        {self.props.navigation.getParam('plant', 'Det funkar ej').name}
+                    </Text>
 
-                    <Text style={speciesStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').type}</Text>
+                    <Text style={speciesStyle}>
+                        {self.props.navigation.getParam('plant', 'Det funkar ej').type}
+                    </Text>
                 </View>
 
                 <View style={viewCenterStyle}>
@@ -67,14 +71,14 @@ class PlantDetailScreen extends Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Information'}
-                            body={this.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
+                            body={self.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Skötselråd'}
-                            body={this.props.navigation.getParam('plant', 'Det funkar ej').advice}
+                            body={self.props.navigation.getParam('plant', 'Det funkar ej').advice}
                         />
                     </View>
                 </View>

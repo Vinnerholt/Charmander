@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import PlantList from '../components/myplants/PlantList';
+import { View } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import PlantList from '../../components/myplants/PlantList';
 
-import PlantDetailScreen from '../screens/PlantDetailScreen';
+import PlantDetailScreen from './PlantDetailScreen';
 
-var self;
+let self;
 
 class MyPlantScreen extends React.Component {
 
@@ -29,7 +29,7 @@ const AppNavigator = createStackNavigator(
         Details: PlantDetailScreen
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: 'Home',
         headerMode: 'none',
         cardStyle: {
             backgroundColor: 'transperent'
