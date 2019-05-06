@@ -3,66 +3,77 @@
         "list": [
             {
                 "name": "tomat",
+                "type": "tomat",
                 "advice": "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
                 "extendedDescription": "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
                 "imageURL": "../../resources/images/tomat.jpg"
             },
             {
                 "name": "slanggurka",
+                "type": "slanggurka",
                 "advice": "Trivs i växthus och ger rikligt skörd. Finns i flera olika sorter. KRAV-odlade.",
                 "extendedDescription": "Att vattna jämnt och rikligt är viktigt för smaken. Bind upp plantan vid t.ex. en ståltrådsställning eller spaljé. Skörda gurkorna så fort de mognar. Om man låter dem sitta kvar hindrar det vidare fruktsättning.",
                 "imageURL": "../../resources/images/slanggurka.jpg"
             },
             {
                 "name": "ros",
+                "type": "ros",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Aron",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Caroline",
+                "type": "slanggurka",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Liwia",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Jonathan",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Gustav",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Benjamin",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Andrea",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"
             },
             {
                 "name": "Malin",
+                "type": "tomat",
                 "advice": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "extendedDescription": "Marktäckande ros som passar att plantera i grupp, som solitär, som häck eller i kruka.",
                 "imageURL": "../../resources/images/ros.jpg"

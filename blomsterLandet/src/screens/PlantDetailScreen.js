@@ -54,7 +54,7 @@ class PlantDetailScreen extends Component {
                 <View style={viewCenterStyle}>
                     <Text style={nameStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').name}</Text>
 
-                    <Text style={speciesStyle}>Tomat</Text>
+                    <Text style={speciesStyle}>{this.props.navigation.getParam('plant', 'Det funkar ej').type}</Text>
                 </View>
 
                 <View style={viewCenterStyle}>

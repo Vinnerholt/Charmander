@@ -5,7 +5,7 @@ import images from '../../resources/images';
 
 const PlantListItem = (props) => {
 
-    var image = images[props.plant.name];
+    var image = images[props.plant.type];
     props.plant.image = image;
 
     return (
