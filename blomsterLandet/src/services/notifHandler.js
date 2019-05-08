@@ -2,14 +2,15 @@ import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
 import jsonStorage from './jsonStorage';
 
-export function initNotifications() {
+export function initNotifications(mountee) {
+    console.log('wallah');
     checkPermissions();
     createChannel();
-    mountNotifListeners();
+    mountNotifListeners(mountee);
 }
 
-function checkPermissions() {
-    const enabled = firebase.messaging().hasPermission();
+const checkPermissions = async() => {
+    const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
         // user has permissions
         console.log('user has permissions');
@@ -36,38 +37,14 @@ function createChannel() {
     firebase.notifications().android.createChannel(channel);
 }
 
-function mountNotifListeners() {
-    this.notificationDisplayedListener = firebase.notifications()
-        .onNotificationDisplayed((notification) => {
-        // Process your notification as required
-        // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
-        console.log('Received');
-        console.log(notification.notificationId);
-        
-        const notif = {
-            notifId: notification.notificationId,
-            title: notification.title,
-            description: notification.body,
-            icon: 'default',
-            imageURL: `../../resources/images/${notification.data.imageURL}`,
-            type: notification.data.type,
-            pointer: 0,
-            read: false
-        };
-        jsonStorage.getItem('notifications').then(r => {
-            r.notifications.push(notif);
-            jsonStorage.setItem('notifications', r);
-            console.log('Added');
-          }).catch(e => {
-            const start = {
-              notifications: []
-            };
-            start.notifications.push(notif);
-            jsonStorage.setItem('notifications', start);
-            console.log('Had to be created');
-          });
-    });
+let currentId = 0;
+function mountNotifListeners(mountee) {
+    setOnNotification();
+    setOnNotificationDisplayed(mountee);
+    setOnNotificationOpened();  
+}
 
+function setOnNotification() {
     this.notificationListener = firebase.notifications().onNotification((notification) => {
         // Process your notification as required
 
@@ -102,6 +79,49 @@ function mountNotifListeners() {
                 .catch(err => console.error(err));
             }
         });
+}
+
+function setOnNotificationDisplayed(mountee) {
+    this.notificationDisplayedListener = firebase.notifications()
+        .onNotificationDisplayed((notification) => {
+        // Process your notification as required
+        // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification
+        
+        const notif = {
+            notifId: currentId,
+            title: notification.title,
+            description: notification.body,
+            icon: 'default',
+            imageURL: `../../resources/images/${notification.data.imageURL}`,
+            type: notification.data.type,
+            pointer: 0,
+            read: false
+        };
+        currentId++;
+        jsonStorage.getItem('notifications').then(r => {
+            r.notifications.unshift(notif);
+            jsonStorage.setItem('notifications', r).then(() => {
+                mountee.updateNotificationList();
+            });
+            //console.log('Added');
+          }).catch(e => {
+            const start = {
+              notifications: []
+            };
+            start.notifications.push(notif);
+            jsonStorage.setItem('notifications', start).then(() => {
+                mountee.updateNotificationList();
+            });
+            console.log('Had to be created');
+          });
+    });
+}
+
+function setOnNotificationOpened(mountee) {
+    this.notificationOpenedListener = firebase.notifications().onNotificationOpened(notificationOpen => {
+        const action = notificationOpen.action;
+        const notification = notificationOpen.notification;
+    }); 
 }
 
 export function unmountNotifListeners() {

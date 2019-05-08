@@ -2,6 +2,8 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
+import * as notifHandler from '../services/notifHandler';
+import jsonStorage from '../services/jsonStorage';
 
 let self;
 class NotificationScreen extends React.Component {
@@ -13,22 +15,30 @@ class NotificationScreen extends React.Component {
         expandedDescription: '',
     };
 
-
     componentWillMount() {
         self = this;
-        //Loads notifications from json
-        let jsonNotifications = require('../resources/data/notifications.json');
-        //Sets notification state, when asynch call is completed, functions using state are called
-        self.setState({ notifications: jsonNotifications }, () => {
-            self.listNotifications();
-            self.checkForOutsideExpandRequest(self.props);
-        });
+        self.updateNotificationList();
     }
 
-    
+    componentDidMount() {
+        notifHandler.initNotifications(self);
+    }
 
     componentWillReceiveProps(nextProps) {
         self.checkForOutsideExpandRequest(nextProps);
+    }
+
+    updateNotificationList() {
+        console.log('yo');
+        jsonStorage.getItem('notifications').then(r => {
+            //Sets notification state, when asynch call is completed, functions using state are called
+            console.log(r.notifications);
+            self.setState({ notifications: r.notifications }, () => {
+                self.listNotifications();
+            }); 
+        }).catch(e => {
+            console.log(e);
+        });
     }
 
     //Checks if the navigation to the notification screen was made by
@@ -54,15 +64,14 @@ class NotificationScreen extends React.Component {
                 pressedRemoved={self.removeNotification.bind(self)}
             />)
         ));
+        console.log(mapOfNotifications);
         self.setState({ notificationMap: mapOfNotifications });
     }
 
     //Returns the map with notificationListItems if it exists, 
     //otherwise it creates it and returns it
     listNotifications() {
-        if (self.state.notificationMap.length === 0) {
-            self.mapNotifications();
-        }
+        self.mapNotifications();
         return self.state.notificationMap;
     }
 
@@ -73,6 +82,10 @@ class NotificationScreen extends React.Component {
             expandedTitle: notification.title,
             expandedDescription: notification.description
         });
+    }
+
+    openExpandedNotificationById() {
+        self.openExpandedNotification(self.state.mapOfNotifications.get(0));
     }
 
     closeExpandedNotification() {
