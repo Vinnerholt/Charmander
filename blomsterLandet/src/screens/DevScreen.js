@@ -5,7 +5,7 @@
 import React from 'react';
 import { View, Button } from 'react-native';
 import firebase from 'react-native-firebase';
-import RNFS from 'react-native-fs';
+import jsonStorage from '../services/jsonStorage';
 
 class DevScreen extends React.Component {
 
@@ -26,44 +26,16 @@ class DevScreen extends React.Component {
         firebase.notifications().displayNotification(localNotification);
     };
 
-    addFile = () => {
-        // eslint-disable-next-line import/newline-after-import
-        // eslint-disable-next-line global-require
-        const path = RNFS.DocumentDirectoryPath + '/test.txt';
-        const start = {
-            notifications: [{ title: 'titelnn' }]
-        };
-
-        RNFS.writeFile(path, JSON.stringify(start), 'utf8')
-        .then((success) => {
-            console.log('FILE WRITTEN!');
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
-    };
-    appendFile = () => {
-        const notifObject = {
-            notifId: 'ssss',
-            title: 'titel'
-        };
-        const path = RNFS.DocumentDirectoryPath + '/test.txt';
-
-        RNFS.readFile(RNFS.DocumentDirectoryPath + '/test.txt', 'utf8').then(result => {
-            const json = JSON.parse(result);
-            json.notifications.push(notifObject);
-            RNFS.writeFile(path, JSON.stringify(json), 'utf8');
-        });
-    }
-
     readFile = () => {
-        RNFS.readFile(RNFS.DocumentDirectoryPath + '/test.txt', 'utf8').then(result => {
-            console.log(result);
+        jsonStorage.getItem('notifications').then(r => {
+            console.log(r);
         });
     };
 
     deleteFile = () => {
-        RNFS.unlink(RNFS.DocumentDirectoryPath + '/test.txt');
+        jsonStorage.removeItem('notifications').then(() => {
+            console.log('deleted');
+        });
     };
 
     render() {
@@ -74,17 +46,9 @@ class DevScreen extends React.Component {
                     onPress={() => this.sendLocalNotif()} 
                 />
                  <Button 
-                    title='Create file'
-                    onPress={() => this.addFile()}
-                 />
-                 <Button 
                     title='read file'
                     onPress={() => this.readFile()}
                  />
-                  <Button 
-                    title='append file'
-                    onPress={() => this.appendFile()}
-                  />
                   <Button 
                     title='delete file'
                     onPress={() => this.deleteFile()}

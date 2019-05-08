@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
-import RNFS from 'react-native-fs';
+import jsonStorage from './jsonStorage';
 
 export function initNotifications() {
     checkPermissions();
@@ -44,7 +44,7 @@ function mountNotifListeners() {
         console.log('Received');
         console.log(notification.notificationId);
         
-        const notifObject = {
+        const notif = {
             notifId: notification.notificationId,
             title: notification.title,
             description: notification.body,
@@ -54,8 +54,18 @@ function mountNotifListeners() {
             pointer: 0,
             read: false
         };
-        //writeNotifToJSON(notifObject);
-        
+        jsonStorage.getItem('notifications').then(r => {
+            r.notifications.push(notif);
+            jsonStorage.setItem('notifications', r);
+            console.log('Added');
+          }).catch(e => {
+            const start = {
+              notifications: []
+            };
+            start.notifications.push(notif);
+            jsonStorage.setItem('notifications', start);
+            console.log('Had to be created');
+          });
     });
 
     this.notificationListener = firebase.notifications().onNotification((notification) => {
@@ -97,15 +107,4 @@ function mountNotifListeners() {
 export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  
-}
-
-function writeNotifToJSON(notification) {
- 
-}
-
-function readNotif() {
-    RNFS.readFile(RNFS.DocumentDirectoryPath + '/test.json', 'utf8').then(result => {
-        console.log(result[0]);
-        return result;
-    });
 }

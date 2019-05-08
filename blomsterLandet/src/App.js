@@ -4,7 +4,7 @@ import { Image, ImageBackground } from 'react-native';
 
 import { Header } from './components/common/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as notifHandler from './notifHandler';
+import * as notifHandler from './services/notifHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
 import MyPlantScreen from './screens/myplants/MyPlantScreen';

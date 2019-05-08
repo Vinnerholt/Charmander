@@ -25,6 +25,8 @@ class NotificationScreen extends React.Component {
         });
     }
 
+    
+
     componentWillReceiveProps(nextProps) {
         self.checkForOutsideExpandRequest(nextProps);
     }
