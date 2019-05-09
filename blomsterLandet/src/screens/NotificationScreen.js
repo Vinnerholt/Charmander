@@ -2,8 +2,8 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
-import * as notifHandler from '../services/notifHandler';
 import jsonStorage from '../services/jsonStorage';
+import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
@@ -21,7 +21,7 @@ class NotificationScreen extends React.Component {
     }
 
     componentDidMount() {
-        notifHandler.initNotifications(self);
+        NotifObservable.subscribe(self.updateNotificationList);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -29,10 +29,8 @@ class NotificationScreen extends React.Component {
     }
 
     updateNotificationList() {
-        console.log('yo');
         jsonStorage.getItem('notifications').then(r => {
             //Sets notification state, when asynch call is completed, functions using state are called
-            console.log(r.notifications);
             self.setState({ notifications: r.notifications }, () => {
                 self.listNotifications();
             }); 
@@ -64,7 +62,6 @@ class NotificationScreen extends React.Component {
                 pressedRemoved={self.removeNotification.bind(self)}
             />)
         ));
-        console.log(mapOfNotifications);
         self.setState({ notificationMap: mapOfNotifications });
     }
 

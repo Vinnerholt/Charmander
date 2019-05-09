@@ -1,22 +1,21 @@
 import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
 import jsonStorage from './jsonStorage';
+import NotifObservable from '../services/observers/NotifObservable';
 
-export function initNotifications(mountee) {
-    console.log('wallah');
+const notifPath = 'notifications';
+export function initNotifications() {
     checkPermissions();
     createChannel();
-    mountNotifListeners(mountee);
+    mountNotifListeners();
 }
 
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
         // user has permissions
-        console.log('user has permissions');
     } else {
         // user doesn't have permission
-        console.log('user doesnt have permissions');
         firebase.messaging().requestPermission()
             .then(() => {
                 // User has authorised  
@@ -26,7 +25,7 @@ const checkPermissions = async() => {
                 console.log(error);  
             });
     }
-}
+};
 
 function createChannel() {
     //Sets up a channel where notifications can be received
@@ -37,58 +36,39 @@ function createChannel() {
     firebase.notifications().android.createChannel(channel);
 }
 
-let currentId = 0;
-function mountNotifListeners(mountee) {
+function mountNotifListeners() {
     setOnNotification();
-    setOnNotificationDisplayed(mountee);
-    setOnNotificationOpened();  
+    setOnNotificationDisplayed();
+    //setOnNotificationOpened();  
 }
 
 function setOnNotification() {
-    this.notificationListener = firebase.notifications().onNotification((notification) => {
+    firebase.notifications().onNotification((notification) => {
         // Process your notification as required
 
-        //Hit kommer du när du väl får notisen, och så väljer den olika inställningar
-        //beroende på vilken platform du är på.
         if (Platform.OS === 'android') {
-            const localNotification = new firebase.notifications.Notification()
-                .setNotificationId(notification.notificationId)
-                .setTitle(notification.title)
-                .setSubtitle(notification.subtitle)
-                .setBody(notification.body)
-                .setData(notification.data)
+            notification
                 .setSound('default')
                 .android.setChannelId('test-channel') // e.g. the id you chose above
                 .android.setSmallIcon('ic_stat_notification') // create this icon in Android Studio
                 .android.setColor('#000000') // you can set a color here
                 .android.setPriority(firebase.notifications.Android.Priority.High);
-    
-                //Här skickas notisen (till sig själv), med andra ord visas
-            firebase.notifications().displayNotification(localNotification);
             } else if (Platform.OS === 'ios') {
-            const localNotification = new firebase.notifications.Notification()
-                .setNotificationId(notification.notificationId)
-                .setTitle(notification.title)
-                .setSubtitle(notification.subtitle)
-                .setBody(notification.body)
-                .setData(notification.data)
-                .ios.setBadge(notification.ios.badge);
-    
-            firebase.notifications()
-                .displayNotification(localNotification)
-                .catch(err => console.error(err));
+            notification.ios.setBadge(notification.ios.badge);
             }
-        });
+
+        firebase.notifications().displayNotification(notification);
+    });
 }
 
-function setOnNotificationDisplayed(mountee) {
-    this.notificationDisplayedListener = firebase.notifications()
-        .onNotificationDisplayed((notification) => {
+function setOnNotificationDisplayed() {
+    firebase.notifications()
+        .onNotificationDisplayed(async (notification) => {
         // Process your notification as required
         // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification
         
         const notif = {
-            notifId: currentId,
+            notifId: notification.notificationId,
             title: notification.title,
             description: notification.body,
             icon: 'default',
@@ -97,34 +77,33 @@ function setOnNotificationDisplayed(mountee) {
             pointer: 0,
             read: false
         };
-        currentId++;
-        jsonStorage.getItem('notifications').then(r => {
-            r.notifications.unshift(notif);
-            jsonStorage.setItem('notifications', r).then(() => {
-                mountee.updateNotificationList();
-            });
-            //console.log('Added');
-          }).catch(e => {
+
+        let file = null;
+        await jsonStorage.getItem(notifPath).then(item => {
+            item.notifications.unshift(notif);
+            file = item;
+          }).catch(() => {
             const start = {
               notifications: []
             };
             start.notifications.push(notif);
-            jsonStorage.setItem('notifications', start).then(() => {
-                mountee.updateNotificationList();
-            });
-            console.log('Had to be created');
+            file = start;
           });
+
+        await jsonStorage.setItem(notifPath, file);
+
+        NotifObservable.notify();
     });
 }
 
-function setOnNotificationOpened(mountee) {
+/*function setOnNotificationOpened() {
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened(notificationOpen => {
         const action = notificationOpen.action;
         const notification = notificationOpen.notification;
     }); 
-}
+}*/
 
-export function unmountNotifListeners() {
+/*export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  
-}
+}*/

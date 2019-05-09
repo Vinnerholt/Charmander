@@ -62,6 +62,9 @@ const TabNavigatorContainer = createAppContainer(TabNavigator);
 
 //The main application
 class App extends React.Component {
+    componentDidMount() {
+        notifHandler.initNotifications();
+    }
     render() {
         return (
             <ImageBackground

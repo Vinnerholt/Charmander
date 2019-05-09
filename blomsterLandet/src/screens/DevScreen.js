@@ -6,13 +6,15 @@ import React from 'react';
 import { View, Button } from 'react-native';
 import firebase from 'react-native-firebase';
 import jsonStorage from '../services/jsonStorage';
+import NotifObservable from '../services/observers/NotifObservable';
 
 class DevScreen extends React.Component {
 
     sendLocalNotif = () => {
+        const randomNotifId = Math.floor(Math.random() * 10000).toString();
         const localNotification = new firebase.notifications.Notification()
-        .setNotificationId('notificationId')
-        .setTitle('My notification title')
+        .setNotificationId(randomNotifId)
+        .setTitle(randomNotifId)
         .setBody('My notification body')
         .setData({
             imageURL: 'value1',
@@ -38,6 +40,10 @@ class DevScreen extends React.Component {
         });
     };
 
+    checkSingleton = () => {
+        console.log(NotifObservable().getInstance());
+    }
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
@@ -52,6 +58,10 @@ class DevScreen extends React.Component {
                   <Button 
                     title='delete file'
                     onPress={() => this.deleteFile()}
+                  />
+                  <Button 
+                    title='Check singleton'
+                    onPress={() => this.checkSingleton()}
                   />
             </View>
             
