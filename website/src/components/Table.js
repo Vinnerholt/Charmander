@@ -57,17 +57,18 @@ class CustomizedTable extends React.Component {
 		this.generateRows();
 	}
 
-	generateRows() {
-		console.log(orderReader.fetchData())
-		orderReader.fetchData().then(orders => {
-			this.setState({ rows: orders });
-		}).catch(() => {
-			console.log('Fel');
-		});
+	generateRows = async() => {
+		let orders = await orderReader.fetchData();
+		for(let i in orders) {
+			const productRef = await orders[i].product.get();
+			const productObject = await productRef.data();
+			const productName = productObject.name;
+			orders[i].product = productName;
+		}
+		this.setState({ rows: orders });
 	}
 	
 	render() {
-		console.log(this.state.rows);
 		return (
 			<Paper className={this.props.classes.root}>
 			  <Table className={this.props.classes.table}>
@@ -81,8 +82,7 @@ class CustomizedTable extends React.Component {
 				<TableBody>
 				  {this.state.rows.map(row => (
 					<TableRow className={this.props.classes.row} key={row.amount}>
-						{console.log(orderReader.fetchProduct('tomatplanta'))}
-						<CustomTableCell align="right">{row.product.get().name}</CustomTableCell>
+						<CustomTableCell align="right">{row.product}</CustomTableCell>
 					  <CustomTableCell align="right">{row.buyer}</CustomTableCell>
 					  <CustomTableCell align="right">{row.amount}</CustomTableCell>
 					</TableRow>
