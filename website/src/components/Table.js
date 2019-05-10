@@ -41,13 +41,6 @@ function createData(doc) {
   return { id, doc };
 }
 
-//let rows = [
-  /*createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),*/
-//];
 
 
 class CustomizedTable extends React.Component {
@@ -60,9 +53,9 @@ class CustomizedTable extends React.Component {
 	generateRows = async() => {
 		let orders = await orderReader.fetchData();
 		for(let i in orders) {
-			const productRef = await orders[i].product.get();
-			const productObject = await productRef.data();
-			const productName = productObject.name;
+			const productSnapshot = await orders[i].product.get();
+			const productData = await productSnapshot.data();
+			const productName = productData.name;
 			orders[i].product = productName;
 		}
 		this.setState({ rows: orders });
