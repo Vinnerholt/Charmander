@@ -33,3 +33,9 @@ export async function fetchData() {
 export async function fetchProduct(productId) {
     const snapshot = await firebase.firestore().collection('products').doc(productId).get();
 }
+
+export async function koppla() {
+    firebase.firestore().collection('orders').onSnapshot(r => {
+        console.log('Ändrad');
+    })
+}
