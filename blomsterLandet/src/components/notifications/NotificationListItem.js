@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class NotificationListItem extends Component {
 
     render() {
         const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
+        const { title } = this.props.notification.item;
         return (
             <TouchableOpacity style={itemStyle}>
                 <TouchableOpacity>
                     <Icon name="close" style={crossStyle} />
                 </TouchableOpacity>
                 <Text style={textStyle}>
-                    {}
+                    {title}
                 </Text>
                 <Icon name="chevron-right" style={arrowStyle} />
             </TouchableOpacity>
         );
     }
-
-};
+}
 
 const styles = {
     textStyle: {
@@ -54,4 +55,4 @@ const styles = {
     }
 };
 
-export default NotificationListItem;
+export default connect()(NotificationListItem);
