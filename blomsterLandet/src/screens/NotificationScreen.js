@@ -106,9 +106,7 @@ class NotificationScreen extends React.Component {
     }*/
 
     renderItem(notification) {
-        return (<NotificationListItem
-            notification={notification}
-        />);
+        return <NotificationListItem notification={notification} />;
     }
 
 
@@ -123,7 +121,6 @@ class NotificationScreen extends React.Component {
     render() {
         return (
             <View>
-                {console.log(this.props.notifications)}
                 <FlatList
                     data={this.props.notifications}
                     renderItem={this.renderItem}
