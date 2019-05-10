@@ -8,6 +8,7 @@
 import React, { Component } from 'react';
 import { Text, Image, Modal, Button, View } from 'react-native';
 import { Card, CardSection } from '../common/index';
+import BuyButton from '../shop/BuyButton';
 
 class NotificationExpanded extends Component {
     constructor(props) {
@@ -69,6 +70,10 @@ class NotificationExpanded extends Component {
         
                     <CardSection>
                         <Text style={descriptionStyle}>{this.props.description}</Text>
+                    </CardSection>
+                        
+                    <CardSection>
+                        <BuyButton />
                     </CardSection>
                 </Card>  
                 </View>

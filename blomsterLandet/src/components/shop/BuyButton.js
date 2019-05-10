@@ -4,8 +4,7 @@ import React from 'react';
 import { View, Button, Alert } from 'react-native';
 
 
-const BuyButton = () => {
-    return (
+const BuyButton = () => (
         <View >
             <Button
                 title="Köp nu"
@@ -13,7 +12,6 @@ const BuyButton = () => {
             />
         </View>
     );
-};
 
 function notification() {
     Alert.alert('Din order har tagits emot');

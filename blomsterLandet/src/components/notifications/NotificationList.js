@@ -3,10 +3,6 @@ import { ScrollView } from 'react-native';
 import { NotificationListItem } from './index';
 
 class NotificationList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = { notifications: [] };
 
     componentWillMount() {

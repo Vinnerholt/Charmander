@@ -4,27 +4,67 @@
  */
 import React from 'react';
 import { View, Button } from 'react-native';
-import NotifService from '../services/NotifService';
-import NotificationContext from '../services/NotificationContext';
+import firebase from 'react-native-firebase';
+import jsonStorage from '../services/jsonStorage';
+import NotifObservable from '../services/observers/NotifObservable';
 
 class DevScreen extends React.Component {
-    static contextType = NotificationContext;
 
-    constructor(props) {
-        super(props);
-        console.log(props.navigation);
-        this.notif = new NotifService(props.navigation);
+    sendLocalNotif = () => {
+        const randomNotifId = Math.floor(Math.random() * 10000).toString();
+        const localNotification = new firebase.notifications.Notification()
+        .setNotificationId(randomNotifId)
+        .setTitle(randomNotifId)
+        .setBody('My notification body')
+        .setData({
+            imageURL: 'value1',
+            type: 'value2',
+        })
+        .android.setChannelId('test-channel')
+        .android.setSmallIcon('ic_launcher')
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+
+        firebase.notifications().displayNotification(localNotification);
+    };
+
+    readFile = () => {
+        jsonStorage.getItem('notifications').then(r => {
+            console.log(r);
+        });
+    };
+
+    deleteFile = () => {
+        jsonStorage.removeItem('notifications').then(() => {
+            console.log('deleted');
+        });
+    };
+
+    checkSingleton = () => {
+        console.log(NotifObservable().getInstance());
     }
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Button
-                    title='Send Local Notification'
-                    onPress={() => this.notif.localNotif('Tomatdags',
-                        'Nu är det dags att odla tomater!', 0)}
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+                <Button 
+                    title='Send local Notif v22'
+                    onPress={() => this.sendLocalNotif()} 
                 />
+                 <Button 
+                    title='read file'
+                    onPress={() => this.readFile()}
+                 />
+                  <Button 
+                    title='delete file'
+                    onPress={() => this.deleteFile()}
+                  />
+                  <Button 
+                    title='Check singleton'
+                    onPress={() => this.checkSingleton()}
+                  />
             </View>
+            
         );
     }
 }
