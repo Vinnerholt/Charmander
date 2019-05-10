@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import PlantListItem from './PlantListItem';
-
+import plantHandler from '../../services/plantHandler';
 
 let self;
 class PlantList extends Component {
     state = { myPlants: [] };
 
-    componentWillMount() {
+    async componentWillMount() {
         self = this;
-        let jsonPlants = require('../../resources/data/myPlants.json');
-        self.setState({ myPlants: jsonPlants.myPlants.list });
+        await plantHandler.getFile().then(item => {
+            console.log(item);
+            self.setState({ myPlants: item.plantList });
+        });
+        /*
+                self.setState({ myPlants: jsonPlants.plantList });
+                console.log(jsonPlants);
+                */
+
     }
 
     renderPlants() {
-        return self.state.myPlants.map(plant =>
-            <PlantListItem key={plant.name} plant={plant} navigation={this.props.navigation} />);
+
+        if (!self.state.myPlants) {
+            return <Text> LOADING</Text>;
+        } else {
+            return self.state.myPlants.map(plant =>
+                <PlantListItem key={plant.name} plant={plant} navigation={this.props.navigation} />);
+        }
     }
 
     render() {

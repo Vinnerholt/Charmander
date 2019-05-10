@@ -9,18 +9,15 @@ export default {
 
 
     async getFile() {
-        await jsonStorage.getItem(plantPath).then(item => {
+        return await jsonStorage.getItem(plantPath).then(item => {
 
-            console.log(item);
+            return item;
         }).catch(() => {
-            /* const start = {
-               notifications: []
-             };
-             start.notifications.push(plant);
-             file = start;
-             */
+
             console.log("catched");
+            return 'error';
         });
+
     },
 
     async createFile() {
@@ -34,7 +31,7 @@ export default {
             },
             {
                 name: "Carro",
-                type: "Carro",
+                type: "slanggurka",
                 advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
                 extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
                 imageURL: "../../resources/images/tomat.jpg"
