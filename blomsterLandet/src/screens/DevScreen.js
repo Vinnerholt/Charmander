@@ -7,6 +7,7 @@ import { View, Button } from 'react-native';
 import firebase from 'react-native-firebase';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
+import firestoreHandler from '../services/firestoreHandler';
 
 class DevScreen extends React.Component {
 
@@ -44,6 +45,15 @@ class DevScreen extends React.Component {
         console.log(NotifObservable().getInstance());
     }
 
+    makeAnOrder = () => {
+        const order = {
+            amount: 11,
+            buyer: 'Peter',
+            product: 'träd' 
+        };
+        firestoreHandler.placeOrder(order);
+    }
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
@@ -62,6 +72,10 @@ class DevScreen extends React.Component {
                   <Button 
                     title='Check singleton'
                     onPress={() => this.checkSingleton()}
+                  />
+                  <Button 
+                    title='Make an order'
+                    onPress={() => this.makeAnOrder()}
                   />
             </View>
             
