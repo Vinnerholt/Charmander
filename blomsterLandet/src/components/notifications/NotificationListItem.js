@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const NotificationListItem = ({ notification }) => {
-    const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
-    return (
-        <TouchableOpacity style={itemStyle}>
-            <TouchableOpacity>
-                <Icon name="close" style={crossStyle} />
+class NotificationListItem extends Component {
+
+    render() {
+        const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
+        return (
+            <TouchableOpacity style={itemStyle}>
+                <TouchableOpacity>
+                    <Icon name="close" style={crossStyle} />
+                </TouchableOpacity>
+                <Text style={textStyle}>
+                    {}
+                </Text>
+                <Icon name="chevron-right" style={arrowStyle} />
             </TouchableOpacity>
-            <Text style={textStyle}>
-                {notification.item.title}
-            </Text>
-            <Icon name="chevron-right" style={arrowStyle} />
-        </TouchableOpacity>
-    );
+        );
+    }
+
 };
 
 const styles = {
@@ -50,4 +54,4 @@ const styles = {
     }
 };
 
-export { NotificationListItem };
+export default NotificationListItem;
