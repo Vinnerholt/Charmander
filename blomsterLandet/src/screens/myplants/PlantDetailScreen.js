@@ -5,17 +5,22 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
+import jsonStorage from '../../services/jsonStorage';
+
+
+
 
 let self;
 let image;
-
+const plantPath = 'myPlants';
 class PlantDetailScreen extends Component {
 
     componentWillMount() {
         self = this;
         image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
     }
-    
+
+
     render() {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
@@ -33,8 +38,11 @@ class PlantDetailScreen extends Component {
                         />
                     </SmallButton>
 
-                    <SmallButton>
+                    <SmallButton
+                        onPress={getFile} >
+
                         <Icon
+
                             style={iconStyle}
                             name="brush"
                         />
@@ -87,6 +95,47 @@ class PlantDetailScreen extends Component {
     }
 }
 
+const getFile = async () => {
+    await jsonStorage.getItem(plantPath).then(item => {
+
+        console.log(item);
+    }).catch(() => {
+        /* const start = {
+           notifications: []
+         };
+         start.notifications.push(plant);
+         file = start;
+         */
+        console.log("catched");
+    });
+
+}
+
+const createFile = async () => {
+
+
+    const plant = {
+        plantList: [{
+            name: "tomat",
+            type: "tomat",
+            advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
+            extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+            imageURL: "../../resources/images/tomat.jpg"
+        },
+        {
+            name: "Carro",
+            type: "Carro",
+            advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
+            extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+            imageURL: "../../resources/images/tomat.jpg"
+        }
+        ]
+    };
+
+    const file = plant;
+
+    await jsonStorage.setItem(plantPath, file);
+};
 const styles = {
     nameStyle: {
         fontSize: 40,
