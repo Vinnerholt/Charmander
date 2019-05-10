@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import firebase from 'firebase';
 import * as orderReader from '../orderReader';
 
 const CustomTableCell = withStyles(theme => ({
@@ -48,17 +49,33 @@ class CustomizedTable extends React.Component {
 
 	componentWillMount() {
 		this.generateRows();
+		this.listenForChanges();
+		//orderReader.koppla();
 	}
 
+	listenForChanges() {
+		firebase.firestore().collection('orders').onSnapshot(r => {
+				this.generateRows();
+		});
+	}
 	generateRows = async() => {
 		let orders = await orderReader.fetchData();
 		for(let i in orders) {
-			const productSnapshot = await orders[i].product.get();
-			const productData = await productSnapshot.data();
-			const productName = productData.name;
-			orders[i].product = productName;
+			try {
+				const productSnapshot = await orders[i].product.get();
+				const productData = await productSnapshot.data();
+				const productName = productData.name;
+				orders[i].product = productName;
+			} catch (err) {
+				
+			}
+			
 		}
 		this.setState({ rows: orders });
+	}
+
+	test = async() => {
+
 	}
 	
 	render() {
