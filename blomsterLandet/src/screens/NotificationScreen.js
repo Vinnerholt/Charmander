@@ -81,10 +81,6 @@ class NotificationScreen extends React.Component {
         });
     }
 
-    openExpandedNotificationById() {
-        self.openExpandedNotification(self.state.mapOfNotifications.get(0));
-    }
-
     closeExpandedNotification() {
         self.setState({ notificationExpanded: false });
     }
