@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { NotificationListItem } from '../components/notifications';
+import NotificationListItem from '../components/notifications/NotificationListItem';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
