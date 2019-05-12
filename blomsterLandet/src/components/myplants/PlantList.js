@@ -15,17 +15,30 @@ class PlantList extends Component {
                 self.setState({ myPlants: item.plantList });
             }
         });
-        /*
-                self.setState({ myPlants: jsonPlants.plantList });
-                console.log(jsonPlants);
-                */
-
     }
 
+    componentWillReceiveProps() {
+
+    }
     renderPlants() {
 
         if (!self.state.myPlants || self.state.myPlants.length === 0) {
-            return <Text> LOADING</Text>;
+            return (
+                //creates a database file and loads it
+                <Button title="create dummyPlants"
+                    onPress={async () => {
+                        return await plantHandler.createFile().then(() => {
+                            return plantHandler.getFile();
+                        }).then(item => {
+                            self.setState({ myPlants: item.plantList });
+                        }).catch(() => {
+                            console.log("error in loading database in plantlist");
+                        });
+                    }
+                    }>
+                </Button>
+            )
+
         } else {
             return self.state.myPlants.map(plant =>
                 <PlantListItem key={plant.name} plant={plant} navigation={this.props.navigation} />);
@@ -36,8 +49,7 @@ class PlantList extends Component {
 
         return (
             <ScrollView>
-                <Button title="create DB"
-                    onPress={plantHandler.createFile}></Button>
+
                 {self.renderPlants()}
             </ScrollView>
         );
