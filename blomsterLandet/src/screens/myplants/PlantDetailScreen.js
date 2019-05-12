@@ -14,11 +14,11 @@ const plantPath = 'myPlants';
 
 let nameLabel;
 class PlantDetailScreen extends Component {
-    state = { editMode: true };
+    state = { editMode: true, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
     componentWillMount() {
         self = this;
-        image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
+        image = images[self.state.plant.name];
     }
 
     checkForEdit() {
@@ -27,7 +27,7 @@ class PlantDetailScreen extends Component {
             nameLabel = <Text>Edit mode</Text>;
         } else {
             nameLabel = <Text style={styles.nameStyle}>
-                {self.props.navigation.getParam('plant', 'Det funkar ej').name}
+                {self.state.plant.name}
             </Text>;
         }
     }
@@ -38,7 +38,8 @@ class PlantDetailScreen extends Component {
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
             scrollViewStyle, iconStyle } = styles;
 
-
+        console.log(self.props.navigation.getParam('plant', 'Det funkar ej').image);
+        console.log("HÄÄÄÄR");
         self.checkForEdit();
         return (
             <ScrollView>
@@ -69,7 +70,7 @@ class PlantDetailScreen extends Component {
                         <Image
                             style={imageStyle}
                             // eslint-disable-next-line global-require
-                            source={self.props.navigation.getParam('plant', 'Det funkar ej').image}
+                            source={images[self.state.plant.type]}
                         />
                     </View>
                 </View>
@@ -79,7 +80,7 @@ class PlantDetailScreen extends Component {
                     {nameLabel}
 
                     <Text style={speciesStyle}>
-                        {self.props.navigation.getParam('plant', 'Det funkar ej').type}
+                        {self.state.plant.type}
                     </Text>
                 </View>
 
@@ -93,14 +94,14 @@ class PlantDetailScreen extends Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Information'}
-                            body={self.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
+                            body={self.state.plant.extendedDescription}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Skötselråd'}
-                            body={self.props.navigation.getParam('plant', 'Det funkar ej').advice}
+                            body={self.state.plant.advice}
                         />
                     </View>
                 </View>
