@@ -22,3 +22,15 @@ export function checkForKey(db, plant) {
     }
 }
 
+export function findPlant(db, key) {
+    for (var i in db.plantList) {
+        console.log(db.plantList[i]);
+        if (db.plantList[i].key == key) {
+            console.log("found it");
+            return db.plantList[i];
+        } else {
+            console.log("not found  DB:" + db.plantList[i].key + " plant:" + key);
+        }
+    }
+}
+

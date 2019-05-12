@@ -15,10 +15,11 @@ const plantPath = 'myPlants';
 let nameLabel;
 let topRightButton;
 class PlantDetailScreen extends Component {
-    state = { editMode: true, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
+    state = { editMode: false, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
     componentWillMount() {
         self = this;
+        self.loadPlant();
         image = images[self.state.plant.name];
     }
 
@@ -40,7 +41,7 @@ class PlantDetailScreen extends Component {
                     title="Save changes"
                     onPress={async () => {
                         await plantHandler.editPlant(self.state.plant).then(() => {
-
+                            self.loadPlant();
                             this.setState({ editMode: !self.state.editMode });
                         });
                     }
@@ -63,7 +64,11 @@ class PlantDetailScreen extends Component {
         }
     }
     async loadPlant() {
-        //  const plant = await plantHandler.getFile()
+        await plantHandler.getPlant(self.state.plant.key).then(dbPlant => {
+            console.log("loadplant:");
+            console.log(dbPlant);
+            self.setState({ plant: dbPlant });
+        });
     }
 
     render() {
