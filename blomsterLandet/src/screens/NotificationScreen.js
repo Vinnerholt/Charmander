@@ -2,6 +2,8 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { NotificationListItem } from '../components/notifications';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
+import jsonStorage from '../services/jsonStorage';
+import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
@@ -13,20 +15,28 @@ class NotificationScreen extends React.Component {
         expandedDescription: '',
     };
 
-
     componentWillMount() {
         self = this;
-        //Loads notifications from json
-        let jsonNotifications = require('../resources/data/notifications.json');
-        //Sets notification state, when asynch call is completed, functions using state are called
-        self.setState({ notifications: jsonNotifications.notifications }, () => {
-            self.listNotifications();
-            self.checkForOutsideExpandRequest(self.props);
-        });
+        self.updateNotificationList();
+    }
+
+    componentDidMount() {
+        NotifObservable.subscribe(self.updateNotificationList);
     }
 
     componentWillReceiveProps(nextProps) {
         self.checkForOutsideExpandRequest(nextProps);
+    }
+
+    updateNotificationList() {
+        jsonStorage.getItem('notifications').then(r => {
+            //Sets notification state, when asynch call is completed, functions using state are called
+            self.setState({ notifications: r.notifications }, () => {
+                self.listNotifications();
+            }); 
+        }).catch(e => {
+            console.log(e);
+        });
     }
 
     //Checks if the navigation to the notification screen was made by
@@ -58,9 +68,7 @@ class NotificationScreen extends React.Component {
     //Returns the map with notificationListItems if it exists, 
     //otherwise it creates it and returns it
     listNotifications() {
-        if (self.state.notificationMap.length === 0) {
-            self.mapNotifications();
-        }
+        self.mapNotifications();
         return self.state.notificationMap;
     }
 

@@ -33,7 +33,7 @@ class ProfileScreen extends React.Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>Olle Innebandysson</Text>
+                    <Text style={nameStyle}>Kalle Kuling</Text>
 
                 </View>
 
@@ -42,22 +42,22 @@ class ProfileScreen extends React.Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Personuppgifter'}
-                            body={`E-mail: innebandy_pingis@hotmail.com
-Adress: Genvägen 12`}
+                            body={'E-mail: innebandy_pingis@hotmail.com \nAdress: Genvägen 12'}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Tidigare ordar'}
-                            body={`Här ska du kunna se dina tidigare ordrar.`}
+                            body={'Här ska du kunna se dina tidigare ordrar.'}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
-                            header={'Inställningar'}
-                            body={`Diverse inställningar osv.`}
+                            header={'Om mig'}
+                            body={`Hur mycket jag är intresserad av blommor och växter på en skala 1-10.
+Andra relevanta saker.`}
                         />
                     </View>
                 </View>

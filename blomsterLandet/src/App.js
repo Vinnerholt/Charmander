@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Image, ImageBackground } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import { Header } from './components/common/index';
-import * as firebaseHandler from './firebaseHandler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as notifHandler from './services/notifHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
-import MyPlantScreen from './screens/MyPlantScreen';
+import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
@@ -45,7 +46,13 @@ export const TabNavigator = createBottomTabNavigator({
                     default:
                         break;
                 }
-                return <Icon name={iconName} fontSize={30} flex={1} size={25} color={focused ? '#adc22d' : '#000'} />;
+                return (<Icon 
+                    name={iconName}
+                    fontSize={30} 
+                    flex={1} 
+                    size={25} 
+                    color={focused ? '#adc22d' : '#000'} 
+                />);
             }
         })
     }
@@ -55,9 +62,8 @@ const TabNavigatorContainer = createAppContainer(TabNavigator);
 
 //The main application
 class App extends React.Component {
-    componentWillMount() {
-        //Connects App to firebase.
-        firebaseHandler.initializeApp();
+    componentDidMount() {
+        notifHandler.initNotifications();
     }
     render() {
         return (
