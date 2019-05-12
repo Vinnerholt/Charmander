@@ -38,11 +38,11 @@ export default {
         });
     },
 
-    async editPlant() {
+    async editPlant(plant) {
         return await jsonStorage.getItem(plantPath).then(item => {
             return item;
         }).then(db => {
-            checkForKey(db);
+            checkForKey(db, plant);
             return db;
         }).then(db => {
             return jsonStorage.setItem(plantPath, db);
