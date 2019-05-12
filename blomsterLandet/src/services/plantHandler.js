@@ -1,9 +1,28 @@
-import firebase from 'react-native-firebase';
-import { Platform } from 'react-native';
 import jsonStorage from './jsonStorage';
+import { checkForKey } from './plantHandlerHelperFunctions';
 
 
 const plantPath = 'myPlants';
+const dummyPlantlist = {
+    plantList: [{
+        key: "001",
+        name: "tomat",
+        type: "tomat",
+        advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
+        extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+        imageURL: "../../resources/images/tomat.jpg"
+    },
+    {
+        key: "002",
+        name: "Aron edited",
+        type: "slanggurka",
+        advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
+        extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+        imageURL: "../../resources/images/tomat.jpg"
+    }
+    ]
+};
+
 
 export default {
 
@@ -17,28 +36,27 @@ export default {
             console.log("catched");
             return 'error';
         });
+    },
 
+    async editPlant() {
+        return await jsonStorage.getItem(plantPath).then(item => {
+            return item;
+        }).then(db => {
+            checkForKey(db);
+            return db;
+        }).then(db => {
+            return jsonStorage.setItem(plantPath, db);
+        }).catch(() => {
+            console.log("error editing Plant in DB");
+        });
     },
 
     async createFile() {
-        const plant = {
-            plantList: [{
-                name: "tomat",
-                type: "tomat",
-                advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
-                extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
-                imageURL: "../../resources/images/tomat.jpg"
-            },
-            {
-                name: "Carro",
-                type: "slanggurka",
-                advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
-                extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
-                imageURL: "../../resources/images/tomat.jpg"
-            }
-            ]
-        };
-        const file = plant;
-        await jsonStorage.setItem(plantPath, file);
+        const file = dummyPlantlist;
+        await jsonStorage.setItem(plantPath, file).then(() => {
+            console.log("Created new myPlants file in DB");
+        }).catch(() => {
+            console.log("Error creating new myPlants file in DB");
+        });
     }
 }

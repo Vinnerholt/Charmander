@@ -36,7 +36,7 @@ class PlantDetailScreen extends Component {
                     </SmallButton>
 
                     <SmallButton
-                        onPress={plantHandler.getFile} >
+                        onPress={plantHandler.editPlant} >
 
                         <Icon
 
