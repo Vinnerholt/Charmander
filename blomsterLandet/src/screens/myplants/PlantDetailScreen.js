@@ -6,6 +6,7 @@ import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
+import MyTextInput from '../../components/common/MyTextInput';
 
 
 let self;
@@ -27,15 +28,15 @@ class PlantDetailScreen extends Component {
     checkForEdit() {
         console.log("in function");
         if (self.state.editMode) {
-            nameLabel =
-                <TextInput
+            nameLabel = (
+                <MyTextInput
                     onChangeText={(text) => {
                         let tempPlant = self.state.plant;
                         tempPlant.name = text;
                         self.setState({ plant: tempPlant });
                     }}
                     value={self.state.plant.name}>
-                </TextInput>;
+                </MyTextInput>);
             topRightButton = (
                 <Button
                     title="Save changes"
