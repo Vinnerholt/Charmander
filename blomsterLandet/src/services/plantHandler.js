@@ -1,8 +1,10 @@
 import jsonStorage from './jsonStorage';
-import { checkForKey, findPlant } from './plantHandlerHelperFunctions';
+import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
 const plantPath = 'myPlants';
+
+//used for testing
 const dummyPlantlist = {
     plantList: [{
         key: "001",
@@ -26,17 +28,17 @@ const dummyPlantlist = {
 
 export default {
 
-
+    //gets the whole JSON file from the AsyncStorage
     async getFile() {
         return await jsonStorage.getItem(plantPath).then(item => {
-
             return item;
-        }).catch(() => {
 
-            console.log("catched");
-            return 'error';
+        }).catch(() => {
+            console.log("errror");
+            return "error";
         });
     },
+    //returns a plant based on the key value 
     async getPlant(key) {
         return await jsonStorage.getItem(plantPath).then(item => {
             return findPlant(item, key);
@@ -46,12 +48,12 @@ export default {
             return 'error';
         });
     },
-
+    //overwrites the existing plant if it matches the keyvalue of the input.
     async editPlant(plant) {
         return await jsonStorage.getItem(plantPath).then(item => {
             return item;
         }).then(db => {
-            checkForKey(db, plant);
+            overwritePlant(db, plant);
             return db;
         }).then(db => {
             return jsonStorage.setItem(plantPath, db);
@@ -59,7 +61,7 @@ export default {
             console.log("error editing Plant in DB");
         });
     },
-
+    //creates a file in the async storage with a dummy plantList
     async createFile() {
         const file = dummyPlantlist;
         await jsonStorage.setItem(plantPath, file).then(() => {
