@@ -7,16 +7,30 @@ import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 
+
 let self;
 let image;
 const plantPath = 'myPlants';
+
+let nameLabel;
 class PlantDetailScreen extends Component {
+    state = { editMode: true };
 
     componentWillMount() {
         self = this;
         image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
     }
 
+    checkForEdit() {
+        console.log("in function");
+        if (self.state.editMode) {
+            nameLabel = <Text>Edit mode</Text>;
+        } else {
+            nameLabel = <Text style={styles.nameStyle}>
+                {self.props.navigation.getParam('plant', 'Det funkar ej').name}
+            </Text>;
+        }
+    }
 
     render() {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
@@ -24,6 +38,8 @@ class PlantDetailScreen extends Component {
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
             scrollViewStyle, iconStyle } = styles;
 
+
+        self.checkForEdit();
         return (
             <ScrollView>
                 <View style={topButtonsContainerStyle}>
@@ -36,7 +52,9 @@ class PlantDetailScreen extends Component {
                     </SmallButton>
 
                     <SmallButton
-                        onPress={plantHandler.editPlant} >
+                        onPress={() => {
+                            this.setState({ editMode: !self.state.editMode });
+                        }} >
 
                         <Icon
 
@@ -57,9 +75,8 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>
-                        {self.props.navigation.getParam('plant', 'Det funkar ej').name}
-                    </Text>
+
+                    {nameLabel}
 
                     <Text style={speciesStyle}>
                         {self.props.navigation.getParam('plant', 'Det funkar ej').type}
@@ -90,6 +107,8 @@ class PlantDetailScreen extends Component {
             </ScrollView>
         );
     }
+
+
 }
 
 
