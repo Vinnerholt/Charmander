@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, Button } from 'react-native';
 import PlantListItem from './PlantListItem';
 import plantHandler from '../../services/plantHandler';
 
@@ -11,7 +11,9 @@ class PlantList extends Component {
         self = this;
         await plantHandler.getFile().then(item => {
             console.log(item);
-            self.setState({ myPlants: item.plantList });
+            if (item) {
+                self.setState({ myPlants: item.plantList });
+            }
         });
         /*
                 self.setState({ myPlants: jsonPlants.plantList });
@@ -22,7 +24,7 @@ class PlantList extends Component {
 
     renderPlants() {
 
-        if (!self.state.myPlants) {
+        if (!self.state.myPlants || self.state.myPlants.length === 0) {
             return <Text> LOADING</Text>;
         } else {
             return self.state.myPlants.map(plant =>
@@ -34,6 +36,8 @@ class PlantList extends Component {
 
         return (
             <ScrollView>
+                <Button title="create DB"
+                    onPress={plantHandler.createFile}></Button>
                 {self.renderPlants()}
             </ScrollView>
         );
