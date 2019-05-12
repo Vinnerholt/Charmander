@@ -1,5 +1,5 @@
 import jsonStorage from './jsonStorage';
-import { checkForKey } from './plantHandlerHelperFunctions';
+import { checkForKey, findPlant } from './plantHandlerHelperFunctions';
 
 
 const plantPath = 'myPlants';
@@ -31,6 +31,15 @@ export default {
         return await jsonStorage.getItem(plantPath).then(item => {
 
             return item;
+        }).catch(() => {
+
+            console.log("catched");
+            return 'error';
+        });
+    },
+    async getPlant(key) {
+        return await jsonStorage.getItem(plantPath).then(item => {
+            return findPlant(item, key);
         }).catch(() => {
 
             console.log("catched");
