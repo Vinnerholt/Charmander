@@ -10,14 +10,14 @@ const dummyPlant = {
 };
 
 
-export function checkForKey(db) {
+export function checkForKey(db, plant) {
     for (var i in db.plantList) {
         console.log(db.plantList[i]);
-        if (db.plantList[i].key == "001") {
+        if (db.plantList[i].key == plant.key) {
             console.log("found it");
-            db.plantList[i] = dummyPlant;
+            db.plantList[i] = plant;
         } else {
-            console.log("not found");
+            console.log("not found  DB:" + db.plantList[i].key + " plant:" + plant.key);
         }
     }
 }

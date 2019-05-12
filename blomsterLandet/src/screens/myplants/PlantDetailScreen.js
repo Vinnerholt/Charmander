@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, Text } from 'react-native';
+import { View, ScrollView, Image, Text, TextInput, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SmallButton from '../../components/common/SmallButton';
@@ -13,6 +13,7 @@ let image;
 const plantPath = 'myPlants';
 
 let nameLabel;
+let topRightButton;
 class PlantDetailScreen extends Component {
     state = { editMode: true, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
@@ -21,15 +22,48 @@ class PlantDetailScreen extends Component {
         image = images[self.state.plant.name];
     }
 
+
     checkForEdit() {
         console.log("in function");
         if (self.state.editMode) {
-            nameLabel = <Text>Edit mode</Text>;
+            nameLabel =
+                <TextInput
+                    onChangeText={(text) => {
+                        let tempPlant = self.state.plant;
+                        tempPlant.name = text;
+                        self.setState({ plant: tempPlant });
+                    }}
+                    value={self.state.plant.name}>
+                </TextInput>;
+            topRightButton = (
+                <Button
+                    title="Save changes"
+                    onPress={async () => {
+                        await plantHandler.editPlant(self.state.plant).then(() => {
+
+                            this.setState({ editMode: !self.state.editMode });
+                        });
+                    }
+                    }
+                />)
         } else {
-            nameLabel = <Text style={styles.nameStyle}>
-                {self.state.plant.name}
-            </Text>;
+            nameLabel = (
+                <Text style={styles.nameStyle}>
+                    {self.state.plant.name}
+                </Text>
+            );
+            topRightButton = (
+                <SmallButton
+                    onPress={() => {
+                        this.setState({ editMode: !self.state.editMode });
+                    }} >
+                    <Icon style={styles.iconStyle} name="brush" />
+                </SmallButton>
+            );
         }
+    }
+    async loadPlant() {
+        //  const plant = await plantHandler.getFile()
     }
 
     render() {
@@ -43,6 +77,7 @@ class PlantDetailScreen extends Component {
         self.checkForEdit();
         return (
             <ScrollView>
+                <Text>key: {self.state.plant.key}</Text>
                 <View style={topButtonsContainerStyle}>
                     <SmallButton onPress={() => self.props.navigation.navigate('Home')}>
 
@@ -52,17 +87,7 @@ class PlantDetailScreen extends Component {
                         />
                     </SmallButton>
 
-                    <SmallButton
-                        onPress={() => {
-                            this.setState({ editMode: !self.state.editMode });
-                        }} >
-
-                        <Icon
-
-                            style={iconStyle}
-                            name="brush"
-                        />
-                    </SmallButton>
+                    {topRightButton}
                 </View>
 
                 <View style={scrollViewStyle}>
