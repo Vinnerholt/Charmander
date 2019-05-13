@@ -37,9 +37,14 @@ class NotificationScreen extends React.Component {
         return <NotificationListItem notification={notification} />;
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> Notifications can now be expanded and closed PP MR & GH
     render() {
         return (
             <View>
+                <NotificationExpanded />
                 <FlatList
                     data={this.props.notifications}
                     renderItem={this.renderItem}
