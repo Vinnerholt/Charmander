@@ -1,29 +1,89 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, Text } from 'react-native';
+import { View, ScrollView, Image, Text, TextInput, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
+import plantHandler from '../../services/plantHandler';
+import MyTextInput from '../../components/common/MyTextInput';
+
 
 let self;
 let image;
+const plantPath = 'myPlants';
 
+let nameLabel;
+let topRightButton;
 class PlantDetailScreen extends Component {
+    state = { editMode: false, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
     componentWillMount() {
         self = this;
-        image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
+        self.loadPlant();
+        image = images[self.state.plant.name];
     }
-    
+
+
+    checkForEdit() {
+        console.log("in function");
+        if (self.state.editMode) {
+            nameLabel = (
+                <MyTextInput
+                    onChangeText={(text) => {
+                        let tempPlant = self.state.plant;
+                        tempPlant.name = text;
+                        self.setState({ plant: tempPlant });
+                    }}
+                    value={self.state.plant.name}>
+                </MyTextInput>);
+            topRightButton = (
+                <Button
+                    title="Save changes"
+                    onPress={async () => {
+                        await plantHandler.editPlant(self.state.plant).then(() => {
+                            self.loadPlant();
+                            this.setState({ editMode: !self.state.editMode });
+                        });
+                    }
+                    }
+                />)
+        } else {
+            nameLabel = (
+                <Text style={styles.nameStyle}>
+                    {self.state.plant.name}
+                </Text>
+            );
+            topRightButton = (
+                <SmallButton
+                    onPress={() => {
+                        this.setState({ editMode: !self.state.editMode });
+                    }} >
+                    <Icon style={styles.iconStyle} name="brush" />
+                </SmallButton>
+            );
+        }
+    }
+    async loadPlant() {
+        await plantHandler.getPlant(self.state.plant.key).then(dbPlant => {
+            console.log("loadplant:");
+            console.log(dbPlant);
+            self.setState({ plant: dbPlant });
+        });
+    }
+
     render() {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
             scrollViewStyle, iconStyle } = styles;
 
+        console.log(self.props.navigation.getParam('plant', 'Det funkar ej').image);
+        console.log("HÄÄÄÄR");
+        self.checkForEdit();
         return (
             <ScrollView>
+                <Text>key: {self.state.plant.key}</Text>
                 <View style={topButtonsContainerStyle}>
                     <SmallButton onPress={() => self.props.navigation.navigate('Home')}>
 
@@ -33,12 +93,7 @@ class PlantDetailScreen extends Component {
                         />
                     </SmallButton>
 
-                    <SmallButton>
-                        <Icon
-                            style={iconStyle}
-                            name="brush"
-                        />
-                    </SmallButton>
+                    {topRightButton}
                 </View>
 
                 <View style={scrollViewStyle}>
@@ -46,18 +101,17 @@ class PlantDetailScreen extends Component {
                         <Image
                             style={imageStyle}
                             // eslint-disable-next-line global-require
-                            source={self.props.navigation.getParam('plant', 'Det funkar ej').image}
+                            source={images[self.state.plant.type]}
                         />
                     </View>
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <Text style={nameStyle}>
-                        {self.props.navigation.getParam('plant', 'Det funkar ej').name}
-                    </Text>
+
+                    {nameLabel}
 
                     <Text style={speciesStyle}>
-                        {self.props.navigation.getParam('plant', 'Det funkar ej').type}
+                        {self.state.plant.type}
                     </Text>
                 </View>
 
@@ -71,21 +125,25 @@ class PlantDetailScreen extends Component {
                     <View style={[viewCenterStyle]}>
                         <CollapseButton
                             header={'Information'}
-                            body={self.props.navigation.getParam('plant', 'Det funkar ej').extendedDescription}
+                            body={self.state.plant.extendedDescription}
                         />
                     </View>
 
                     <View style={viewCenterStyle}>
                         <CollapseButton
                             header={'Skötselråd'}
-                            body={self.props.navigation.getParam('plant', 'Det funkar ej').advice}
+                            body={self.state.plant.advice}
                         />
                     </View>
                 </View>
             </ScrollView>
         );
     }
+
+
 }
+
+
 
 const styles = {
     nameStyle: {
