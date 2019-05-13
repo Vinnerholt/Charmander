@@ -36,13 +36,6 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(doc) {
-  id += 1;
-  return { id, doc };
-}
-
-
 
 class CustomizedTable extends React.Component {
 	state = { rows: [] };
@@ -50,17 +43,28 @@ class CustomizedTable extends React.Component {
 	componentWillMount() {
 		this.generateRows();
 		this.listenForChanges();
-		//orderReader.koppla();
 	}
 
+	/**
+	 * Initializes the app to check for changes on the database
+	 */
 	listenForChanges() {
+		// re-generates rows whenever something in the collection 'orders' changes.
 		firebase.firestore().collection('orders').onSnapshot(r => {
 				this.generateRows();
 		});
 	}
 	generateRows = async() => {
+		//Creates a unique key for each row
+		let rowKey = 0;
+		//Fetches the orders from firebase
 		let orders = await orderReader.fetchData();
+
 		for(let i in orders) {
+			orders[i].rowKey = rowKey;
+			rowKey++;
+			//Since the product in the order is a reference to a product, the product
+			//in question must be fetched from firebase aswell.
 			try {
 				const productSnapshot = await orders[i].product.get();
 				const productData = await productSnapshot.data();
@@ -72,10 +76,6 @@ class CustomizedTable extends React.Component {
 			
 		}
 		this.setState({ rows: orders });
-	}
-
-	test = async() => {
-
 	}
 	
 	render() {
@@ -91,7 +91,7 @@ class CustomizedTable extends React.Component {
 				</TableHead>
 				<TableBody>
 				  {this.state.rows.map(row => (
-					<TableRow className={this.props.classes.row} key={row.amount}>
+					<TableRow className={this.props.classes.row} key={row.rowKey}>
 						<CustomTableCell align="right">{row.product}</CustomTableCell>
 					  <CustomTableCell align="right">{row.buyer}</CustomTableCell>
 					  <CustomTableCell align="right">{row.amount}</CustomTableCell>
