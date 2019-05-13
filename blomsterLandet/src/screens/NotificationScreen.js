@@ -109,18 +109,11 @@ class NotificationScreen extends React.Component {
         return <NotificationListItem notification={notification} />;
     }
 
-
-    /*
-    <NotificationExpanded
-                    title={self.state.expandedTitle}
-                    description={}
-                    modalVisible={self.state.notificationExpanded}
-                    closeModal={self.closeExpandedNotification.bind(self)}
-                />
-                */
+    
     render() {
         return (
             <View>
+                <NotificationExpanded />
                 <FlatList
                     data={this.props.notifications}
                     renderItem={this.renderItem}
