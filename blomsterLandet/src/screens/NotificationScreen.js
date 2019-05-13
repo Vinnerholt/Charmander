@@ -37,6 +37,10 @@ class NotificationScreen extends React.Component {
         }
     }
 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> Now the notifications can be removed by pressing the x-button PP GH & MR
     renderItem(notification) {
         return <NotificationListItem notification={notification} />;
     }

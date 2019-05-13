@@ -4,3 +4,10 @@ export const expandNotification = (notification) => {
         payload: notification
     };
 };
+
+export const removeNotification = (notification) => {
+    return {
+        type: 'remove_notification',
+        payload: notification
+    };
+};
