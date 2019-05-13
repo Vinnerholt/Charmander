@@ -46,10 +46,11 @@ class DevScreen extends React.Component {
     }
 
     makeAnOrder = () => {
+        const ref = firebase.firestore().collection('products').doc('tomatplanta');
         const order = {
             amount: 11,
             buyer: 'Peter',
-            product: 'träd' 
+            product: ref
         };
         firestoreHandler.placeOrder(order);
     }
