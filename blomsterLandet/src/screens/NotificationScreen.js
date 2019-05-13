@@ -8,7 +8,11 @@ import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> Tried to implement saving the notifications in a map in the state, but failed. PP MR & GH
     /*
     updateNotificationList() {
         jsonStorage.getItem('notifications').then(r => {
