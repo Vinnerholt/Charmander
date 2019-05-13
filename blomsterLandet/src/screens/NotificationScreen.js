@@ -9,10 +9,14 @@ import NotifObservable from '../services/observers/NotifObservable';
 let self;
 class NotificationScreen extends React.Component {
 <<<<<<< HEAD
+<<<<<<< HEAD
    
 =======
 
 >>>>>>> Tried to implement saving the notifications in a map in the state, but failed. PP MR & GH
+=======
+
+>>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     /*
     updateNotificationList() {
         jsonStorage.getItem('notifications').then(r => {
@@ -40,15 +44,75 @@ class NotificationScreen extends React.Component {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> Now the notifications can be removed by pressing the x-button PP GH & MR
+=======
+    //Creates a map with notificationListItems, the key needs to be reworked as it 
+    //might not always be unique
+    mapNotifications() {
+        const mapOfNotifications = (self.state.notifications.map(notification =>
+            (<NotificationListItem
+                key={notification.notifId}
+                notification={notification}
+                pressed={self.openExpandedNotification.bind(self)}
+                pressedRemoved={self.removeNotification.bind(self)}
+            />)
+        ));
+        //self.setState({ notificationMap: mapOfNotifications });
+    }
+
+    //Returns the map with notificationListItems if it exists, 
+    //otherwise it creates it and returns it
+    listNotifications() {
+        self.mapNotifications();
+        return self.state.notificationMap;
+    }
+
+    //Opens the expanded notification based on the inputted notification
+    openExpandedNotification(notification) {
+        self.setState({
+            notificationExpanded: true,
+            expandedTitle: notification.title,
+            expandedDescription: notification.description
+        });
+    }
+
+    closeExpandedNotification() {
+        //self.setState({ notificationExpanded: false });
+    }
+
+    //Removes the notification from the notification map based on the notifId, then updates the list of notifications displayed
+    /*removeNotification(notification) {
+        self.setState({
+            notifications: self.state.notifications.filter(notif =>
+                notif.notifId !== notification.notifId)
+        }, () => {
+            self.mapNotifications();
+        });
+    }
+
+    //Adds a notification presuming it is correctly formatted
+    /*addNotification(notification) {
+        const notifList = self.state.notifications;
+        notifList.push(notification);
+        self.setState({ notifications: notifList }, () => {
+            self.mapNotifications();
+        });
+    }*/
+
+>>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     renderItem(notification) {
         return <NotificationListItem notification={notification} />;
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> Notifications can now be expanded and closed PP MR & GH
+=======
+    
+>>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     render() {
         return (
             <View>

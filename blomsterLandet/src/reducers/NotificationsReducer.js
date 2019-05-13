@@ -1,5 +1,6 @@
 import data from '../resources/data/notifications.json';
 
+<<<<<<< HEAD
 export default (state = data, action) => {
     switch (action.type) {
         case 'remove_notification':
@@ -8,3 +9,6 @@ export default (state = data, action) => {
             return state;
     }
 };
+=======
+export default () => data;
+>>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
