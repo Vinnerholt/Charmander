@@ -8,27 +8,8 @@ import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
-    /*state = {
-        notificationExpanded: false,
-        notifications: [],
-        notificationMap: [],
-        expandedTitle: '',
-        expandedDescription: '',
-    };*/
 
-    /*componentWillMount() {
-        self = this;
-        self.updateNotificationList();
-    }
-
-    componentDidMount() {
-        NotifObservable.subscribe(self.updateNotificationList);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        self.checkForOutsideExpandRequest(nextProps);
-    }
-
+    /*
     updateNotificationList() {
         jsonStorage.getItem('notifications').then(r => {
             //Sets notification state, when asynch call is completed, functions using state are called

@@ -14,7 +14,7 @@ class NotificationListItem extends Component {
         return (
             <TouchableOpacity style={itemStyle} onPress={() => this.props.expandNotification(notification)}>
                 <TouchableOpacity>
-                    <Icon name="close" style={crossStyle} />
+                    <Icon name="close" style={crossStyle} onPress={() => this.props.removeNotification(notification)} />
                 </TouchableOpacity>
                 <Text style={textStyle}>
                     {title}
