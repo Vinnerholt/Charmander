@@ -11,10 +11,29 @@ let self;
 let image;
 
 class PlantDetailScreen extends Component {
+    constructor() {
+        super();
+
+        this.value = null;
+        this.currentTime = 1557746991;
+    }
 
     componentWillMount() {
         self = this;
         image = images[this.props.navigation.getParam('plant', 'Det funkar ej').name];
+
+        self.value = self.calcVal();
+    }
+
+    // Calculates the percentage to fill the waterGauge based on when the
+    // plant was last watered, time past since watered and it's wateringInterval. 
+    calcVal() {
+        return 100 - (100 * ((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered) 
+            / (self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval * 24 * 60 * 60)));
+    }
+
+    fills() {
+        return 30;
     }
     
     render() {
@@ -48,7 +67,7 @@ class PlantDetailScreen extends Component {
                         <AnimatedGaugeProgress
                             size={250}
                             width={15}
-                            fill={100}
+                            fill={self.value}
                             rotation={90}
                             cropDegree={90}
                             tintColor="#4682b4"
