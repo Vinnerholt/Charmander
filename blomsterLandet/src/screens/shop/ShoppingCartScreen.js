@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import CartListItem from '../../components/shop/CartListItem';
 
@@ -10,10 +10,8 @@ class ShoppingCartScreen extends React.Component {
     }
 
     render() {
-        console.log(this.props.shoppingCart);
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text>shoppelishopcart</Text>
+            <View>
                 <FlatList
                     data={this.props.shoppingCart}
                     renderItem={this.renderItem}
@@ -25,7 +23,6 @@ class ShoppingCartScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return { shoppingCart: state.shoppingCart.arr };
 };
 

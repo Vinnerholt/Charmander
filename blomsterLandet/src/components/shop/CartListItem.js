@@ -8,9 +8,10 @@ import * as actions from '../../actions';
 class CartListItem extends Component {
 
     render() {
-        const { itemStyle, textStyle, crossStyle } = styles;
+        const { itemStyle, textStyle, crossStyle, arrowStyle } = styles;
         const product = this.props.product.item;
         const { name } = product;
+        console.log(name);
         return (
             <TouchableOpacity style={itemStyle}>
                 <TouchableOpacity>
@@ -19,6 +20,7 @@ class CartListItem extends Component {
                 <Text style={textStyle}>
                     {name}
                 </Text>
+                <Icon name="chevron-right" style={arrowStyle} />
             </TouchableOpacity>
         );
     }
