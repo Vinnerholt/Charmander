@@ -1,9 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { Image, ImageBackground } from 'react-native';
-
-import { Header } from './components/common/index';
+import { Image, ImageBackground, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import reducers from './reducers';
+import { Header } from './components/common/index';
 import * as notifHandler from './services/notifHandler';
 
 import NotificationScreen from './screens/NotificationScreen';
@@ -46,12 +49,12 @@ export const TabNavigator = createBottomTabNavigator({
                     default:
                         break;
                 }
-                return (<Icon 
+                return (<Icon
                     name={iconName}
-                    fontSize={30} 
-                    flex={1} 
-                    size={25} 
-                    color={focused ? '#adc22d' : '#000'} 
+                    fontSize={30}
+                    flex={1}
+                    size={25}
+                    color={focused ? '#adc22d' : '#000'}
                 />);
             }
         })
@@ -67,20 +70,25 @@ class App extends React.Component {
     }
     render() {
         return (
-            <ImageBackground
-                // eslint-disable-next-line global-require
-                source={require('./resources/images/page-content-bg.png')}
-                style={{ width: '100%', height: '100%' }}
-            >
-                <Header>
-                    <Image
-                        style={{ width: 55, height: 36 }}
+            <Provider store={createStore(reducers)}>
+                <View>
+                    <ImageBackground
                         // eslint-disable-next-line global-require
-                        source={require('./resources/images/blomsterlandet_logo.png')}
-                    />
-                </Header>
-                <TabNavigatorContainer />
-            </ImageBackground>
+                        source={require('./resources/images/page-content-bg.png')}
+                        style={{ width: '100%', height: '100%' }}
+                    >
+                        <Header>
+                            <Image
+                                style={{ width: 55, height: 36 }}
+                                // eslint-disable-next-line global-require
+                                source={require('./resources/images/blomsterlandet_logo.png')}
+                            />
+                        </Header>
+                        <TabNavigatorContainer />
+                    </ImageBackground>
+                </View>
+
+            </Provider>
         );
     }
 }
