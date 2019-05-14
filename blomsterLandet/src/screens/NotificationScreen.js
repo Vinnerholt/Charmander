@@ -36,24 +36,7 @@ class NotificationScreen extends React.Component {
 
     //Creates a map with notificationListItems, the key needs to be reworked as it 
     //might not always be unique
-    mapNotifications() {
-        const mapOfNotifications = (self.state.notifications.map(notification =>
-            (<NotificationListItem
-                key={notification.notifId}
-                notification={notification}
-                pressed={self.openExpandedNotification.bind(self)}
-                pressedRemoved={self.removeNotification.bind(self)}
-            />)
-        ));
-        //self.setState({ notificationMap: mapOfNotifications });
-    }
-
-    //Returns the map with notificationListItems if it exists, 
-    //otherwise it creates it and returns it
-    listNotifications() {
-        self.mapNotifications();
-        return self.state.notificationMap;
-    }
+    
 
     //Opens the expanded notification based on the inputted notification
     openExpandedNotification(notification) {

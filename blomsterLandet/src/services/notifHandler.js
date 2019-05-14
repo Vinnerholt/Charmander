@@ -2,6 +2,9 @@ import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
 import jsonStorage from './jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
+import NavigationService from '../services/NavigationService';
+import { store } from '../App';
+import * as actions from '../actions';
 
 const notifPath = 'notifications';
 export function initNotifications() {
@@ -39,7 +42,7 @@ function createChannel() {
 function mountNotifListeners() {
     setOnNotification();
     setOnNotificationDisplayed();
-    //setOnNotificationOpened();  
+    setOnNotificationOpened();  
 }
 
 function setOnNotification() {
@@ -92,16 +95,19 @@ function setOnNotificationDisplayed() {
 
         await jsonStorage.setItem(notifPath, file);
 
-        NotifObservable.notify();
+        store.dispatch(actions.addNotification(notif));
     });
 }
 
-/*function setOnNotificationOpened() {
+function setOnNotificationOpened() {
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened(notificationOpen => {
         const action = notificationOpen.action;
         const notification = notificationOpen.notification;
+
+        store.dispatch(actions.expandNotification(notification));
+        NavigationService.navigate('Notifications');
     }); 
-}*/
+}
 
 /*export function unmountNotifListeners() {
     this.notificationDisplayedListener();
