@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const NotificationListItem = ({ pressed, pressedRemoved, notification }) => {
-    const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
-    return (
-        <TouchableOpacity onPress={() => (pressed(notification))} style={itemStyle}>
-            <TouchableOpacity onPress={() => (pressedRemoved(notification))}>
-                <Icon name="close" style={crossStyle} />
+import * as actions from '../../actions';
+
+class NotificationListItem extends Component {
+
+    render() {
+        const { itemStyle, textStyle, arrowStyle, crossStyle } = styles;
+        const notification = this.props.notification.item;
+        const { title } = notification;
+        return (
+            <TouchableOpacity style={itemStyle} onPress={() => this.props.expandNotification(notification)}>
+                <TouchableOpacity>
+                    <Icon name="close" style={crossStyle} onPress={() => this.props.removeNotification(notification)} />
+                </TouchableOpacity>
+                <Text style={textStyle}>
+                    {title}
+                </Text>
+                <Icon name="chevron-right" style={arrowStyle} />
             </TouchableOpacity>
-            <Text style={textStyle}>
-                {notification.title}
-            </Text>
-            <Icon name="chevron-right" style={arrowStyle} />
-        </TouchableOpacity>
-    );
-};
+        );
+    }
+}
 
 const styles = {
     textStyle: {
@@ -50,4 +58,4 @@ const styles = {
     }
 };
 
-export { NotificationListItem };
+export default connect(null, actions)(NotificationListItem);

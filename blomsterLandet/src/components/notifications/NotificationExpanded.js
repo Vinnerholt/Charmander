@@ -7,80 +7,66 @@
 
 import React, { Component } from 'react';
 import { Text, Image, Modal, Button, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, CardSection } from '../common/index';
 import BuyButton from '../shop/BuyButton';
+import * as actions from '../../actions';
 
 class NotificationExpanded extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modalVisible: props.modalVisible,
-            imagePlaceHolder: require('./../../resources/images/tomat.jpg') //imagePlaceHolder has to be fixed to be dynamic
-        };
-    }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.modalVisible !== this.state.modalVisible) {
-          this.setState({ modalVisible: nextProps.modalVisible });
-          this.setModalVisible(nextProps.modalVisible);
+    renderExpandedNotification() {
+        const { titleStyle, descriptionStyle } = styles;
+        if (this.props.modalVisible) {
+            const { title, description } = this.props.notification;
+            return (
+                <React.Fragment>
+                    <CardSection>
+                        <Text style={titleStyle}>{title}</Text>
+                    </CardSection>
+
+                    <CardSection>
+                        <Text style={descriptionStyle}>{description}</Text>
+                    </CardSection>
+                </React.Fragment>
+            );
         }
-      }
-    
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
-    }
-
-    close() {
-        this.setModalVisible(false);
-        this.props.closeModal();
     }
 
     render() {
-        const {  
-            titleStyle, 
-            descriptionStyle, 
-            imageStyle,
-            buttonContainer
-         } = styles;
-         return (
+        const { imageStyle, buttonContainer } = styles;
+        return (
             <View>
                 {/*Modal is the Component that becomes visible when the state is set to visible*/}
                 <Modal
                     animationType="slide"
                     transparent
-                    visible={this.state.modalVisible}
+                    visible={this.props.modalVisible}
                 >
-                <View style={{ marginTop: 20 }}>
-                <Card>
-                    <CardSection>
-                        <Image
-                            style={imageStyle}
-                            source={this.state.imagePlaceHolder}
-                        />
-                        <View style={buttonContainer}>
-                            <Button 
-                                onPress={() => { this.close(); }} 
-                                title="x"
-                            />
-                        </View> 
-                    </CardSection>
-                    <CardSection>
-                        <Text style={titleStyle}>{this.props.title}</Text> 
-                    </CardSection>
-        
-                    <CardSection>
-                        <Text style={descriptionStyle}>{this.props.description}</Text>
-                    </CardSection>
-                        
-                    <CardSection>
-                        <BuyButton />
-                    </CardSection>
-                </Card>  
-                </View>
-            </Modal>
-        </View>
+                    <View style={{ marginTop: 20 }}>
+                        <Card>
+                            <CardSection>
+                                <Image
+                                    style={imageStyle}
+                                    source={this.props.imagePlaceHolder}
+                                />
+                                <View style={buttonContainer}>
+                                    <Button
+                                        onPress={() => this.props.expandNotification(null)}
+                                        title="x"
+                                    />
+                                </View>
+                            </CardSection>
+                            {this.renderExpandedNotification()}
+
+                            <CardSection>
+                                <BuyButton />
+                            </CardSection>
+                        </Card>
+                    </View>
+                </Modal>
+            </View>
         );
-    }   
+    }
 }
 
 const styles = {
@@ -89,12 +75,12 @@ const styles = {
     },
     imageStyle: {
         marginTop: 10,
-        height: 180, 
+        height: 180,
         width: 200,
         flex: 1
     },
     buttonContainer: {
-        position: 'absolute', 
+        position: 'absolute',
         top: 0,
         right: 0
     },
@@ -109,4 +95,12 @@ const styles = {
     }
 };
 
-export default NotificationExpanded;
+const mapStateToProps = state => {
+    return {
+        notification: state.expandedNotification,
+        imagePlaceHolder: require('./../../resources/images/tomat.jpg'),
+        modalVisible: (state.expandedNotification !== null)
+    };
+};
+
+export default connect(mapStateToProps, actions)(NotificationExpanded);

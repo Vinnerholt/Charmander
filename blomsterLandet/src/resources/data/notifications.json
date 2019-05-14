@@ -1,5 +1,4 @@
-{
-    "notifications": [
+[
         {
             "notifId": 1,
             "title": "Dags att odla tomater",
@@ -20,5 +19,4 @@
             "pointer": 0,
             "read": false
         }
-    ]
-}
+]
