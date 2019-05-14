@@ -8,15 +8,7 @@ import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
-<<<<<<< HEAD
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> Tried to implement saving the notifications in a map in the state, but failed. PP MR & GH
-=======
-
->>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     /*
     updateNotificationList() {
         jsonStorage.getItem('notifications').then(r => {
@@ -41,12 +33,7 @@ class NotificationScreen extends React.Component {
         }
     }
 */
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> Now the notifications can be removed by pressing the x-button PP GH & MR
-=======
     //Creates a map with notificationListItems, the key needs to be reworked as it 
     //might not always be unique
     mapNotifications() {
@@ -100,19 +87,10 @@ class NotificationScreen extends React.Component {
         });
     }*/
 
->>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     renderItem(notification) {
         return <NotificationListItem notification={notification} />;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
->>>>>>> Notifications can now be expanded and closed PP MR & GH
-=======
-    
->>>>>>> c01737c44db0c051a43e3926fde3bc4096e781cc
     render() {
         return (
             <View>
