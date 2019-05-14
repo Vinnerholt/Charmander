@@ -4,7 +4,7 @@ import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react
 
 const CollapseButton = ({ header, body }) => {
     const {
-        collapseButtonStyle, headerTextStyle
+        collapseButtonStyle, headerTextStyle, bodyTextStyle
     } = styles;
 
     return (
@@ -16,7 +16,7 @@ const CollapseButton = ({ header, body }) => {
             </CollapseHeader>
 
             <CollapseBody>
-                <Text style={{ paddingBottom: 10 }}>{body}</Text>
+                <Text style={bodyTextStyle}>{body}</Text>
             </CollapseBody>
         </Collapse>
     );
@@ -44,8 +44,12 @@ const styles = {
         alignItems: 'flex-end',
         color: '#3e5f36',
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
+    bodyTextStyle: {
+        paddingRight: 10,
+        paddingBottom: 10
+    }
 };
 
 
