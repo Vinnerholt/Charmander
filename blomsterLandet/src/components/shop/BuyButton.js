@@ -1,22 +1,18 @@
 
 
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Button } from 'react-native';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 
-const BuyButton = () => (
+const BuyButton = (props) => (
         <View >
             <Button
                 title="Köp nu"
-                onPress={notification}
+                onPress={() => props.addCartItem(props.product)}
             />
         </View>
     );
 
-function notification() {
-    Alert.alert('Din order har tagits emot');
-    console.log('Order');
-}
-
-
-export default BuyButton;
+export default connect(null, actions)(BuyButton);

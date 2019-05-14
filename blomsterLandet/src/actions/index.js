@@ -11,3 +11,17 @@ export const removeNotification = (notification) => {
         payload: notification
     };
 };
+
+export const addCartItem = (item) => {
+    return {
+        type: 'add_cart_item',
+        payload: item
+    };
+};
+
+export const removeCartItem = (item) => {
+    return {
+        type: 'remove_cart_item',
+        payload: item
+    };
+};

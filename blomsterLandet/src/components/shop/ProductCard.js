@@ -1,18 +1,18 @@
 import React from 'react';
 import { Text, Image, View } from 'react-native';
-import PlantCardContainer from './PlantCardContainer';
+import ProductCardContainer from './ProductCardContainer';
 import BuyButton from './BuyButton';
 import InfoButton from './InfoButton';
 import images from '../../resources/images/index';
 
 
-const PlantCard = (props) => {
+const ProductCard = (props) => {
 
 
-    var image = images[props.plant.name];
+    var image = images[props.product.key];
 
     return (
-        <PlantCardContainer>
+        <ProductCardContainer>
             <Image
                 source={image}
                 style={{
@@ -20,20 +20,23 @@ const PlantCard = (props) => {
                     height: 150
                 }}
             />
-            <Text style={styles.plantName}>{props.plant.name}</Text>
-            <Text style={styles.plantDescription}>{props.plant.description}</Text>
-            <Text style={styles.priceTag}>{props.plant.price}kr St </Text>
+            <Text style={styles.productName}>{props.product.name}</Text>
+            <Text style={styles.productDescription}>{props.product.description}</Text>
+            <Text style={styles.priceTag}>{props.product.price}kr St </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                 <InfoButton navigation={props.navigation} />
-                <BuyButton title='Köp nu' />
+                <BuyButton 
+                    title='Köp nu'
+                    product={props.product} 
+                />
 
             </View>
-        </PlantCardContainer>
+        </ProductCardContainer>
     );
 };
 
 const styles = {
-    plantCardContainer: {
+    productCardContainer: {
         width: '90%',
         minHeight: 200,
         backgroundColor: '#AE2',
@@ -42,12 +45,12 @@ const styles = {
         borderColor: '#333'
 
     },
-    plantName: {
+    productName: {
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: 'center'
     },
-    plantDescription: {
+    productDescription: {
         marginLeft: 3,
         marginRight: 3
     },
@@ -58,4 +61,4 @@ const styles = {
     }
 };
 
-export default PlantCard;
+export default ProductCard;
