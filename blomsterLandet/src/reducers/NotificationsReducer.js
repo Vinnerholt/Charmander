@@ -8,5 +8,3 @@ export default (state = data, action) => {
             return state;
     }
 };
-
-export default () => data;
