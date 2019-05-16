@@ -4,10 +4,10 @@ export const expandNotification = (notification) => {
         payload: notification
     };
 };
-export const loadMyPlantsData = () => {
+export const loadMyPlantsData = (data) => {
     return {
         type: 'load_my_plants_data',
-        payload: null
+        payload: data
     };
 };
 

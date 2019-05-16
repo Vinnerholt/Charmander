@@ -14,6 +14,7 @@ import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
+import plantHandler from './services/plantHandler';
 
 export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
@@ -68,6 +69,7 @@ class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
     }
+
     render() {
         return (
             <Provider store={createStore(reducers)}>
