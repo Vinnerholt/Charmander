@@ -2,13 +2,19 @@ import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
 import jsonStorage from './jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
+import NavigationService from '../services/NavigationService';
+import { store } from '../App';
+import * as actions from '../actions';
 
 const notifPath = 'notifications';
-export function initNotifications() {
+export const initNotifications = async() => {
+    const notif = await jsonStorage.getItem('notifications');
+    console.log(notif);
+    store.dispatch(actions.initNotifications(notif));
     checkPermissions();
     createChannel();
     mountNotifListeners();
-}
+};
 
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
@@ -39,7 +45,7 @@ function createChannel() {
 function mountNotifListeners() {
     setOnNotification();
     setOnNotificationDisplayed();
-    //setOnNotificationOpened();  
+    setOnNotificationOpened();  
 }
 
 function setOnNotification() {
@@ -78,30 +84,20 @@ function setOnNotificationDisplayed() {
             read: false
         };
 
-        let file = null;
-        await jsonStorage.getItem(notifPath).then(item => {
-            item.notifications.unshift(notif);
-            file = item;
-          }).catch(() => {
-            const start = {
-              notifications: []
-            };
-            start.notifications.push(notif);
-            file = start;
-          });
-
-        await jsonStorage.setItem(notifPath, file);
-
-        NotifObservable.notify();
+        store.dispatch(actions.addNotification(notif));
     });
 }
 
-/*function setOnNotificationOpened() {
+function setOnNotificationOpened() {
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened(notificationOpen => {
         const action = notificationOpen.action;
         const notification = notificationOpen.notification;
+
+        console.log(notification);
+        store.dispatch(actions.expandNotification(notification));
+        NavigationService.navigate('Notifications');
     }); 
-}*/
+}
 
 /*export function unmountNotifListeners() {
     this.notificationDisplayedListener();

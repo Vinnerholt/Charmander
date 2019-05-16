@@ -5,10 +5,24 @@ export const expandNotification = (notification) => {
     };
 };
 
+export const addNotification = (notification) => {
+    return {
+        type: 'add_notification',
+        payload: notification
+    };
+};
+
 export const removeNotification = (notification) => {
     return {
         type: 'remove_notification',
         payload: notification
+    };
+};
+
+export const initNotifications = (notifications) => {
+    return {
+        type: 'init_notifications',
+        payload: notifications
     };
 };
 
@@ -30,3 +44,4 @@ export const removeCartItem = (item) => {
         payload: item
     };
 };
+
