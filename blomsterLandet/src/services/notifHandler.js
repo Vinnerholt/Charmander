@@ -1,21 +1,21 @@
 import firebase from 'react-native-firebase';
 import { Platform } from 'react-native';
-import jsonStorage from './jsonStorage';
-import NotifObservable from '../services/observers/NotifObservable';
 import NavigationService from '../services/NavigationService';
 import { store } from '../App';
 import * as actions from '../actions';
 
-const notifPath = 'notifications';
 export const initNotifications = async() => {
-    const notif = await jsonStorage.getItem('notifications');
-    console.log(notif);
-    store.dispatch(actions.initNotifications(notif));
+    //Loads initial notifications
+    store.dispatch(await actions.initNotifications());
     checkPermissions();
     createChannel();
     mountNotifListeners();
 };
 
+/**
+ * Checks wether the user has relevant 
+ * permissions the receive notifications
+ */
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
@@ -48,6 +48,10 @@ function mountNotifListeners() {
     setOnNotificationOpened();  
 }
 
+/**
+ * Gets called when a notification is received by the system,
+ * not to be confused whith setOnNotificationDisplayed.
+ */
 function setOnNotification() {
     firebase.notifications().onNotification((notification) => {
         // Process your notification as required
@@ -67,38 +71,54 @@ function setOnNotification() {
     });
 }
 
+/**
+ * This function gets called when a notification is displayed
+ */
 function setOnNotificationDisplayed() {
     firebase.notifications()
         .onNotificationDisplayed(async (notification) => {
         // Process your notification as required
         // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification
+        const notif = convertNotification(notification);
         
-        const notif = {
-            notifId: notification.notificationId,
-            title: notification.title,
-            description: notification.body,
-            icon: 'default',
-            imageURL: `../../resources/images/${notification.data.imageURL}`,
-            type: notification.data.type,
-            pointer: 0,
-            read: false
-        };
 
         store.dispatch(actions.addNotification(notif));
     });
 }
 
+/**
+ * This function gets called when a push notification is pressed on
+ */
 function setOnNotificationOpened() {
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened(notificationOpen => {
-        const action = notificationOpen.action;
-        const notification = notificationOpen.notification;
+        //const action = notificationOpen.action;
+        const notification = convertNotification(notificationOpen.notification);
 
-        console.log(notification);
+        
         store.dispatch(actions.expandNotification(notification));
         NavigationService.navigate('Notifications');
     }); 
 }
 
+/**
+ * Converts a firebase notification into a notif object
+ * that is used to store the notifications
+ * 
+ * @param {Notification} notification 
+ */
+const convertNotification = (notification) => {
+    const notif = {
+        notifId: notification.notificationId,
+        title: notification.title,
+        description: notification.body,
+        icon: 'default',
+        imageURL: `../../resources/images/${notification.data.imageURL}`,
+        type: notification.data.type,
+        refKey: notification.data.refKey,
+        read: false
+    };
+    return notif;
+};
 /*export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  

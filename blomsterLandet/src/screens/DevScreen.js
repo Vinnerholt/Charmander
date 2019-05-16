@@ -19,7 +19,8 @@ class DevScreen extends React.Component {
         .setBody('My notification body')
         .setData({
             imageURL: 'value1',
-            type: 'value2',
+            type: 'product',
+            refKey: 'ros'
         })
         .android.setChannelId('test-channel')
         .android.setSmallIcon('ic_launcher')

@@ -1,41 +1,45 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import * as storeActions from '../../actions/storeActions';
+import { store } from '../../App';
 //import axios from 'axios';
 import ProductCard from './ProductCard';
-import firestoreHandler from '../../services/firestoreHandler';
+import { Spinner } from '../common';
 
 let self;
 class ProductList extends Component {
-    state = { products: [] };
 
-    /*  componentWillMount() {
-          axios.get('https://gist.githubusercontent.com/ilcarolineJonsson/1a170871c66ab0255396df3c7553902c/raw/8fb0ba8e5327ce032b277e97304551e6204dd97e/products')
-              .then(response => this.setState({ products: response.data }));
-      }*/
     componentWillMount() {
         self = this;
-        self.loadProducts();
+        self.initStore();
     }
 
-    async loadProducts() {
-        firestoreHandler.getCollection('products').then(products => {
-            self.setState({ products });
-        }).then(err => {
-            console.log(err);
-        });
+    initStore = async () => {
+        store.dispatch(await storeActions.initProducts());
     }
+
     renderProducts() {
-        return this.state.products.map(product =>
-            <ProductCard key={product.key} product={product} navigation={this.props.navigation} />);
+        const arr = [];
+        self.props.products.forEach(product => 
+            arr.push(<ProductCard key={product.key} product={product} navigation={self.props.navigation} />));
+        if (arr.length === 0) {
+            return <Spinner />;
+        }
+        return arr;
     }
 
     render() {
         return (
             <ScrollView>
-                {this.renderProducts()}
+                {self.renderProducts()}
             </ScrollView>
         );
     }
 }
 
-export default ProductList;
+const mapStateToProps = state => {
+    return { products: state.products };
+};
+
+export default connect(mapStateToProps, storeActions)(ProductList);

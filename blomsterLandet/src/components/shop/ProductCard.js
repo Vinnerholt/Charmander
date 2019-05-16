@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, Image, View, Button } from 'react-native';
+import { Text, Image, View } from 'react-native';
 import ProductCardContainer from './ProductCardContainer';
 import images from '../../resources/images/index';
+import InfoButton from './InfoButton';
 
 
 const ProductCard = (props) => {
@@ -22,9 +23,8 @@ const ProductCard = (props) => {
             <Text style={styles.productDescription}>{props.product.description}</Text>
             <Text style={styles.priceTag}>{props.product.price}kr St </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                <Button
-                    title="Köp"
-                    onPress={() => props.navigation.navigate('Details', { product: props.product })}
+                <InfoButton
+                    product={props.product}
                 />
             </View>
         </ProductCardContainer>
