@@ -12,12 +12,9 @@ let self;
 
 class MyPlantScreen extends React.Component {
 
-    async componentWillMount() {
+    componentWillMount() {
         self = this;
-        await plantHandler.getFile().then(item => {
-            console.log(item);
 
-        });
     }
 
     render() {

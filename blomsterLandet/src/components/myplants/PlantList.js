@@ -8,18 +8,17 @@ import * as actions from '../../actions';
 
 
 let self;
+let firstStart = true;
 class PlantList extends Component {
 
 
     componentWillMount() {
         self = this;
-        self.getPlants();
-        /* await plantHandler.getFile().then(item => {
-             console.log(item);
-             if (item) {
-                 self.setState({ myPlants: item.plantList });
-             }
-         });*/
+        if (firstStart) {
+            self.getPlants();
+            firstStart = false;
+        }
+
     }
 
     async getPlants() {
@@ -38,7 +37,7 @@ class PlantList extends Component {
     }
 
     render() {
-        console.log(self.props);
+        console.log(self.props.myPlants);
 
         if (self.props.myPlants) {
             return (<ScrollView>

@@ -1,4 +1,5 @@
 import plantHandler from './../services/plantHandler';
+import { overwritePlant } from './../services/plantHandlerHelperFunctions';
 
 const data = {
     plantList: [{
@@ -16,6 +17,9 @@ export default (state = null, action) => {
     switch (action.type) {
         case 'load_my_plants_data':
             return (action.payload);
+        case 'edit_my_plants_data':
+            return overwritePlant(state, action.payload);
+
         default:
             return state;
     }
