@@ -11,3 +11,10 @@ export const loadMyPlantsData = () => {
     };
 };
 
+
+export const removeNotification = (notification) => {
+    return {
+        type: 'remove_notification',
+        payload: notification
+    };
+};
