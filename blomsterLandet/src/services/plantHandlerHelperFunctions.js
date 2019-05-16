@@ -7,7 +7,7 @@ export function overwritePlant(db, plant) {
         if (db.plantList[i].key == plant.key) {
             console.log("Overwrote plant with key :" + plant.key);
             db.plantList[i] = plant;
-            return db;
+            return JSON.parse(JSON.stringify(db));
         }
     }
     console.log("could not find plant key in database");

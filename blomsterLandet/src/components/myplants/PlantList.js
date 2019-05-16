@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Button } from 'react-native';
+import { ScrollView, Text, Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 import PlantListItem from './PlantListItem';
@@ -29,6 +29,9 @@ class PlantList extends Component {
         });
     }
 
+    renderPlant(plant) {
+        return <PlantListItem plant={plant} navigation={self.props.navigation} key={plant.name} />;
+    }
     renderPlants() {
 
         return self.props.myPlants.plantList.map(plant =>
@@ -40,6 +43,13 @@ class PlantList extends Component {
         console.log(self.props.myPlants);
 
         if (self.props.myPlants) {
+            console.log(self.props.myPlants);
+            /*    return (
+                    <FlatList
+                        data={self.props.myPlants.plantList}
+                        renderItem={self.renderPlant}
+                        keyExtractor={(plant) => plant.key}
+                    />);*/
             return (<ScrollView>
                 <Text>Vi har Plantor</Text>
                 {self.renderPlants()}
@@ -48,11 +58,11 @@ class PlantList extends Component {
             </ScrollView>)
         } else {
             return (
-                <ScrollView>
+                <React.Fragment>
                     <Text>Inga Plantor</Text>
                     <Button title="tryck"
                         onPress={() => self.props.loadMyPlantsData()}></Button>
-                </ScrollView>
+                </React.Fragment>
             );
         }
     }
