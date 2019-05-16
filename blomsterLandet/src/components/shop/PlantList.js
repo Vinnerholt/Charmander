@@ -25,8 +25,6 @@ class PlantList extends Component {
     }
 
     render() {
-
-
         return (
             <ScrollView>
                 {this.renderPlants()}

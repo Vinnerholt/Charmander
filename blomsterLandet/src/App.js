@@ -15,6 +15,7 @@ import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
+import jsonStorage from './services/jsonStorage';
 
 export const TabNavigator = createBottomTabNavigator({
     Shop: ShopScreen,
@@ -69,6 +70,9 @@ export const store = createStore(reducers);
 class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
+    }
+    componentWillUnmount() {
+        //jsonStorage.saveSession();
     }
     render() {
         return (

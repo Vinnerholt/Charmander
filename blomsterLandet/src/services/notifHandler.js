@@ -7,11 +7,14 @@ import { store } from '../App';
 import * as actions from '../actions';
 
 const notifPath = 'notifications';
-export function initNotifications() {
+export const initNotifications = async() => {
+    const notif = await jsonStorage.getItem('notifications');
+    console.log(notif);
+    store.dispatch(actions.initNotifications(notif));
     checkPermissions();
     createChannel();
     mountNotifListeners();
-}
+};
 
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
@@ -80,20 +83,6 @@ function setOnNotificationDisplayed() {
             pointer: 0,
             read: false
         };
-
-        let file = null;
-        await jsonStorage.getItem(notifPath).then(item => {
-            item.notifications.unshift(notif);
-            file = item;
-          }).catch(() => {
-            const start = {
-              notifications: []
-            };
-            start.notifications.push(notif);
-            file = start;
-          });
-
-        await jsonStorage.setItem(notifPath, file);
 
         store.dispatch(actions.addNotification(notif));
     });

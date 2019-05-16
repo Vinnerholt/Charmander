@@ -18,3 +18,10 @@ export const removeNotification = (notification) => {
         payload: notification
     };
 };
+
+export const initNotifications = (notifications) => {
+    return {
+        type: 'init_notifications',
+        payload: notifications
+    };
+};
