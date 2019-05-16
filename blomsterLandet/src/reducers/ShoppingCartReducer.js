@@ -1,17 +1,18 @@
 
-const initialUserState = {
 
-    arr: []
-};
-
-export default (state = initialUserState, action) => {
+export default (state = [], action) => {
     switch (action.type) {
         case 'add_cart_item': 
-            return {
-                arr: state.arr.concat(action.payload)
-            };
-        /*case 'remove_cart_item':
-            return state.filter((notification) => { if (notification.notifId !== action.payload.notifId) { return notification; } return null; });*/
+            for(var i in state) {
+                if (state[i].product.key === action.payload.product.key) {
+                    state[i].amount += action.payload.amount;
+                    return state;
+                }
+            }
+            return state.concat(action.payload);
+        case 'remove_cart_item':
+            console.log(state);
+            return state.filter((product) => { if (product.key !== action.payload.key) { return product; } return null; });
         default:
             return state;
     }

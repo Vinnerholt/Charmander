@@ -5,8 +5,8 @@ import CartListItem from '../../components/shop/CartListItem';
 
 class ShoppingCartScreen extends React.Component {
 
-    renderItem(product) {
-        return <CartListItem product={product} />;
+    renderItem(orderItem) {
+        return <CartListItem orderItem={orderItem} />;
     }
 
     render() {
@@ -15,7 +15,7 @@ class ShoppingCartScreen extends React.Component {
                 <FlatList
                     data={this.props.shoppingCart}
                     renderItem={this.renderItem}
-                    keyExtractor={(product) => product.key}
+                    keyExtractor={(orderItem) => orderItem.product.key}
                 />
             </View>
         );
@@ -23,7 +23,7 @@ class ShoppingCartScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { shoppingCart: state.shoppingCart.arr };
+    return { shoppingCart: state.shoppingCart };
 };
 
 export default connect(mapStateToProps)(ShoppingCartScreen);

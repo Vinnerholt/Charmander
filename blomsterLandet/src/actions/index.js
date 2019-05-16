@@ -12,10 +12,15 @@ export const removeNotification = (notification) => {
     };
 };
 
-export const addCartItem = (item) => {
+export const addCartItem = (item, amount) => {
+    const orderItem = {
+        product: item,
+        amount
+    };
+    
     return {
         type: 'add_cart_item',
-        payload: item
+        payload: orderItem
     };
 };
 

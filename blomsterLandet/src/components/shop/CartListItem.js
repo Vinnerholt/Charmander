@@ -8,19 +8,23 @@ import * as actions from '../../actions';
 class CartListItem extends Component {
 
     render() {
-        const { itemStyle, textStyle, crossStyle, arrowStyle } = styles;
-        const product = this.props.product.item;
-        const { name } = product;
+        const { itemStyle, textStyle, crossStyle } = styles;
+        const orderItem = this.props.orderItem.item;
+        const { name } = orderItem.product;
+        const { amount } = orderItem;
+
         console.log(name);
         return (
             <TouchableOpacity style={itemStyle}>
                 <TouchableOpacity>
-                    <Icon name="close" style={crossStyle} />
+                    <Icon name="close" style={crossStyle} onPress={() => this.props.removeCartItem(orderItem)} />
                 </TouchableOpacity>
                 <Text style={textStyle}>
                     {name}
                 </Text>
-                <Icon name="chevron-right" style={arrowStyle} />
+                <Text>
+                    {amount}
+                </Text>
             </TouchableOpacity>
         );
     }

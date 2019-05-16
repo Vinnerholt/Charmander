@@ -10,7 +10,7 @@ const BuyButton = (props) => (
         <View >
             <Button
                 title="Köp nu"
-                onPress={() => props.addCartItem(props.product)}
+                onPress={() => props.addCartItem(props.product, 1)}
             />
         </View>
     );
