@@ -10,9 +10,9 @@ class CartListItem extends Component {
     render() {
         const { itemStyle, textStyle, crossStyle } = styles;
         const orderItem = this.props.orderItem.item;
-        const { name } = orderItem.product;
+        const { name, price } = orderItem.product;
         const { amount } = orderItem;
-
+        const totalPrice = amount * price;
         console.log(name);
         return (
             <TouchableOpacity style={itemStyle}>
@@ -23,7 +23,7 @@ class CartListItem extends Component {
                     {name}
                 </Text>
                 <Text>
-                    {amount}
+                    {amount} * {price}kr  (Total: {totalPrice}kr)
                 </Text>
             </TouchableOpacity>
         );

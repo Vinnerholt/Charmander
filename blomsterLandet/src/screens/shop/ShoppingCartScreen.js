@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Button } from 'react-native';
 import { connect } from 'react-redux';
 import CartListItem from '../../components/shop/CartListItem';
+import firestoreHandler from '../../services/firestoreHandler';
 
 class ShoppingCartScreen extends React.Component {
 
@@ -16,6 +17,10 @@ class ShoppingCartScreen extends React.Component {
                     data={this.props.shoppingCart}
                     renderItem={this.renderItem}
                     keyExtractor={(orderItem) => orderItem.product.key}
+                />
+                <Button 
+                    title='Lägg order'
+                    onPress={() => this.finializeOrder()}
                 />
             </View>
         );
