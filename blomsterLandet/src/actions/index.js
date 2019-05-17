@@ -22,7 +22,12 @@ export const removeNotification = (notification) => {
 };
 
 export const initNotifications = async () => {
-    const notif = await jsonStorage.getItem('notifications');
+    let notif = [];
+    await jsonStorage.getItem('notifications').then(result => {
+        if (result !== null) {
+            notif = result;
+        }
+    });
     return {
         type: 'init_notifications',
         payload: notif

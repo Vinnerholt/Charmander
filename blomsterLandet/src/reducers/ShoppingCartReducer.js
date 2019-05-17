@@ -9,8 +9,9 @@ export default (state = [], action) => {
             }
             return state.concat(action.payload);
         case 'remove_cart_item':
-            console.log(state);
-            return state.filter((product) => { if (product.key !== action.payload.key) { return product; } return null; });
+            return state.filter((orderItem) => { if (orderItem.product.key !== action.payload.product.key) { return orderItem; } return null; });
+        case 'empty_shopping_cart':
+            return [];
         default:
             return state;
     }

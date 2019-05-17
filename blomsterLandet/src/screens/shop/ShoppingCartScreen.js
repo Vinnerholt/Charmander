@@ -3,17 +3,33 @@ import { View, FlatList, Button, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import CartListItem from '../../components/shop/CartListItem';
 import orderHandler from '../../services/orderHandler';
+import * as actions from '../../actions/storeActions';
 
 class ShoppingCartScreen extends React.Component {
-
-    renderItem(orderItem) {
-        return <CartListItem orderItem={orderItem} />;
-    }
 
     displayAlert() {
         Alert.alert(
             'Din order är lagd!'
         );
+    }
+
+    renderItem(orderItem) {
+        return <CartListItem orderItem={orderItem} />;
+    }
+
+    renderPlaceOrderButton() {
+        if (this.props.shoppingCart.length !== 0) {
+            return (
+                <Button 
+                    title='Lägg order'
+                    onPress={() => {
+                            orderHandler.finalizeOrder(this.props.shoppingCart);
+                            this.props.emptyShoppingCart();
+                            this.displayAlert();
+                        }
+                    }
+                />);
+        }
     }
 
     render() {
@@ -24,14 +40,7 @@ class ShoppingCartScreen extends React.Component {
                     renderItem={this.renderItem}
                     keyExtractor={(orderItem) => orderItem.product.key}
                 />
-                <Button 
-                    title='Lägg order'
-                    onPress={() => {
-                            orderHandler.finalizeOrder(this.props.shoppingCart);
-                            this.displayAlert();
-                        }
-                    }
-                />
+                {this.renderPlaceOrderButton()}
             </View>
         );
     }
@@ -41,4 +50,4 @@ const mapStateToProps = state => {
     return { shoppingCart: state.shoppingCart };
 };
 
-export default connect(mapStateToProps)(ShoppingCartScreen);
+export default connect(mapStateToProps, actions)(ShoppingCartScreen);

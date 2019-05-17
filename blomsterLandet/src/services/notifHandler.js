@@ -19,7 +19,7 @@ export const initNotifications = async() => {
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
-        console.log('Has permission');
+        
     } else {
         // user doesn't have permission
         firebase.messaging().requestPermission()

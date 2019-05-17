@@ -31,3 +31,9 @@ export const removeCartItem = (item) => {
         payload: item
     };
 };
+
+export const emptyShoppingCart = () => {
+    return {
+        type: 'empty_shopping_cart',
+    };
+};
