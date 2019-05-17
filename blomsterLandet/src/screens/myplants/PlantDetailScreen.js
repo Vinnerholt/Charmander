@@ -8,11 +8,13 @@ import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 import MyTextInput from '../../components/common/MyTextInput';
+import { calcVal } from '../../services/plantHandlerHelperFunctions';
+
 
 
 let self;
 let image;
-const plantPath = 'myPlants11';
+const plantPath = 'myPlants12';
 
 let nameLabel;
 let topRightButton;
@@ -32,15 +34,15 @@ class PlantDetailScreen extends Component {
         image = images[self.state.plant.name];
         self.value = null;
         self.currentTime = Date.now() / 1000;
-        self.value = self.calcVal();
+        self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
     }
 
         // Calculates the percentage to fill the waterGauge based on when the
     // plant was last watered, time past since watered and it's wateringInterval. 
-    calcVal() {
+ /*   calcVal() {
         return 100 - (100 * ((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered) 
             / (self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval * 24 * 60 * 60)));
-    }
+    }*/
 
     daysSinceWatered() {
         return Math.round((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered)
