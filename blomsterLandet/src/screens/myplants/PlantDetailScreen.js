@@ -50,7 +50,7 @@ class PlantDetailScreen extends Component {
                     onPress={() => {
                         self.props.editMyPlantsData(self.state.plant);
                         self.props.toggleMyPlantsEditMode();
-
+                        plantHandler.createFile(self.props.myPlants);
                     }
                     }
                 />)

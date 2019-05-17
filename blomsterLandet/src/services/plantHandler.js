@@ -62,9 +62,8 @@ export default {
         });
     },
     //creates a file in the async storage with a dummy plantList
-    async createFile() {
-        const file = dummyPlantlist;
-        await jsonStorage.setItem(plantPath, file).then(() => {
+    async createFile(myPlants) {
+        await jsonStorage.setItem(plantPath, myPlants).then(() => {
             console.log("Created new myPlants file in DB");
         }).catch(() => {
             console.log("Error creating new myPlants file in DB");
