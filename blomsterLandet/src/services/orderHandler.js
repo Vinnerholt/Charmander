@@ -1,17 +1,24 @@
 import firestoreHandler from '../services/firestoreHandler';
 
 export default {
-    finalizeOrder(order) {
+    async finalizeOrder(order) {
         const finalOrder = {
             buyer: 'Hugo',
             postalCode: 41326,
-            order: null
+            order: []
         };
 
         for (let i in order) {
-           const newOrder = {
-               amount: order[i].amount
-           }; 
+            const ref = await firestoreHandler.getDocument('products', order[i].product.key);
+
+            const newOrder = {
+                product: ref,
+                amount: order[i].amount
+            }; 
+
+            finalOrder.order.push(newOrder);
         }
+
+        firestoreHandler.placeOrder(finalOrder);
     }
 };

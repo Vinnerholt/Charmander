@@ -1,13 +1,19 @@
 import React from 'react';
-import { View, FlatList, Button } from 'react-native';
+import { View, FlatList, Button, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import CartListItem from '../../components/shop/CartListItem';
-import firestoreHandler from '../../services/firestoreHandler';
+import orderHandler from '../../services/orderHandler';
 
 class ShoppingCartScreen extends React.Component {
 
     renderItem(orderItem) {
         return <CartListItem orderItem={orderItem} />;
+    }
+
+    displayAlert() {
+        Alert.alert(
+            'Din order är lagd!'
+        );
     }
 
     render() {
@@ -20,7 +26,11 @@ class ShoppingCartScreen extends React.Component {
                 />
                 <Button 
                     title='Lägg order'
-                    onPress={() => this.finializeOrder()}
+                    onPress={() => {
+                            orderHandler.finalizeOrder(this.props.shoppingCart);
+                            this.displayAlert();
+                        }
+                    }
                 />
             </View>
         );

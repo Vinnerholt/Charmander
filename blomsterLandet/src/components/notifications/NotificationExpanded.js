@@ -12,6 +12,7 @@ import { Card, CardSection } from '../common/index';
 import InfoButton from '../shop/InfoButton';
 import * as actions from '../../actions';
 import { store } from '../../App';
+import NavigationService from '../../services/NavigationService';
 
 class NotificationExpanded extends Component {
 
@@ -38,7 +39,14 @@ class NotificationExpanded extends Component {
            const { type, refKey } = this.props.notification;
             switch (type) {
             case 'product':
-                return <InfoButton product={store.getState().products.get(refKey)} />;
+                 return (
+                    <Button 
+                        title='Gå till produkt'
+                        onPress={() => {
+                            NavigationService.navigate('Details', { product: store.getState().products.get(refKey) });
+                            this.props.expandNotification(null);
+                        }}
+                    />);
             }  
         }
     }

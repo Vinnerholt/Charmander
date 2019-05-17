@@ -19,7 +19,7 @@ export const initNotifications = async() => {
 const checkPermissions = async() => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
-        // user has permissions
+        console.log('Has permission');
     } else {
         // user doesn't have permission
         firebase.messaging().requestPermission()
@@ -55,7 +55,7 @@ function mountNotifListeners() {
 function setOnNotification() {
     firebase.notifications().onNotification((notification) => {
         // Process your notification as required
-
+        console.log('yoho');
         if (Platform.OS === 'android') {
             notification
                 .setSound('default')
