@@ -2,7 +2,7 @@ import jsonStorage from './jsonStorage';
 import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
-const plantPath = 'myPlants2';
+const plantPath = 'myPlants11';
 
 //used for testing
 const dummyPlantlist = {
@@ -13,8 +13,8 @@ const dummyPlantlist = {
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
         imageURL: "../../resources/images/tomat.jpg",
-        lastWatered: 1557741000,
-        wateringInterval: 2
+        lastWatered: 1557996093,
+        wateringInterval: 12
     },
     {
         key: "002",

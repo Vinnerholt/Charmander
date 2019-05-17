@@ -12,7 +12,7 @@ import MyTextInput from '../../components/common/MyTextInput';
 
 let self;
 let image;
-const plantPath = 'myPlants';
+const plantPath = 'myPlants11';
 
 let nameLabel;
 let topRightButton;
@@ -27,12 +27,11 @@ class PlantDetailScreen extends Component {
     state = { editMode: false, plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
     componentWillMount() {
-        //console.log('@@@@@@@@@@@@@@@@@');
         self = this;
         self.loadPlant();
         image = images[self.state.plant.name];
-           self.value = null;
-         self.currentTime = 1557746991;
+        self.value = null;
+        self.currentTime = Date.now() / 1000;
         self.value = self.calcVal();
     }
 
@@ -41,6 +40,18 @@ class PlantDetailScreen extends Component {
     calcVal() {
         return 100 - (100 * ((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered) 
             / (self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval * 24 * 60 * 60)));
+    }
+
+    daysSinceWatered() {
+        return Math.round((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered)
+        / (60 * 60 * 24));
+    }
+
+    daysUntilWater() {
+        return Math.round((self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered 
+        - self.currentTime) 
+        / (60 * 60 * 24)
+        + self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval);
     }
 
 
@@ -96,7 +107,8 @@ class PlantDetailScreen extends Component {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-            scrollViewStyle, iconStyle, gaugeImageContainerStyle } = styles;
+            scrollViewStyle, iconStyle, gaugeImageContainerStyle,
+            gaugeContainerStyle, wateringDaysTextStyle } = styles;
 
     
         self.checkForEdit();
@@ -115,28 +127,38 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 
-                <View style={scrollViewStyle}>
+                <View style={gaugeContainerStyle}>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{`  dagar kvar  `}</Text>
+                        <Text style={wateringDaysTextStyle}>{self.daysUntilWater()}</Text>
+                    </View>
+                    
                     <View style={imageContainerStyle}>
-                    <AnimatedGaugeProgress
-                            size={250}
-                            width={15}
-                            fill={self.value}
-                            rotation={90}
-                            cropDegree={90}
-                            tintColor="#4682b4"
-                            delay={0}
-                            backgroundColor="#b0c4de"
-                            stroke={[2, 2]} //For a equally dashed line
-                            strokeCap="circle" 
-                        >
-                        <View style={gaugeImageContainerStyle}>
+                        <AnimatedGaugeProgress
+                                size={250}
+                                width={15}
+                                fill={self.value}
+                                rotation={90}
+                                cropDegree={90}
+                                tintColor="#4682b4"
+                                delay={0}
+                                backgroundColor="#b0c4de"
+                                stroke={[2, 2]} //For a equally dashed line
+                                strokeCap="circle" 
+                            >
+                            <View style={gaugeImageContainerStyle}>
                                     <Image 
                                         style={imageStyle}
                                         source={images[self.state.plant.type]} 
                                     />  
-                                </View>        
+                            </View>        
                         </AnimatedGaugeProgress>
                     </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{`dagar sedan`}</Text>
+                        <Text style={wateringDaysTextStyle}>{self.daysSinceWatered()}</Text>
+                    </View>
+                    
                 </View>
 
                 <View style={viewCenterStyle}>
@@ -273,7 +295,19 @@ const styles = {
         height: 200,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    gaugeContainerStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '100%'
+    },
+    wateringDaysTextStyle: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#3e5f36'
     }
+
 };
 
 export default PlantDetailScreen;
