@@ -8,7 +8,7 @@ import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 import MyTextInput from '../../components/common/MyTextInput';
-import { calcVal } from '../../services/plantHandlerHelperFunctions';
+import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
 
 
 
@@ -49,11 +49,18 @@ class PlantDetailScreen extends Component {
         / (60 * 60 * 24));
     }
 
-    daysUntilWater() {
+ /*   daysUntilWater() {
         return Math.round((self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered 
         - self.currentTime) 
         / (60 * 60 * 24)
         + self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval);
+    } */
+
+    daysUntilColor() {
+        if (daysUntilWater(self.state.plant.lastWatered, self.state.plant.wateringInterval) < 1) {
+            return styles.wateringDaysTextStyleRed;
+        }
+        return styles.wateringDaysTextStyle;
     }
 
 
@@ -110,7 +117,7 @@ class PlantDetailScreen extends Component {
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
             scrollViewStyle, iconStyle, gaugeImageContainerStyle,
-            gaugeContainerStyle, wateringDaysTextStyle } = styles;
+            gaugeContainerStyle, wateringDaysTextStyle, wateringDaysTextStyleRed } = styles;
 
     
         self.checkForEdit();
@@ -132,7 +139,9 @@ class PlantDetailScreen extends Component {
                 <View style={gaugeContainerStyle}>
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10 }}>{`  dagar kvar  `}</Text>
-                        <Text style={wateringDaysTextStyle}>{self.daysUntilWater()}</Text>
+                        <Text style={self.daysUntilColor()}>
+                            {daysUntilWater(self.state.plant.lastWatered, self.state.plant.wateringInterval)}
+                        </Text>
                     </View>
                     
                     <View style={imageContainerStyle}>
@@ -308,6 +317,11 @@ const styles = {
         fontSize: 30,
         fontWeight: 'bold',
         color: '#3e5f36'
+    },
+    wateringDaysTextStyleRed: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#ff0000'
     }
 
 };
