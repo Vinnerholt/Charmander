@@ -9,6 +9,9 @@ import * as actions from '../../actions';
 
 let self;
 let firstStart = true;
+let addNewPlant;
+
+
 class PlantList extends Component {
 
 
@@ -18,6 +21,9 @@ class PlantList extends Component {
             self.getPlants();
             firstStart = false;
         }
+
+        addNewPlant = (<Button style={styles.itemStyle} title="add new plant"
+            onPress={() => self.props.loadMyPlantsData()}></Button>);
 
     }
 
@@ -54,18 +60,35 @@ class PlantList extends Component {
             return (<ScrollView>
                 <Text>Vi har Plantor</Text>
                 {self.renderPlants()}
-                <Button title="tryck"
-                    onPress={() => self.props.loadMyPlantsData()}></Button>
+
             </ScrollView>)
         } else {
             return (
-                <React.Fragment>
+                <ScrollView >
                     <Text>Inga Plantor</Text>
-                    <Button title="tryck"
-                        onPress={() => self.props.loadMyPlantsData()}></Button>
-                </React.Fragment>
+                    <Button
+                        title="add new plant"
+                        onPress={() => self.props.navigation.navigate('AddPlant')}
+                    ></Button>
+                </ScrollView >
             );
         }
+    }
+}
+
+const styles = {
+    itemStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flex: 1,
+        alignSelf: 'stretch',
+        color: '#fff',
+        marginBottom: 1,
+        borderBottom: 1,
+        borderColor: 'grey',
+        padding: 10,
+        height: 50,
+        alignItems: 'center'
     }
 }
 const mapStateToProps = (state, ownProps) => {

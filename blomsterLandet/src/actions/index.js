@@ -22,11 +22,15 @@ export const toggleMyPlantsEditMode = () => {
         payload: null
     };
 };
-
-
 export const removeNotification = (notification) => {
     return {
         type: 'remove_notification',
         payload: notification
+    };
+};
+export const getPlantTypes = () => {
+    return {
+        type: 'get_plant_types',
+        payload: null
     };
 };

@@ -6,6 +6,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import PlantList from '../../components/myplants/PlantList';
 import plantHandler from './../../services/plantHandler';
 import PlantDetailScreen from './PlantDetailScreen';
+import AddPlantScreen from './AddPlantScreen';
 
 
 let self;
@@ -30,7 +31,8 @@ class MyPlantScreen extends React.Component {
 const AppNavigator = createStackNavigator(
     {
         Home: MyPlantScreen,
-        Details: PlantDetailScreen
+        Details: PlantDetailScreen,
+        AddPlant: AddPlantScreen
     },
     {
         initialRouteName: 'Home',
