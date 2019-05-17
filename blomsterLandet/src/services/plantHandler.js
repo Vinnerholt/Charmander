@@ -2,7 +2,7 @@ import jsonStorage from './jsonStorage';
 import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
-const plantPath = 'myPlants';
+const plantPath = 'myPlants10';
 
 //used for testing
 const dummyPlantlist = {
@@ -12,7 +12,9 @@ const dummyPlantlist = {
         type: "tomat",
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
-        imageURL: "../../resources/images/tomat.jpg"
+        imageURL: "../../resources/images/tomat.jpg",
+        lastWatered: 1557996093,
+        wateringInterval: 12
     },
     {
         key: "002",
@@ -20,7 +22,9 @@ const dummyPlantlist = {
         type: "slanggurka",
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
-        imageURL: "../../resources/images/tomat.jpg"
+        imageURL: "../../resources/images/tomat.jpg",
+        lastWatered: 1557741000,
+        wateringInterval: 2
     }
     ]
 };
@@ -64,6 +68,13 @@ export default {
     //creates a file in the async storage with a dummy plantList
     async createFile(myPlants) {
         await jsonStorage.setItem(plantPath, myPlants).then(() => {
+            console.log("Created new myPlants file in DB");
+        }).catch(() => {
+            console.log("Error creating new myPlants file in DB");
+        });
+    },
+    async createDummyFile() {
+        await jsonStorage.setItem(plantPath, dummyPlantlist).then(() => {
             console.log("Created new myPlants file in DB");
         }).catch(() => {
             console.log("Error creating new myPlants file in DB");

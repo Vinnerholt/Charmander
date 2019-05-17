@@ -24,3 +24,8 @@ export function findPlant(db, key) {
     console.log("Didnt find key: " + key);
 }
 
+export function calcVal(lastWatered, wateringInterval) {
+    return 100 - (100 * ((Date.now() / 1000 - lastWatered) 
+    / (wateringInterval * 24 * 60 * 60)));
+}
+

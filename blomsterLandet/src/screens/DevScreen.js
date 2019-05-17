@@ -7,6 +7,7 @@ import { View, Button } from 'react-native';
 import firebase from 'react-native-firebase';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
+import plantHandler from './../services/plantHandler';
 
 class DevScreen extends React.Component {
 
@@ -62,6 +63,10 @@ class DevScreen extends React.Component {
                 <Button
                     title='Check singleton'
                     onPress={() => this.checkSingleton()}
+                />
+                <Button
+                    title='Create dummyPlantList'
+                    onPress={async () => plantHandler.createDummyFile()}
                 />
             </View>
 

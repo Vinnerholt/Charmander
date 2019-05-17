@@ -17,8 +17,9 @@ import DevScreen from './screens/DevScreen';
 import plantHandler from './services/plantHandler';
 
 export const TabNavigator = createBottomTabNavigator({
-    Shop: ShopScreen,
     Plants: MyPlantScreen,
+    Shop: ShopScreen,
+    //BYT TILLBAKA
     Notifications: NotificationScreen,
     Profile: ProfileScreen,
     Dev: DevScreen

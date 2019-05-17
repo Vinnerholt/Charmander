@@ -12,23 +12,42 @@ import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 import { findPlant } from '../../services/plantHandlerHelperFunctions';
 import MyTextInput from '../../components/common/MyTextInput';
-
-
+import { calcVal } from '../../services/plantHandlerHelperFunctions';
 
 let self;
 let image;
-const plantPath = 'myPlants';
-
-
 let nameLabel;
 let topRightButton;
 class PlantDetailScreen extends Component {
     state = { plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
+
     componentWillMount() {
         self = this;
         self.loadPlant();
         image = images[self.state.plant.name];
+        self.value = null;
+        self.currentTime = Date.now() / 1000;
+        self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
+    }
+
+    // Calculates the percentage to fill the waterGauge based on when the
+    // plant was last watered, time past since watered and it's wateringInterval. 
+    /*   calcVal() {
+           return 100 - (100 * ((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered) 
+               / (self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval * 24 * 60 * 60)));
+       }*/
+
+    daysSinceWatered() {
+        return Math.round((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered)
+            / (60 * 60 * 24));
+    }
+
+    daysUntilWater() {
+        return Math.round((self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered
+            - self.currentTime)
+            / (60 * 60 * 24)
+            + self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval);
     }
 
 
@@ -42,7 +61,8 @@ class PlantDetailScreen extends Component {
                         tempPlant.name = text;
                         self.setState({ plant: tempPlant });
                     }}
-                    value={self.state.plant.name}>
+                    value={self.state.plant.name}
+                >
                 </MyTextInput>);
             topRightButton = (
                 <Button
@@ -81,8 +101,8 @@ class PlantDetailScreen extends Component {
         const { nameStyle, imageContainerStyle, viewCenterStyle,
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
-            scrollViewStyle, iconStyle, gaugeImageContainerStyle } = styles;
-
+            scrollViewStyle, iconStyle, gaugeImageContainerStyle,
+            gaugeContainerStyle, wateringDaysTextStyle } = styles;
 
         self.checkForEdit();
         return (
@@ -98,14 +118,17 @@ class PlantDetailScreen extends Component {
 
                     {topRightButton}
                 </View>
+                <View style={gaugeContainerStyle}>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{`  dagar kvar  `}</Text>
+                        <Text style={wateringDaysTextStyle}>{self.daysUntilWater()}</Text>
+                    </View>
 
-
-                <View style={scrollViewStyle}>
                     <View style={imageContainerStyle}>
                         <AnimatedGaugeProgress
                             size={250}
                             width={15}
-                            fill={100}
+                            fill={self.value}
                             rotation={90}
                             cropDegree={90}
                             tintColor="#4682b4"
@@ -117,11 +140,16 @@ class PlantDetailScreen extends Component {
                             <View style={gaugeImageContainerStyle}>
                                 <Image
                                     style={imageStyle}
-                                    source={this.props.navigation.getParam('plant', 'Det funkar ej').image}
+                                    source={images[self.state.plant.type]}
                                 />
                             </View>
                         </AnimatedGaugeProgress>
                     </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{`dagar sedan`}</Text>
+                        <Text style={wateringDaysTextStyle}>{self.daysSinceWatered()}</Text>
+                    </View>
+
                 </View>
 
                 <View style={viewCenterStyle}>
@@ -160,7 +188,6 @@ class PlantDetailScreen extends Component {
 
 
 }
-
 
 
 const styles = {
@@ -259,7 +286,19 @@ const styles = {
         height: 200,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    gaugeContainerStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '100%'
+    },
+    wateringDaysTextStyle: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#3e5f36'
     }
+
 };
 
 const mapStateToProps = (state, ownProps) => {
