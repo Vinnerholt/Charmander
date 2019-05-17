@@ -1,4 +1,4 @@
-import { View, Text, Picker } from 'react-native';
+import { View, Text, Picker, Button } from 'react-native';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -9,15 +9,20 @@ import MyTextInput from './../../components/common/MyTextInput';
 let self;
 class AddPlantScreen extends React.Component {
 
-    state = { user: '' }
+    state = { type: '', plantName: '', selectedTypeObject: {} }
 
     componentWillMount() {
         self = this;
         self.populatePicker();
     }
 
-    updateUser = (user) => {
-        this.setState({ user: user })
+    updateType = (type) => {
+        self.props.plantTypes.map(plant => {
+            if (plant.type == type) {
+                self.setState({ selectedTypeObject: plant });
+            }
+        });
+        this.setState({ type: type })
     }
 
 
@@ -35,19 +40,32 @@ class AddPlantScreen extends React.Component {
 
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
                     <Text>Namn:</Text>
-                    <MyTextInput />
+                    <MyTextInput value={self.state.plantName} />
                 </View>
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
                     <Text>Typ:</Text>
                     <Picker
-                        selectedValue={this.state.user}
+                        selectedValue={self.state.type}
                         style={{ height: 50, width: '70%' }}
-                        onValueChange={this.updateUser
+                        onValueChange={self.updateType
                         }>
                         {self.renderPlantTypes()}
                     </Picker>
                 </View>
-                <View style={{ flex: 4 }}></View>
+                <View style={{ flex: 4 }}>
+                    <Button
+                        title="Lägg till"
+                        onPress={() => {
+                            var newPlant = {
+                                name: self.state.plantName,
+                                type: self.state.type,
+                                advice: self.props.selectedTypeObject.advice,
+                                extendedDescription: self.props.selectedTypeObject.extendedDescription
+                            };
+
+                        }}>
+                    </Button>
+                </View>
             </View>
         );
     }
