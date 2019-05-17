@@ -9,8 +9,10 @@ import React, { Component } from 'react';
 import { Text, Image, Modal, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection } from '../common/index';
-import BuyButton from '../shop/BuyButton';
+import InfoButton from '../shop/InfoButton';
 import * as actions from '../../actions';
+import { store } from '../../App';
+import NavigationService from '../../services/NavigationService';
 
 class NotificationExpanded extends Component {
 
@@ -29,6 +31,23 @@ class NotificationExpanded extends Component {
                     </CardSection>
                 </React.Fragment>
             );
+        }
+    }
+
+    renderNavButton() {
+        if (this.props.notification !== null) {
+           const { type, refKey } = this.props.notification;
+            switch (type) {
+            case 'product':
+                 return (
+                    <Button 
+                        title='Gå till produkt'
+                        onPress={() => {
+                            NavigationService.navigate('Details', { product: store.getState().products.get(refKey) });
+                            this.props.expandNotification(null);
+                        }}
+                    />);
+            }  
         }
     }
 
@@ -57,10 +76,7 @@ class NotificationExpanded extends Component {
                                 </View>
                             </CardSection>
                             {this.renderExpandedNotification()}
-
-                            <CardSection>
-                                <BuyButton />
-                            </CardSection>
+                            {this.renderNavButton()}
                         </Card>
                     </View>
                 </Modal>
