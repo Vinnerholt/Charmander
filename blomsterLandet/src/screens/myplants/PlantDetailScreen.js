@@ -10,6 +10,7 @@ import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
+import { findPlant } from '../../services/plantHandlerHelperFunctions';
 import MyTextInput from '../../components/common/MyTextInput';
 
 
@@ -70,10 +71,10 @@ class PlantDetailScreen extends Component {
         }
 
     }
-    async loadPlant() {
-        await plantHandler.getPlant(self.state.plant.key).then(dbPlant => {
-            self.setState({ plant: dbPlant });
-        });
+    loadPlant() {
+        var tempPlant = findPlant(self.props.myPlants, self.state.plant.key);
+        console.log(tempPlant);
+        self.setState({ plant: tempPlant });
     }
 
     render() {
@@ -265,7 +266,8 @@ const mapStateToProps = (state, ownProps) => {
 
     return {
         navigation: ownProps.navigation,
-        editMode: state.myPlantsEditMode
+        editMode: state.myPlantsEditMode,
+        myPlants: state.myPlants
     };
 };
 

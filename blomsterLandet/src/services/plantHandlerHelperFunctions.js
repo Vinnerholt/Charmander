@@ -19,9 +19,8 @@ export function findPlant(db, key) {
         if (db.plantList[i].key == key) {
             console.log("found it");
             return db.plantList[i];
-        } else {
-            console.log("not found  DB:" + db.plantList[i].key + " plant:" + key);
         }
     }
+    console.log("Didnt find key: " + key);
 }
 
