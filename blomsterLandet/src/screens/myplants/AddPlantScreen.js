@@ -7,7 +7,8 @@ import MyTextInput from './../../components/common/MyTextInput';
 
 
 let self;
-let plantis;
+let plantis; 
+let plantis2;
 class AddPlantScreen extends React.Component {
 
     state = { type: '', plantName: ''}
@@ -22,7 +23,8 @@ class AddPlantScreen extends React.Component {
             console.log(plant.type);
             if (plant.type === type) {
                 plantis = plant.advice;
-                return plantis;
+                plantis2 = plant.extendedDescription;
+                return [plantis, plantis2];
             }  
         });
         this.setState({ type: type })  
@@ -67,8 +69,8 @@ class AddPlantScreen extends React.Component {
                             let newPlant = {
                                 name: self.state.plantName,
                                 type: self.state.type,
-                                advice: plantis
-                                //extendedDescription: self.props.selectedTypeObject.extendedDescription
+                                advice: plantis,
+                                extendedDescription: plantis2
                             };
                         console.log(newPlant);
 
