@@ -7,9 +7,10 @@ import MyTextInput from './../../components/common/MyTextInput';
 
 
 let self;
+let plantis;
 class AddPlantScreen extends React.Component {
 
-    state = { type: '', plantName: '', selectedTypeObject: {} }
+    state = { type: '', plantName: ''}
 
     componentWillMount() {
         self = this;
@@ -18,29 +19,36 @@ class AddPlantScreen extends React.Component {
 
     updateType = (type) => {
         self.props.plantTypes.map(plant => {
-            if (plant.type == type) {
-                self.setState({ selectedTypeObject: plant });
-            }
+            console.log(plant.type);
+            if (plant.type === type) {
+                plantis = plant.advice;
+                return plantis;
+            }  
         });
-        this.setState({ type: type })
+        this.setState({ type: type })  
     }
 
 
     renderPlantTypes() {
-        console.log("renderPlantTypes");
+        console.log('renderPlantTypes');
         return self.props.plantTypes.map(plant =>
             <Picker.Item label={plant.type} value={plant.type} plant={plant} />);
 
     }
 
     render() {
-        console.log(self.props.plantTypes);
+        console.log(plantis);
         return (
             <View style={{ flex: 1, justifyContent: "space-around", flexDirection: 'column' }}>
 
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
                     <Text>Namn:</Text>
-                    <MyTextInput value={self.state.plantName} />
+                    <MyTextInput 
+                    onChangeText={(plantName) => {
+                        this.setState({ plantName }); 
+                    }
+                    }
+                    value={self.state.plantName} />
                 </View>
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
                     <Text>Typ:</Text>
@@ -56,12 +64,13 @@ class AddPlantScreen extends React.Component {
                     <Button
                         title="Lägg till"
                         onPress={() => {
-                            var newPlant = {
+                            let newPlant = {
                                 name: self.state.plantName,
                                 type: self.state.type,
-                                advice: self.props.selectedTypeObject.advice,
-                                extendedDescription: self.props.selectedTypeObject.extendedDescription
+                                advice: plantis
+                                //extendedDescription: self.props.selectedTypeObject.extendedDescription
                             };
+                        console.log(newPlant);
 
                         }}>
                     </Button>
