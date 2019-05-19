@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import firebase from 'firebase';
 import * as orderReader from '../orderReader';
 
@@ -25,6 +26,9 @@ const styles = theme => ({
 		width: '100%',
 		marginTop: theme.spacing.unit * 3,
 		overflowX: 'auto',
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	table: {
 		minWidth: 700,
@@ -32,7 +36,11 @@ const styles = theme => ({
 	row: {
 		'&:nth-of-type(odd)': {
 			backgroundColor: theme.palette.background.default,
-		},
+		}
+	},
+	progress: {
+		margin: theme.spacing.unit * 2,
+		alignSelf: 'center',
 	},
 });
 
@@ -40,6 +48,7 @@ const styles = theme => ({
 class CustomizedTable extends React.Component {
 	state = {
 		rows: [],
+		loading: true
 	};
 
 	componentWillMount() {
@@ -138,23 +147,42 @@ class CustomizedTable extends React.Component {
 		));
 	}
 
+	renderLoader() {
+		if (this.state.loading) {
+			if (this.state.rows.length > 0) {
+				this.setState({ loading: false });
+			}
+			return <CircularProgress
+				className={this.props.classes.progress}
+				size={40}
+				left={-20}
+				top={10}
+				status={'loading'}
+				style={{ marginLeft: '50%' }} />
+		}
+	}
+
 	render() {
 		return (
-			<Paper className={this.props.classes.root}>
-				<Table className={this.props.classes.table}>
-					<TableHead>
-						<TableRow>
-							<CustomTableCell align="center">Product(s)</CustomTableCell>
-							<CustomTableCell align="right">Buyer</CustomTableCell>
-							<CustomTableCell align="right">Amount</CustomTableCell>
-							<CustomTableCell align="right">Postal Code</CustomTableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{this.renderRows(this.state.rows)}
-					</TableBody>
-				</Table>
-			</Paper>
+			<React.Fragment>
+				<Paper className={this.props.classes.root}>
+					<Table className={this.props.classes.table}>
+						<TableHead>
+							<TableRow>
+								<CustomTableCell align="center">Product(s)</CustomTableCell>
+								<CustomTableCell align="right">Buyer</CustomTableCell>
+								<CustomTableCell align="right">Amount</CustomTableCell>
+								<CustomTableCell align="right">Postal Code</CustomTableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{this.renderRows(this.state.rows)}
+						</TableBody>
+					</Table>
+					{this.renderLoader()}
+				</Paper>
+
+			</React.Fragment>
 		);
 	}
 
