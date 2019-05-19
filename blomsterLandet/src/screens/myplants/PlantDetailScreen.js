@@ -108,7 +108,12 @@ class PlantDetailScreen extends Component {
         return (
             <ScrollView contentContainerStyle={scrollViewStyle}>
                 <View style={topButtonsContainerStyle}>
-                    <SmallButton onPress={() => self.props.navigation.navigate('Home')}>
+                    <SmallButton onPress={() => {
+                        if (self.props.editMode) {
+                            self.props.toggleMyPlantsEditMode();
+                        }
+                        self.props.navigation.navigate('Home');
+                    }}>
 
                         <Icon
                             style={iconStyle}
