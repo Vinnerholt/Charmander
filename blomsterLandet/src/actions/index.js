@@ -40,3 +40,9 @@ export const deletePlant = (plant) => {
         payload: plant
     };
 };
+export const waterPlant = (plant) => {
+    return {
+        type: 'water_my_plant',
+        payload: plant
+    };
+};

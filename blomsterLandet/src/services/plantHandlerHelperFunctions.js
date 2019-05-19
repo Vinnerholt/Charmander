@@ -16,7 +16,7 @@ export function overwritePlant(db, plant) {
 export function deletePlant(db, plant) {
     for (var i in db.plantList) {
         if (db.plantList[i].key == plant.key) {
-            console.log("Overwrote plant with key :" + plant.key);
+            console.log("Deleted plant with key :" + plant.key);
             db.plantList.splice(i, 1);
             return JSON.parse(JSON.stringify(db));
         }
@@ -33,6 +33,17 @@ export function findPlant(db, key) {
         }
     }
     console.log("Didnt find key: " + key);
+}
+
+export function waterPlant(db, plant) {
+    for (var i in db.plantList) {
+        if (db.plantList[i].key == plant.key) {
+            console.log("Watered plant with key :" + plant.key);
+            db.plantList[i].lastWatered = Date.now() / 1000;
+            return JSON.parse(JSON.stringify(db));
+        }
+    }
+    console.log("could not find plant key in database");
 }
 
 export function calcVal(lastWatered, wateringInterval) {

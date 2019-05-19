@@ -33,13 +33,6 @@ class PlantDetailScreen extends Component {
         self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
     }
 
-    // Calculates the percentage to fill the waterGauge based on when the
-    // plant was last watered, time past since watered and it's wateringInterval. 
-    /*   calcVal() {
-           return 100 - (100 * ((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered) 
-               / (self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval * 24 * 60 * 60)));
-       }*/
-
     daysSinceWatered() {
         return Math.round((self.currentTime - self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered)
             / (60 * 60 * 24));
@@ -120,6 +113,12 @@ class PlantDetailScreen extends Component {
             ],
             { cancelable: false },
         );
+    }
+
+    waterButtonPressed() {
+        self.props.waterPlant(self.state.plant);
+        self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
+        plantHandler.createFile(self.props.myPlants);
 
     }
     //Deletes the plant from the database and directs user to the myplants screen
@@ -202,7 +201,9 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <TouchableOpacity style={waterButtonStyle}>
+                    <TouchableOpacity
+                        onPress={self.waterButtonPressed}
+                        style={waterButtonStyle}>
                         <Text style={waterButtonTextStyle}>VATTNA</Text>
                     </TouchableOpacity>
                 </View>

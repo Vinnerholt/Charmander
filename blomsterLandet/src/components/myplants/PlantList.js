@@ -58,14 +58,12 @@ class PlantList extends Component {
                         keyExtractor={(plant) => plant.key}
                     />);*/
             return (<ScrollView>
-                <Text>Vi har Plantor</Text>
                 {self.renderPlants()}
 
             </ScrollView>)
         } else {
             return (
                 <ScrollView >
-                    <Text>Inga Plantor</Text>
                     <Button
                         title="add new plant"
                         onPress={() => self.props.navigation.navigate('AddPlant')}

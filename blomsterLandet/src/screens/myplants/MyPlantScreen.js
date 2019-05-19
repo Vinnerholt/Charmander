@@ -15,7 +15,6 @@ class MyPlantScreen extends React.Component {
 
     componentWillMount() {
         self = this;
-
     }
 
     render() {
