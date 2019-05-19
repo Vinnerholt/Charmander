@@ -8,6 +8,7 @@ import firebase from 'react-native-firebase';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
 import plantHandler from './../services/plantHandler';
+import firestoreHandler from '../services/firestoreHandler';
 
 class DevScreen extends React.Component {
 
@@ -19,7 +20,8 @@ class DevScreen extends React.Component {
             .setBody('My notification body')
             .setData({
                 imageURL: 'value1',
-                type: 'value2',
+                type: 'product',
+                refKey: 'ros'
             })
             .android.setChannelId('test-channel')
             .android.setSmallIcon('ic_launcher')
@@ -45,6 +47,16 @@ class DevScreen extends React.Component {
         console.log(NotifObservable().getInstance());
     }
 
+    makeAnOrder = () => {
+        const ref = firebase.firestore().collection('products').doc('tomatplanta');
+        const order = {
+            amount: 11,
+            buyer: 'Peter',
+            product: ref
+        };
+        firestoreHandler.placeOrder(order);
+    }
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
@@ -67,6 +79,10 @@ class DevScreen extends React.Component {
                 <Button
                     title='Create dummyPlantList'
                     onPress={async () => plantHandler.createDummyFile()}
+                />
+                <Button
+                    title='Make an order'
+                    onPress={() => this.makeAnOrder()}
                 />
             </View>
 

@@ -8,13 +8,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import reducers from './reducers';
 import { Header } from './components/common/index';
 import * as notifHandler from './services/notifHandler';
+import NavigationService from './services/NavigationService';
 
 import NotificationScreen from './screens/NotificationScreen';
 import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
-import plantHandler from './services/plantHandler';
 
 export const TabNavigator = createBottomTabNavigator({
     Plants: MyPlantScreen,
@@ -65,15 +65,15 @@ export const TabNavigator = createBottomTabNavigator({
 
 const TabNavigatorContainer = createAppContainer(TabNavigator);
 
+export const store = createStore(reducers);
 //The main application
 class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
     }
-
     render() {
         return (
-            <Provider store={createStore(reducers)}>
+            <Provider store={store}>
                 <View>
                     <ImageBackground
                         // eslint-disable-next-line global-require
@@ -87,7 +87,11 @@ class App extends React.Component {
                                 source={require('./resources/images/blomsterlandet_logo.png')}
                             />
                         </Header>
-                        <TabNavigatorContainer />
+                        <TabNavigatorContainer
+                            ref={navigatorRef => {
+                                NavigationService.setTopLevelNavigator(navigatorRef);
+                            }}
+                        />
                     </ImageBackground>
                 </View>
 

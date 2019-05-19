@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { store } from '../App';
 
 export default {
     async setItem(key, value) {
@@ -23,5 +24,14 @@ export default {
     },
     async removeItem(key) {
         return await AsyncStorage.removeItem(key);
+    },
+
+    async saveSession() {
+        const file = {
+            notifications: []
+        };
+        
+        file.notifications = store.getState().notifications;
+        return await AsyncStorage.setItem('notifications', file);
     }
-}
+};
