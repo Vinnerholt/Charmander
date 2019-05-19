@@ -13,6 +13,7 @@ import plantHandler from '../../services/plantHandler';
 import { findPlant, calcVal } from '../../services/plantHandlerHelperFunctions';
 import MyTextInput from '../../components/common/MyTextInput';
 import DeleteButton from '../../components/common/DeleteButton';
+import SaveButton from '../../components/common/SaveButton';
 
 
 let self;
@@ -28,7 +29,7 @@ class PlantDetailScreen extends Component {
         self = this;
         self.loadPlant();
         image = images[self.state.plant.name];
-        self.value = null;
+        self.value = 0;
         self.currentTime = Date.now() / 1000;
         self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
     }
@@ -60,8 +61,8 @@ class PlantDetailScreen extends Component {
                 >
                 </MyTextInput>);
             topRightButton = (
-                <Button
-                    title="Save changes"
+                <SaveButton
+                    title="Spara"
                     onPress={() => {
                         self.props.editMyPlantsData(self.state.plant);
                         self.props.toggleMyPlantsEditMode();
