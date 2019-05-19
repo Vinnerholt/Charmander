@@ -1,4 +1,4 @@
-import React, { Text } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -7,8 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/Paper';
-import ListItem from '@material-ui/core/Paper';
 import firebase from 'firebase';
 import * as orderReader from '../orderReader';
 
@@ -40,7 +38,9 @@ const styles = theme => ({
 
 
 class CustomizedTable extends React.Component {
-	state = { rows: [] };
+	state = {
+		rows: [],
+	};
 
 	componentWillMount() {
 		this.generateRows();
@@ -65,10 +65,11 @@ class CustomizedTable extends React.Component {
 		for (let i in orders) {
 			orders[i].rowKey = rowKey;
 			rowKey++;
-			//Since the product in the order is a reference to a product, the product
+			//Since the product(s) in the order is a reference to a product, the product
 			//in question must be fetched from firebase aswell.
 			try {
 				for (let j in orders[i].order) {
+					//For every product in the order
 					const productSnapshot = await orders[i].order[j].product.get();
 					const productData = await productSnapshot.data();
 					const productName = productData.name;
@@ -77,9 +78,22 @@ class CustomizedTable extends React.Component {
 			} catch (err) {
 				console.log(err);
 			}
-
 		}
 		this.setState({ rows: orders });
+	}
+
+	//Sorts the orders by postalCode
+	sortByPostalCode(orders) {
+		let sorted = {};
+		for (let i in orders) {
+			let postalCode = orders[i].postalCode;
+			if (sorted[postalCode] != null) {
+				sorted[postalCode].push(orders[i]);
+			} else {
+				sorted[postalCode] = [orders[i]];
+			}
+		}
+		return sorted;
 	}
 
 	renderProductList(orders) {
@@ -88,10 +102,9 @@ class CustomizedTable extends React.Component {
 		if (orders != null) {
 			if (orders.length > 0) {
 				return (
-					<List>{orders.map(order => (
-						<ListItem>{order.product}</ListItem>
-					))}
-					</List>
+					orders.map(order => (
+						<CustomTableCell align="right">{order.product}</CustomTableCell>
+					))
 				);
 			}
 		}
@@ -105,15 +118,24 @@ class CustomizedTable extends React.Component {
 				</CustomTableCell>
 				<CustomTableCell align="right">{row.buyer}</CustomTableCell>
 				<CustomTableCell align="right">{row.amount}</CustomTableCell>
+				<CustomTableCell align="right">{row.postalCode}</CustomTableCell>
 			</TableRow>);
 		}
 	}
-	renderRows() {
-		if (this.state.rows != null) {
-			return this.state.rows.map(row => (
-				this.renderRow(row)
-			));
+
+	renderRows(rows) {
+		if (rows == null) {
+			return;
 		}
+		if (rows.length <= 0) {
+			return;
+		}
+		let sortedRows = this.sortByPostalCode(rows);
+		return Object.values(sortedRows).map(postalCode => (
+			postalCode.map(row => (
+				this.renderRow(row)
+			))
+		));
 	}
 
 	render() {
@@ -122,13 +144,14 @@ class CustomizedTable extends React.Component {
 				<Table className={this.props.classes.table}>
 					<TableHead>
 						<TableRow>
-							<CustomTableCell align="right">Product</CustomTableCell>
+							<CustomTableCell align="right">Product(s)</CustomTableCell>
 							<CustomTableCell align="right">Buyer</CustomTableCell>
 							<CustomTableCell align="right">Amount</CustomTableCell>
+							<CustomTableCell align="right">Postal Code</CustomTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{this.renderRows()}
+						{this.renderRows(this.state.rows)}
 					</TableBody>
 				</Table>
 			</Paper>
