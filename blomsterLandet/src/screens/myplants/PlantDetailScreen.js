@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, Text, TextInput, Button } from 'react-native';
+import { View, ScrollView, Image, Text, Button, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import * as actions from './../../actions';
@@ -10,14 +10,16 @@ import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
-import { findPlant } from '../../services/plantHandlerHelperFunctions';
+import { findPlant, calcVal } from '../../services/plantHandlerHelperFunctions';
 import MyTextInput from '../../components/common/MyTextInput';
-import { calcVal } from '../../services/plantHandlerHelperFunctions';
+import DeleteButton from '../../components/common/DeleteButton';
+
 
 let self;
 let image;
 let nameLabel;
 let topRightButton;
+let deleteButton;
 class PlantDetailScreen extends Component {
     state = { plant: this.props.navigation.getParam('plant', 'Det funkar ej') };
 
@@ -73,7 +75,13 @@ class PlantDetailScreen extends Component {
                         plantHandler.createFile(self.props.myPlants);
                     }
                     }
-                />)
+                />);
+            deleteButton = (
+                <DeleteButton
+                    title="Ta bort växt"
+                    onPress={self.deletePlantPressed}>
+                </DeleteButton>
+            )
         } else {
             nameLabel = (
                 <Text style={styles.nameStyle}>
@@ -88,13 +96,40 @@ class PlantDetailScreen extends Component {
                     <Icon style={styles.iconStyle} name="brush" />
                 </SmallButton>
             );
+            deleteButton = null;
         }
 
     }
     loadPlant() {
         var tempPlant = findPlant(self.props.myPlants, self.state.plant.key);
-        console.log(tempPlant);
         self.setState({ plant: tempPlant });
+    }
+
+    deletePlantPressed() {
+
+        Alert.alert(
+            'Varning',
+            'Är du säker på att du vill ta bort ' + self.state.plant.name,
+            [
+                {
+                    text: 'ångra',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'Ta bort', onPress: self.confirmDeletePlant },
+            ],
+            { cancelable: false },
+        );
+
+    }
+    //Deletes the plant from the database and directs user to the myplants screen
+    confirmDeletePlant() {
+        self.props.deletePlant(self.state.plant);
+        self.props.navigation.navigate('Home');
+        if (self.props.editMode) {
+            self.props.toggleMyPlantsEditMode();
+        }
+        plantHandler.createFile(self.props.myPlants);
     }
 
     render() {
@@ -186,6 +221,8 @@ class PlantDetailScreen extends Component {
                             body={self.state.plant.advice}
                         />
                     </View>
+
+                    {deleteButton}
                 </View>
             </ScrollView>
         );

@@ -34,3 +34,9 @@ export const getPlantTypes = () => {
         payload: null
     };
 };
+export const deletePlant = (plant) => {
+    return {
+        type: 'delete_my_plant',
+        payload: plant
+    };
+};

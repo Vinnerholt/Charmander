@@ -1,5 +1,5 @@
 import plantHandler from './../services/plantHandler';
-import { overwritePlant } from './../services/plantHandlerHelperFunctions';
+import { overwritePlant, deletePlant } from './../services/plantHandlerHelperFunctions';
 
 const data = {
     plantList: [{
@@ -17,6 +17,8 @@ export default (state = null, action) => {
     switch (action.type) {
         case 'load_my_plants_data':
             return (action.payload);
+        case 'delete_my_plant':
+            return deletePlant(state, action.payload);
         case 'edit_my_plants_data':
             return overwritePlant(state, action.payload);
 
