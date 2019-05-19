@@ -103,7 +103,7 @@ class CustomizedTable extends React.Component {
 			if (orders.length > 0) {
 				return (
 					orders.map(order => (
-						<CustomTableCell align="right">{order.product}</CustomTableCell>
+						<CustomTableCell align="right">{order.amount + " st. " + order.product}</CustomTableCell>
 					))
 				);
 			}
@@ -144,7 +144,7 @@ class CustomizedTable extends React.Component {
 				<Table className={this.props.classes.table}>
 					<TableHead>
 						<TableRow>
-							<CustomTableCell align="right">Product(s)</CustomTableCell>
+							<CustomTableCell align="center">Product(s)</CustomTableCell>
 							<CustomTableCell align="right">Buyer</CustomTableCell>
 							<CustomTableCell align="right">Amount</CustomTableCell>
 							<CustomTableCell align="right">Postal Code</CustomTableCell>
