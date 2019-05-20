@@ -54,22 +54,22 @@ class AddPlantScreen extends React.Component {
     render() {
 
         return (
-            <View style={{ flex: 1, justifyContent: "space-around", flexDirection: 'column' }}>
+            <View style={{ flex: 1, justifyContent: 'space-around', flexDirection: 'column' }}>
 
-                <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
+                <View style={{ backgroundColor: '#fff', flexDirection: 'row', height: 60, justifyContent: 'space-between' }}>
                     <Text>Namn:</Text>
                     <MyTextInput
                         onChangeText={(plantName) => {
                             this.setState({ plantName });
-                        }
-                        }
-                        value={self.state.plantName} />
+                        }}
+                        value={self.state.plantName}
+                    />
                 </View>
-                <View style={{ backgroundColor: '#fff', flexDirection: 'row', flex: 1 }}>
+                <View style={{ backgroundColor: '#fff', flexDirection: 'row', height: 60, justifyContent: 'space-between' }}>
                     <Text>Typ:</Text>
                     <Picker
                         selectedValue={self.state.type}
-                        style={{ height: 50, width: '70%' }}
+                        style={{ height: 50, width: '80%' }}
                         onValueChange={self.updateType}>
                         {self.renderPlantTypes()}
                     </Picker>

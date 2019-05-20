@@ -1,8 +1,8 @@
 import * as React from "react";
 import { StyleSheet, TextInput } from "react-native";
 
-const BLUE = "#428AF8";
-const LIGHT_GRAY = "#D3D3D3";
+const GREEN = "#99CA3CEE";
+const WHITE = "#fff";
 
 class MyTextInput extends React.Component {
     state = {
@@ -28,9 +28,9 @@ class MyTextInput extends React.Component {
         const { onFocus, onBlur, ...otherProps } = this.props;
         return (
             <TextInput
-                selectionColor={BLUE}
+                selectionColor={GREEN}
                 underlineColorAndroid={
-                    isFocused ? BLUE : LIGHT_GRAY
+                    isFocused ? GREEN : WHITE
                 }
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur}
@@ -44,8 +44,9 @@ class MyTextInput extends React.Component {
 const styles = StyleSheet.create({
     textInput: {
         width: '80%',
-        height: 40,
-        paddingLeft: 6
+        height: 60,
+        paddingLeft: 6,
+        fontSize: 18
     }
 });
 
