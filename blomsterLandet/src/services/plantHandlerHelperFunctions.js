@@ -51,3 +51,10 @@ export function calcVal(lastWatered, wateringInterval) {
         / (wateringInterval * 24 * 60 * 60)));
 }
 
+export function daysUntilWater(lastWatered, wateringInterval) {
+    return Math.round((lastWatered 
+    - Date.now() / 1000) 
+    / (60 * 60 * 24)
+    + wateringInterval);
+}
+

@@ -3,13 +3,26 @@ import { Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
-import { calcVal } from '../../services/plantHandlerHelperFunctions';
+import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
 
 const PlantListItem = (props) => {
 
     var image = images[props.plant.type];
     props.plant.image = image;
 
+    function waterHighlightColor() {
+        if (daysUntilWater(props.plant.lastWatered, props.plant.wateringInterval) <= 1) {
+            return '#ff0000';
+        }
+        return '#4682b4';
+    }
+
+    function waterBackgroundColor() {
+        if (daysUntilWater(props.plant.lastWatered, props.plant.wateringInterval) <= 1) {
+            return '#ff9494';
+        }
+        return '#b0c4de';
+    }
 
 
     return (
@@ -27,9 +40,9 @@ const PlantListItem = (props) => {
             <Progress.Bar
                 progress={calcVal(props.plant.lastWatered, props.plant.wateringInterval) / 100}
                 width={100}
-                animated={'true'} 
-                color="#4682b4"
-                unfilledColor="#b0c4de"
+                animated={'true'}
+                color={waterHighlightColor()}
+                unfilledColor={waterBackgroundColor()}
             />
             <Icon name="chevron-right" style={styles.arrowStyle} />
         </TouchableOpacity>

@@ -2,7 +2,7 @@ import jsonStorage from './jsonStorage';
 import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
-const plantPath = 'myPlants10';
+const plantPath = 'myPlants6';
 
 //used for testing
 const dummyPlantlist = {

@@ -10,7 +10,7 @@ import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
-import { findPlant, calcVal } from '../../services/plantHandlerHelperFunctions';
+import { findPlant, calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
 import MyTextInput from '../../components/common/MyTextInput';
 import DeleteButton from '../../components/common/DeleteButton';
 import SaveButton from '../../components/common/SaveButton';
@@ -39,11 +39,11 @@ class PlantDetailScreen extends Component {
             / (60 * 60 * 24));
     }
 
-    daysUntilWater() {
-        return Math.round((self.props.navigation.getParam('plant', 'Det funkar ej').lastWatered
-            - self.currentTime)
-            / (60 * 60 * 24)
-            + self.props.navigation.getParam('plant', 'Det funkar ej').wateringInterval);
+    daysUntilColor() {
+        if (daysUntilWater(self.state.plant.lastWatered, self.state.plant.wateringInterval) < 1) {
+            return styles.wateringDaysTextStyleRed;
+        }
+        return styles.wateringDaysTextStyle;
     }
 
 
@@ -73,8 +73,8 @@ class PlantDetailScreen extends Component {
             deleteButton = (
                 <DeleteButton
                     title="Ta bort växt"
-                    onPress={self.deletePlantPressed}>
-                </DeleteButton>
+                    onPress={self.deletePlantPressed}
+                />
             )
         } else {
             nameLabel = (
@@ -86,7 +86,8 @@ class PlantDetailScreen extends Component {
                 <SmallButton
                     onPress={() => {
                         self.props.toggleMyPlantsEditMode();
-                    }} >
+                    }}
+                >
                     <Icon style={styles.iconStyle} name="brush" />
                 </SmallButton>
             );
@@ -137,7 +138,7 @@ class PlantDetailScreen extends Component {
             topButtonsContainerStyle, imageStyle, speciesStyle,
             waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle,
             scrollViewStyle, iconStyle, gaugeImageContainerStyle,
-            gaugeContainerStyle, wateringDaysTextStyle } = styles;
+            gaugeContainerStyle, wateringDaysTextStyle, wateringDaysTextStyleRed } = styles;
 
         self.checkForEdit();
         return (
@@ -161,7 +162,9 @@ class PlantDetailScreen extends Component {
                 <View style={gaugeContainerStyle}>
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10 }}>{`  dagar kvar  `}</Text>
-                        <Text style={wateringDaysTextStyle}>{self.daysUntilWater()}</Text>
+                        <Text style={self.daysUntilColor()}>
+                            {daysUntilWater(self.state.plant.lastWatered, self.state.plant.wateringInterval)}
+                        </Text>
                     </View>
 
                     <View style={imageContainerStyle}>
@@ -341,6 +344,11 @@ const styles = {
         fontSize: 30,
         fontWeight: 'bold',
         color: '#3e5f36'
+    },
+    wateringDaysTextStyleRed: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#ff0000'
     }
 
 };
