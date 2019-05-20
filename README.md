@@ -24,6 +24,7 @@ Under kursen DAT256 Software engineering project VT19 har vi i grupp Charmander 
  * npm
  * React
  * javascript
+ * firebase
  * Redux
  * React-redux
 ## Appen
