@@ -20,7 +20,7 @@ const styles = {
         borderWidth: 1,
         borderColor: '#3e5f36',
         marginLeft: 5,
-        marginRight: 5,
+        marginRight: 15,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#050',
@@ -30,7 +30,9 @@ const styles = {
     },
     waterButtonTextStyle: {
         fontSize: 15,
-        color: '#fff'
+        color: '#fff',
+        paddingTop: 2,
+        paddingBottom: 2
     }
 
 };

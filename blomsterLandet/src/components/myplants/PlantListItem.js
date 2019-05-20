@@ -61,21 +61,19 @@ const PlantListItem = (props) => {
 const styles = {
 
     textStyle: {
-        flex: 9,
+        flex: 1,
         color: 'black',
         fontSize: 16,
         paddingLeft: 5
     },
     arrowStyle: {
         fontSize: 30,
-        paddingRight: 5,
-        flex: 1,
         color: '#000'
     },
     itemStyle: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        flex: 1,
+        justifyContent: 'space-between',
+        flex: 4,
         alignSelf: 'stretch',
         backgroundColor: '#fff',
         marginBottom: 1,
