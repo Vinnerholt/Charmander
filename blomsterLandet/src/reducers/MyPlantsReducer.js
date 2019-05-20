@@ -22,6 +22,7 @@ export default (state = null, action) => {
         case 'edit_my_plants_data':
             return overwritePlant(state, action.payload);
         case 'water_my_plant':
+            console.log("in reducer");
             return waterPlant(state, action.payload);
 
         default:

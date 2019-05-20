@@ -42,7 +42,7 @@ class PlantList extends Component {
         console.log("renderPlants pPlantlist");
         console.log(self.props.myPlants);
         return self.props.myPlants.plantList.map(plant =>
-            <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation} />);
+            <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation}  />);
 
     }
 

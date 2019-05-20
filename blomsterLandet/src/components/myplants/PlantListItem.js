@@ -1,9 +1,12 @@
 import React from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
 import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
+import * as actions from './../../actions';
+import PlantListWaterButton from './PlantListWaterButton';
 
 const PlantListItem = (props) => {
 
@@ -32,11 +35,17 @@ const PlantListItem = (props) => {
                 style={{
                     width: '10%',
                     height: '100%'
-                }} 
+                }}
             />
             <Text style={styles.textStyle}>
                 {props.plant.name}
             </Text>
+
+            <PlantListWaterButton
+                onPress={() => {
+                    props.waterPlant(props.plant);
+                }}
+            />
             <Progress.Bar
                 progress={calcVal(props.plant.lastWatered, props.plant.wateringInterval) / 100}
                 width={100}
@@ -78,4 +87,4 @@ const styles = {
     }
 };
 
-export default PlantListItem;
+export default connect(null, actions)(PlantListItem);
