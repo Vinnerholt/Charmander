@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import NavigationService from '../services/NavigationService';
 import { store } from '../App';
 import * as actions from '../actions';
+import { findPlant } from './plantHandlerHelperFunctions';
 
 export const initNotifications = async() => {
     //Loads initial notifications
@@ -119,6 +120,27 @@ const convertNotification = (notification) => {
     };
     return notif;
 };
+
+export const sendWaterNotification = (daysUntilWater, plantKey) => {
+    const plant = findPlant(store.getState().myPlants, plantKey);
+    const randomNotifId = Math.floor(Math.random() * 10000).toString();
+    const localNotification = new firebase.notifications.Notification()
+        .setNotificationId(randomNotifId)
+        .setTitle('Dags att vattna ' + plant.name)
+        .setBody('Nu är det ' + daysUntilWater + ' dagar till det är dags att vattna ' + plant.name)
+        .setData({
+            imageURL: plant.imageURL,
+            type: 'water',
+            refKey: plantKey
+        })
+        .android.setChannelId('test-channel')
+        .android.setSmallIcon('ic_launcher')
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+
+    firebase.notifications().displayNotification(localNotification);
+};
+
 /*export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  

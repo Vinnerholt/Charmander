@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
 import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
+import { sendWaterNotification } from '../../services/notifHandler';
 
 const PlantListItem = (props) => {
 
@@ -19,6 +20,7 @@ const PlantListItem = (props) => {
 
     function waterBackgroundColor() {
         if (daysUntilWater(props.plant.lastWatered, props.plant.wateringInterval) <= 1) {
+            sendWaterNotification(1, props.plant.key);
             return '#ff9494';
         }
         return '#b0c4de';

@@ -3,7 +3,7 @@ import firestoreHandler from '../services/firestoreHandler';
 export default {
     async finalizeOrder(order) {
         const finalOrder = {
-            buyer: 'Hugo',
+            buyer: 'Kalle Kuling',
             postalCode: 41326,
             order: []
         };

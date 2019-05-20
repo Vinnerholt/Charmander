@@ -47,9 +47,20 @@ class NotificationExpanded extends Component {
                             this.props.expandNotification(null);
                         }}
                     />);
+            case 'water':
+                return (
+                    <Button 
+                        title='Gå till din plantlista'
+                        onPress={() => {
+                            NavigationService.navigate('Plants');
+                            this.props.expandNotification(null);
+                        }}
+                    /> 
+                );
             }  
         }
     }
+
 
     render() {
         const { imageStyle, buttonContainer } = styles;

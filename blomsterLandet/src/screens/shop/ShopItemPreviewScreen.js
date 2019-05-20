@@ -4,6 +4,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import BuyButton from '../../components/shop/BuyButton';
+import SmallButton from '../../components/common/SmallButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 let self;
 let image;
@@ -33,11 +35,22 @@ class ShopItemPreviewScreen extends Component {
     render() {
         const { amountInput, nameStyle, imageContainerStyle, viewCenterStyle,
             imageStyle, waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle, speciesStyle,
-            scrollViewStyle } = styles;
+            scrollViewStyle, topButtonsContainerStyle, iconStyle } = styles;
 
         console.log(this.state.amountText);
         return (
             <ScrollView contentContainerStyle={scrollViewStyle}>
+                <View style={topButtonsContainerStyle}>
+                    <SmallButton onPress={() => {
+                        self.props.navigation.navigate('Home');
+                    }}>
+
+                        <Icon
+                            style={iconStyle}
+                            name="arrow-back"
+                        />
+                    </SmallButton>
+                </View>
                 <View style={scrollViewStyle}>
                     <View style={imageContainerStyle}>
                         <Image 
@@ -91,6 +104,20 @@ const styles = {
         backgroundColor: 'white',
         borderWidth: 3
     },
+    topButtonsContainerStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 4,
+        paddingBottom: 4,
+        width: '100%'
+    },
+    iconStyle: {
+        fontSize: 30,
+        paddingRight: 5,
+        flex: 1,
+        color: '#3e5f36',
+    },
     buyButtonStyle: {
         justifyContent: 'center',
         flex: 1,
@@ -137,14 +164,6 @@ const styles = {
         justifyContent: 'center',
         paddingTop: 10,
     },
-    topButtonsContainerStyle: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: 4,
-        paddingBottom: 4,
-        width: '100%'
-    },
     waterButtonStyle: {
         width: 150,
         height: 55,
@@ -176,12 +195,6 @@ const styles = {
     },
     scrollViewStyle: {
         alignItems: 'center',
-    },
-    iconStyle: {
-        fontSize: 30,
-        paddingRight: 5,
-        flex: 1,
-        color: '#3e5f36',
     },
     gaugeImageContainerStyle: {
         position: 'absolute',
