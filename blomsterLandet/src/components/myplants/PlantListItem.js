@@ -17,8 +17,12 @@ const PlantListItem = (props) => {
             <Image
                 source={image}
                 style={{
-                    width: '10%',
-                    height: '100%'
+                    width: 40,
+                    height: 40,
+                    borderRadius: 40 / 2,
+                    borderWidth: 2,
+                    borderColor: '#3e5f36',
+                    overflow: 'hidden'
                 }}
             />
             <Text style={styles.textStyle}>

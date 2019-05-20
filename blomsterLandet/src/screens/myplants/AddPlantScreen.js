@@ -10,7 +10,7 @@ import plantHandler from './../../services/plantHandler';
 let self;
 let bigAdvice;
 let eD;
-let wateringInterval;
+let wI;
 class AddPlantScreen extends React.Component {
 
     state = { type: '', plantName: '' }
@@ -25,7 +25,7 @@ class AddPlantScreen extends React.Component {
             if (plant.type === type) {
                 bigAdvice = plant.advice;
                 eD = plant.extendedDescription;
-                wateringInterval = plant.wateringInterval;
+                wI = plant.wateringInterval;
                 return [bigAdvice, eD];
             }
         });
@@ -39,7 +39,7 @@ class AddPlantScreen extends React.Component {
             advice: bigAdvice,
             extendedDescription: eD,
             lastWatered: Date.now() / 1000,
-            wateringInterval: 3
+            wateringInterval: wI
         };
         self.props.addPlant(newPlant);
         self.props.navigation.navigate('Home');
@@ -77,7 +77,9 @@ class AddPlantScreen extends React.Component {
                 <View style={{ flex: 4 }}>
                     <Button
                         title="Lägg till"
-                        onPress={self.addPlantPressed}>
+                        onPress={self.addPlantPressed}
+                        color='#99CA3CEE'
+                    >
                     </Button>
                 </View>
             </View>

@@ -48,8 +48,9 @@ class PlantList extends Component {
             return (<ScrollView>
                 {self.renderPlants()}
                 <Button
-                    title="add new plant"
+                    title="Lägg till planta"
                     onPress={() => self.props.navigation.navigate('AddPlant')}
+                    color='#99CA3CEE'
                 ></Button>
 
             </ScrollView>)
@@ -57,8 +58,9 @@ class PlantList extends Component {
             return (
                 <ScrollView >
                     <Button
-                        title="add new plant"
+                        title="Lägg till planta"
                         onPress={() => self.props.navigation.navigate('AddPlant')}
+                        color='#99CA3CEE'
                     ></Button>
                 </ScrollView >
             );
