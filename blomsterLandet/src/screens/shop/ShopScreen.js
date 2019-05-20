@@ -34,7 +34,7 @@ class ShopScreen extends React.Component {
 const AppNavigator = createStackNavigator(
     {
         Home: ShopScreen,
-        Details: ShopItemPreviewScreen,
+        ShopDetails: ShopItemPreviewScreen,
         ShoppingCart: ShoppingCartScreen
     },
     {
