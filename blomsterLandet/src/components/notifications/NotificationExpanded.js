@@ -43,7 +43,7 @@ class NotificationExpanded extends Component {
                     <Button 
                         title='Gå till produkt'
                         onPress={() => {
-                            NavigationService.navigate('Details', { product: store.getState().products.get(refKey) });
+                            NavigationService.navigate('ShopDetails', { product: store.getState().products.get(refKey) });
                             this.props.expandNotification(null);
                         }}
                     />);
