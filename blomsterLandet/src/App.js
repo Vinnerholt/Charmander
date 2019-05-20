@@ -15,11 +15,11 @@ import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
-import jsonStorage from './services/jsonStorage';
 
 export const TabNavigator = createBottomTabNavigator({
-    Shop: ShopScreen,
     Plants: MyPlantScreen,
+    Shop: ShopScreen,
+    //BYT TILLBAKA
     Notifications: NotificationScreen,
     Profile: ProfileScreen,
     Dev: DevScreen
@@ -71,9 +71,6 @@ class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
     }
-    componentWillUnmount() {
-        //jsonStorage.saveSession();
-    }
     render() {
         return (
             <Provider store={store}>
@@ -90,10 +87,10 @@ class App extends React.Component {
                                 source={require('./resources/images/blomsterlandet_logo.png')}
                             />
                         </Header>
-                        <TabNavigatorContainer 
+                        <TabNavigatorContainer
                             ref={navigatorRef => {
                                 NavigationService.setTopLevelNavigator(navigatorRef);
-                            }} 
+                            }}
                         />
                     </ImageBackground>
                 </View>

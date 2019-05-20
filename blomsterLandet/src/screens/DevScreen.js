@@ -7,6 +7,7 @@ import { View, Button } from 'react-native';
 import firebase from 'react-native-firebase';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
+import plantHandler from './../services/plantHandler';
 import firestoreHandler from '../services/firestoreHandler';
 
 class DevScreen extends React.Component {
@@ -14,24 +15,24 @@ class DevScreen extends React.Component {
     sendLocalNotif = () => {
         const randomNotifId = Math.floor(Math.random() * 10000).toString();
         const localNotification = new firebase.notifications.Notification()
-        .setNotificationId(randomNotifId)
-        .setTitle(randomNotifId)
-        .setBody('My notification body')
-        .setData({
-            imageURL: 'value1',
-            type: 'product',
-            refKey: 'ros'
-        })
-        .android.setChannelId('test-channel')
-        .android.setSmallIcon('ic_launcher')
-        .android.setPriority(firebase.notifications.Android.Priority.Max);
+            .setNotificationId(randomNotifId)
+            .setTitle(randomNotifId)
+            .setBody('My notification body')
+            .setData({
+                imageURL: 'value1',
+                type: 'product',
+                refKey: 'ros'
+            })
+            .android.setChannelId('test-channel')
+            .android.setSmallIcon('ic_launcher')
+            .android.setPriority(firebase.notifications.Android.Priority.Max);
 
 
         firebase.notifications().displayNotification(localNotification);
     };
 
     readFile = () => {
-        jsonStorage.getItem('notifications').then(r => {
+        jsonStorage.getItem('myPlants').then(r => {
             console.log(r);
         });
     };
@@ -59,28 +60,32 @@ class DevScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-                <Button 
+                <Button
                     title='Send local Notif v22'
-                    onPress={() => this.sendLocalNotif()} 
+                    onPress={() => this.sendLocalNotif()}
                 />
-                 <Button 
+                <Button
                     title='read file'
                     onPress={() => this.readFile()}
-                 />
-                  <Button 
+                />
+                <Button
                     title='delete file'
                     onPress={() => this.deleteFile()}
-                  />
-                  <Button 
+                />
+                <Button
                     title='Check singleton'
                     onPress={() => this.checkSingleton()}
-                  />
-                  <Button 
+                />
+                <Button
+                    title='Create dummyPlantList'
+                    onPress={async () => plantHandler.createDummyFile()}
+                />
+                <Button
                     title='Make an order'
                     onPress={() => this.makeAnOrder()}
-                  />
+                />
             </View>
-            
+
         );
     }
 }

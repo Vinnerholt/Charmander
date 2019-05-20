@@ -2,11 +2,15 @@ import React from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import images from '../../resources/images';
+import * as Progress from 'react-native-progress';
+import { calcVal } from '../../services/plantHandlerHelperFunctions';
 
 const PlantListItem = (props) => {
 
     var image = images[props.plant.type];
     props.plant.image = image;
+
+
 
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Details', { plant: props.plant })} style={styles.itemStyle}>
@@ -15,10 +19,18 @@ const PlantListItem = (props) => {
                 style={{
                     width: '10%',
                     height: '100%'
-                }} />
+                }} 
+            />
             <Text style={styles.textStyle}>
                 {props.plant.name}
             </Text>
+            <Progress.Bar
+                progress={calcVal(props.plant.lastWatered, props.plant.wateringInterval) / 100}
+                width={100}
+                animated={'true'} 
+                color="#4682b4"
+                unfilledColor="#b0c4de"
+            />
             <Icon name="chevron-right" style={styles.arrowStyle} />
         </TouchableOpacity>
     );
