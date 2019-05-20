@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PlantListItem from './PlantListItem';
 import plantHandler from '../../services/plantHandler';
 import * as actions from '../../actions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 let self;
@@ -42,12 +43,13 @@ class PlantList extends Component {
         console.log("renderPlants pPlantlist");
         console.log(self.props.myPlants);
         return self.props.myPlants.plantList.map(plant =>
-            <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation}  />);
+            <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation} />);
 
     }
 
     render() {
         console.log(self.props.myPlants);
+
 
         if (self.props.myPlants) {
             console.log(self.props.myPlants);
@@ -58,9 +60,16 @@ class PlantList extends Component {
                         keyExtractor={(plant) => plant.key}
                     />);*/
             return (<ScrollView>
+                <TouchableOpacity
+                    style={styles.waterAllPlantsButtonStyle}
+                    onPress={() => {
+                        console.log('@@@@@@@ FIXA VATTNING PÅ ALLA PLANTOR @@@@@@@');
+                    }}
+                >
+                    <Text style={styles.waterAllPlantsButtonTextStyle}>VATTNA ALLA PLANTOR</Text>
+                </TouchableOpacity>
                 {self.renderPlants()}
-
-            </ScrollView>)
+            </ScrollView>);
         } else {
             return (
                 <ScrollView >
@@ -87,6 +96,23 @@ const styles = {
         padding: 10,
         height: 50,
         alignItems: 'center'
+    },
+    waterAllPlantsButtonStyle: {
+        width: '100%',
+        backgroundColor: '#005496',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#050',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        elevation: 5
+    },
+    waterAllPlantsButtonTextStyle: {
+        //fontFamily: 'Comic Sans',
+        fontSize: 20,
+        color: '#fff',
+        paddingTop: 2,
+        paddingBottom: 2
     }
 }
 const mapStateToProps = (state, ownProps) => {
