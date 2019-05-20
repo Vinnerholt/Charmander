@@ -7,7 +7,7 @@ import { calcVal } from '../../services/plantHandlerHelperFunctions';
 
 const PlantListItem = (props) => {
 
-    var image = images[props.plant.type];
+    var image = images[props.plant.type.toLowerCase()];
     props.plant.image = image;
 
 
@@ -19,7 +19,7 @@ const PlantListItem = (props) => {
                 style={{
                     width: '10%',
                     height: '100%'
-                }} 
+                }}
             />
             <Text style={styles.textStyle}>
                 {props.plant.name}
@@ -27,7 +27,7 @@ const PlantListItem = (props) => {
             <Progress.Bar
                 progress={calcVal(props.plant.lastWatered, props.plant.wateringInterval) / 100}
                 width={100}
-                animated={'true'} 
+                animated={'true'}
                 color="#4682b4"
                 unfilledColor="#b0c4de"
             />

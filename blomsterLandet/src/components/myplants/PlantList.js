@@ -39,26 +39,18 @@ class PlantList extends Component {
         return <PlantListItem plant={plant} navigation={self.props.navigation} key={plant.name} />;
     }
     renderPlants() {
-        console.log("renderPlants pPlantlist");
-        console.log(self.props.myPlants);
         return self.props.myPlants.plantList.map(plant =>
             <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation} />);
-
     }
 
     render() {
-        console.log(self.props.myPlants);
-
         if (self.props.myPlants) {
-            console.log(self.props.myPlants);
-            /*    return (
-                    <FlatList
-                        data={self.props.myPlants.plantList}
-                        renderItem={self.renderPlant}
-                        keyExtractor={(plant) => plant.key}
-                    />);*/
             return (<ScrollView>
                 {self.renderPlants()}
+                <Button
+                    title="add new plant"
+                    onPress={() => self.props.navigation.navigate('AddPlant')}
+                ></Button>
 
             </ScrollView>)
         } else {
