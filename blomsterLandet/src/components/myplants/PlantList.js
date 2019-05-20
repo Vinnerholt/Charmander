@@ -1,59 +1,101 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Button } from 'react-native';
+import { ScrollView, Text, Button, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+
 import PlantListItem from './PlantListItem';
 import plantHandler from '../../services/plantHandler';
+import * as actions from '../../actions';
+
 
 let self;
-class PlantList extends Component {
-    state = { myPlants: [] };
+let firstStart = true;
+let addNewPlant;
 
-    async componentWillMount() {
+
+class PlantList extends Component {
+
+
+    componentWillMount() {
         self = this;
+        if (firstStart) {
+            self.getPlants();
+            firstStart = false;
+        }
+
+        addNewPlant = (<Button style={styles.itemStyle} title="add new plant"
+            onPress={() => self.props.loadMyPlantsData()}></Button>);
+
+    }
+
+    async getPlants() {
         await plantHandler.getFile().then(item => {
-            console.log(item);
-            if (item) {
-                self.setState({ myPlants: item.plantList });
-            }
+            return item;
+        }).then(item => {
+            self.props.loadMyPlantsData(item);
         });
     }
 
-    componentWillReceiveProps() {
-
+    renderPlant(plant) {
+        return <PlantListItem plant={plant} navigation={self.props.navigation} key={plant.name} />;
     }
     renderPlants() {
+        console.log("renderPlants pPlantlist");
+        console.log(self.props.myPlants);
+        return self.props.myPlants.plantList.map(plant =>
+            <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation} />);
 
-        if (!self.state.myPlants || self.state.myPlants.length === 0) {
-            return (
-                //creates a database file and loads it
-                <Button title="create dummyPlants"
-                    onPress={async () => {
-                        return await plantHandler.createFile().then(() => {
-                            return plantHandler.getFile();
-                        }).then(item => {
-                            self.setState({ myPlants: item.plantList });
-                        }).catch(() => {
-                            console.log("error in loading database in plantlist");
-                        });
-                    }
-                    }>
-                </Button>
-            )
-
-        } else {
-            return self.state.myPlants.map(plant =>
-                <PlantListItem key={plant.name} plant={plant} navigation={this.props.navigation} />);
-        }
     }
 
     render() {
+        console.log(self.props.myPlants);
 
-        return (
-            <ScrollView>
-
+        if (self.props.myPlants) {
+            console.log(self.props.myPlants);
+            /*    return (
+                    <FlatList
+                        data={self.props.myPlants.plantList}
+                        renderItem={self.renderPlant}
+                        keyExtractor={(plant) => plant.key}
+                    />);*/
+            return (<ScrollView>
                 {self.renderPlants()}
-            </ScrollView>
-        );
+
+            </ScrollView>)
+        } else {
+            return (
+                <ScrollView >
+                    <Button
+                        title="add new plant"
+                        onPress={() => self.props.navigation.navigate('AddPlant')}
+                    ></Button>
+                </ScrollView >
+            );
+        }
     }
 }
 
-export default PlantList;
+const styles = {
+    itemStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flex: 1,
+        alignSelf: 'stretch',
+        color: '#fff',
+        marginBottom: 1,
+        borderBottom: 1,
+        borderColor: 'grey',
+        padding: 10,
+        height: 50,
+        alignItems: 'center'
+    }
+}
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        myPlants: state.myPlants,
+        navigation: ownProps.navigation
+    };
+};
+
+export default connect(mapStateToProps, actions)(PlantList);
+

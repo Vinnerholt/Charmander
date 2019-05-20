@@ -2,10 +2,10 @@ import React from 'react';
 import { View } from 'react-native';
 
 
-const PlantCardContainer = (props) => {
+const ProductCardContainer = (props) => {
     return (
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <View style={styles.plantCardContainer}>
+            <View style={styles.productCardContainer}>
                 {props.children}
             </View>
         </View>
@@ -13,7 +13,7 @@ const PlantCardContainer = (props) => {
 };
 
 const styles = {
-    plantCardContainer: {
+    productCardContainer: {
         width: '90%',
         minHeight: 200,
         backgroundColor: '#AE2',
@@ -22,12 +22,12 @@ const styles = {
         borderColor: '#333'
 
     },
-    plantName: {
+    productName: {
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: 'center'
     },
-    plantDescription: {
+    productDescription: {
         marginLeft: 3,
         marginRight: 3
     },
@@ -38,4 +38,4 @@ const styles = {
     }
 };
 
-export default PlantCardContainer;
+export default ProductCardContainer;

@@ -1,39 +1,21 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-import { NotificationListItem } from '../components/notifications';
+import { View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import NotificationListItem from '../components/notifications/NotificationListItem';
 import NotificationExpanded from '../components/notifications/NotificationExpanded';
 import jsonStorage from '../services/jsonStorage';
 import NotifObservable from '../services/observers/NotifObservable';
 
 let self;
 class NotificationScreen extends React.Component {
-    state = {
-        notificationExpanded: false,
-        notifications: [],
-        notificationMap: [],
-        expandedTitle: '',
-        expandedDescription: '',
-    };
 
-    componentWillMount() {
-        self = this;
-        self.updateNotificationList();
-    }
-
-    componentDidMount() {
-        NotifObservable.subscribe(self.updateNotificationList);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        self.checkForOutsideExpandRequest(nextProps);
-    }
-
+    /*
     updateNotificationList() {
         jsonStorage.getItem('notifications').then(r => {
             //Sets notification state, when asynch call is completed, functions using state are called
             self.setState({ notifications: r.notifications }, () => {
                 self.listNotifications();
-            }); 
+            });
         }).catch(e => {
             console.log(e);
         });
@@ -50,10 +32,12 @@ class NotificationScreen extends React.Component {
             self.openExpandedNotification(self.state.notifications[notifId]);
         }
     }
+*/
 
     //Creates a map with notificationListItems, the key needs to be reworked as it 
     //might not always be unique
     mapNotifications() {
+        console.log('called');
         const mapOfNotifications = (self.state.notifications.map(notification =>
             (<NotificationListItem
                 key={notification.notifId}
@@ -62,7 +46,7 @@ class NotificationScreen extends React.Component {
                 pressedRemoved={self.removeNotification.bind(self)}
             />)
         ));
-        self.setState({ notificationMap: mapOfNotifications });
+        //self.setState({ notificationMap: mapOfNotifications });
     }
 
     //Returns the map with notificationListItems if it exists, 
@@ -82,11 +66,11 @@ class NotificationScreen extends React.Component {
     }
 
     closeExpandedNotification() {
-        self.setState({ notificationExpanded: false });
+        //self.setState({ notificationExpanded: false });
     }
 
     //Removes the notification from the notification map based on the notifId, then updates the list of notifications displayed
-    removeNotification(notification) {
+    /*removeNotification(notification) {
         self.setState({
             notifications: self.state.notifications.filter(notif =>
                 notif.notifId !== notification.notifId)
@@ -96,30 +80,36 @@ class NotificationScreen extends React.Component {
     }
 
     //Adds a notification presuming it is correctly formatted
-    addNotification(notification) {
+    /*addNotification(notification) {
         const notifList = self.state.notifications;
         notifList.push(notification);
         self.setState({ notifications: notifList }, () => {
             self.mapNotifications();
         });
+    }*/
+
+    renderItem(notification) {
+        return <NotificationListItem notification={notification} />;
     }
 
     render() {
-        
         return (
-                <View>
-                    <NotificationExpanded
-                        title={self.state.expandedTitle}
-                        description={self.state.expandedDescription}
-                        modalVisible={self.state.notificationExpanded}
-                        closeModal={self.closeExpandedNotification.bind(self)}
-                    />
-                    <ScrollView>
-                        {self.state.notificationMap}
-                    </ScrollView>
-                </View>
+            <View>
+                <NotificationExpanded />
+                <FlatList
+                    data={this.props.notifications}
+                    renderItem={this.renderItem}
+                    keyExtractor={(notification) => notification.notifId.toString()}
+                />
+            </View>
         );
     }
 }
 
-export default NotificationScreen;
+const mapStateToProps = state => {
+    //Its actually very weird to save this here, We have to find a better place
+    jsonStorage.setItem('notifications', state.notifications);
+    return { notifications: state.notifications };
+};
+
+export default connect(mapStateToProps)(NotificationScreen);
