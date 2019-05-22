@@ -122,16 +122,16 @@ const convertNotification = (notification) => {
 };
 
 export const sendWaterNotification = (daysUntilWater, plantKey) => {
-    const plant = findPlant(store.getState().myPlants, plantKey);
+    //const plant = findPlant(store.getState().myPlants, plantKey);
     const randomNotifId = Math.floor(Math.random() * 10000).toString();
     const localNotification = new firebase.notifications.Notification()
         .setNotificationId(randomNotifId)
-        .setTitle('Dags att vattna ' + plant.name)
-        .setBody('Nu är det ' + daysUntilWater + ' dagar till det är dags att vattna ' + plant.name)
+        .setTitle('Dags att vattna plantor')
+        .setBody('Du har plantor som snart behöver vattnas!')
         .setData({
-            imageURL: plant.imageURL,
+            imageURL: 'default',
             type: 'water',
-            refKey: plantKey
+            refKey: 'default'
         })
         .android.setChannelId('test-channel')
         .android.setSmallIcon('ic_launcher')

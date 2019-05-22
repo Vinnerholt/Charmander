@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import ProductList from '../../components/shop/ProductList';
 import { createStackNavigator, createAppContainer } from "react-navigation";
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 import ShoppingCartScreen from './ShoppingCartScreen';
@@ -18,13 +18,8 @@ class ShopScreen extends React.Component {
                     style={styles.TouchableOpacityStyle}
                 >
                     <Image
-                        //We are making FAB using TouchableOpacity with an image
-                        //We are using online image here
-                        // eslint-disable-next-line global-require
-                        source={require('../../resources/images/kundvagn.jpg')}
-                        //You can use you project image Example below
-                        //source={require('./images/float-add-icon.png')}
-                        style={styles.FloatingButtonStyle}
+                    source={require('../../resources/images/shopping_basket.png')}
+                    style={styles.FloatingButtonStyle}
                     />
                 </TouchableOpacity>
             </View>
@@ -66,10 +61,17 @@ const styles = StyleSheet.create({
    
     FloatingButtonStyle: {
       resizeMode: 'contain',
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
       //backgroundColor:'black'
     },
+    iconStyle: {
+        fontSize: 30,
+        paddingRight: 5,
+        flex: 1,
+        //color: '#3e5f36',
+        color: 'black'
+    }
   });
 
 export default createAppContainer(AppNavigator);

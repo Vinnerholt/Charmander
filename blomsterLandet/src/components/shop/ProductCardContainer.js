@@ -16,25 +16,13 @@ const styles = {
     productCardContainer: {
         width: '90%',
         minHeight: 200,
-        backgroundColor: '#AE2',
+        backgroundColor: 'white',
         borderWidth: 3,
         borderRadius: 2,
-        borderColor: '#333'
+        borderColor: '#3e5f36',
+        marginBottom: 15,
+        padding: 10
 
-    },
-    productName: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    productDescription: {
-        marginLeft: 3,
-        marginRight: 3
-    },
-    priceTag: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        alignSelf: 'center'
     }
 };
 

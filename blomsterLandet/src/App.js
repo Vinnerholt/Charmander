@@ -4,11 +4,13 @@ import { Image, ImageBackground, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import BackgroundTask from 'react-native-background-task'
 
 import reducers from './reducers';
 import { Header } from './components/common/index';
 import * as notifHandler from './services/notifHandler';
 import NavigationService from './services/NavigationService';
+import { daysUntilWater } from './services/plantHandlerHelperFunctions';
 
 import NotificationScreen from './screens/NotificationScreen';
 import MyPlantScreen from './screens/myplants/MyPlantScreen';
@@ -70,7 +72,25 @@ export const store = createStore(reducers);
 class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
+        this.startBackgroundTask();
     }
+
+    startBackgroundTask() {
+        BackgroundTask.define(() => {
+            const myPlants = store.getState().myPlants;
+            
+            for (let i = 0; i < myPlants.length; i++) {
+                const plant = myPlants[i];
+                if (daysUntilWater(plant.lastWatered, plant.wateringInterval) <= 1) {
+                    notifHandler.sendWaterNotification();
+                    break;
+                }
+            }
+            BackgroundTask.finish();  
+        });
+        BackgroundTask.schedule();
+    }
+
     render() {
         return (
             <Provider store={store}>
