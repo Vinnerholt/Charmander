@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/storeActions';
 import NavigationService from '../../services/NavigationService';
@@ -12,9 +12,13 @@ const BuyButton = (props) => (
             <TouchableOpacity
                 style={props.style}
                 onPress={() => {
-                        props.addCartItem(props.product, props.amount);
-                        NavigationService.navigate('Home');
-                        NavigationService.navigate('ShoppingCart');
+                        if (props.amount > 0) {
+                            props.addCartItem(props.product, props.amount);
+                            NavigationService.navigate('Home');
+                            NavigationService.navigate('ShoppingCart');  
+                        } else {
+                            Alert.alert('Ogiltigt antal');
+                        }
                     }
                 }
             >

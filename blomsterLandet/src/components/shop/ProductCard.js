@@ -25,7 +25,7 @@ const ProductCard = (props) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                 <TouchableOpacity
                     style={styles.buyButtonStyle}
-                    onPress={() => NavigationService.navigate('Details', { product: props.product })}
+                    onPress={() => NavigationService.navigate('ShopDetails', { product: props.product })}
                 >
                   <Text style={styles.buyButtonTextStyle}>KÖP</Text>
                 </ TouchableOpacity>

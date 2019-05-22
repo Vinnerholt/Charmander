@@ -11,6 +11,7 @@ import { Header } from './components/common/index';
 import * as notifHandler from './services/notifHandler';
 import NavigationService from './services/NavigationService';
 import { daysUntilWater } from './services/plantHandlerHelperFunctions';
+import * as storeActions from './actions/storeActions';
 
 import NotificationScreen from './screens/NotificationScreen';
 import MyPlantScreen from './screens/myplants/MyPlantScreen';
@@ -71,8 +72,17 @@ export const store = createStore(reducers);
 //The main application
 class App extends React.Component {
     componentDidMount() {
+        this.initializeApp();    
+    }
+
+    initializeApp() {
         notifHandler.initNotifications();
         this.startBackgroundTask();
+        this.initStore();
+    }
+
+    initStore = async () => {
+        store.dispatch(await storeActions.initProducts());
     }
 
     startBackgroundTask() {

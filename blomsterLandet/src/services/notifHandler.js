@@ -137,7 +137,7 @@ export const sendWaterNotification = (daysUntilWater, plantKey) => {
         .android.setSmallIcon('ic_launcher')
         .android.setPriority(firebase.notifications.Android.Priority.Max);
 
-
+        console.log('Yes whathappen??');
     firebase.notifications().displayNotification(localNotification);
 };
 

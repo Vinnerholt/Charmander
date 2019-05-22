@@ -17,9 +17,9 @@ class ShopScreen extends React.Component {
                     activeOpacity={0.7}
                     style={styles.TouchableOpacityStyle}
                 >
-                    <Image
-                    source={require('../../resources/images/shopping_basket.png')}
-                    style={styles.FloatingButtonStyle}
+                    <Icon 
+                        style={styles.iconStyle}
+                        name="shopping-basket"
                     />
                 </TouchableOpacity>
             </View>
@@ -29,7 +29,7 @@ class ShopScreen extends React.Component {
 const AppNavigator = createStackNavigator(
     {
         Home: ShopScreen,
-        Details: ShopItemPreviewScreen,
+        ShopDetails: ShopItemPreviewScreen,
         ShoppingCart: ShoppingCartScreen
     },
     {
@@ -66,8 +66,7 @@ const styles = StyleSheet.create({
       //backgroundColor:'black'
     },
     iconStyle: {
-        fontSize: 30,
-        paddingRight: 5,
+        fontSize: 45,
         flex: 1,
         //color: '#3e5f36',
         color: 'black'

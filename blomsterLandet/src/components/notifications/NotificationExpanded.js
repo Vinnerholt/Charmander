@@ -1,27 +1,37 @@
 /**
  * This is a notification that "pops-up" with the help of modal, with a card with a close button.
- * It's triggered with a "notis-button"
- * Last Modified: 2019-04-16
- * Authors: Jonathan Köre, Liwia Larsson
  */
 
 import React, { Component } from 'react';
-import { Text, Image, Modal, Button, View } from 'react-native';
+import { Text, Image, Modal, Button, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection } from '../common/index';
-import InfoButton from '../shop/InfoButton';
 import * as actions from '../../actions';
 import { store } from '../../App';
 import NavigationService from '../../services/NavigationService';
+import images from '../../resources/images/index';
+
 
 class NotificationExpanded extends Component {
 
     renderExpandedNotification() {
-        const { titleStyle, descriptionStyle } = styles;
+        const { titleStyle, descriptionStyle, imageStyle, buttonContainer } = styles;
         if (this.props.modalVisible) {
-            const { title, description } = this.props.notification;
+            const { title, description, refKey } = this.props.notification;
             return (
                 <React.Fragment>
+                    <CardSection>
+                        <Image
+                            style={imageStyle}
+                            source={images[refKey]}
+                        />
+                        <View style={buttonContainer}>
+                            <Button
+                                onPress={() => this.props.expandNotification(null)}
+                                title="x"
+                            />
+                        </View>
+                    </CardSection>
                     <CardSection>
                         <Text style={titleStyle}>{title}</Text>
                     </CardSection>
@@ -43,8 +53,14 @@ class NotificationExpanded extends Component {
                     <Button 
                         title='Gå till produkt'
                         onPress={() => {
-                            NavigationService.navigate('Details', { product: store.getState().products.get(refKey) });
                             this.props.expandNotification(null);
+
+                            const product = store.getState().products.get(refKey);
+                            if (typeof product === 'undefined') {
+                                Alert.alert('Produkten är inte tillgänglig just nu');
+                            } else {
+                                NavigationService.navigate('ShopDetails', { product });
+                            }
                         }}
                     />);
             case 'water':
@@ -74,18 +90,6 @@ class NotificationExpanded extends Component {
                 >
                     <View style={{ marginTop: 20 }}>
                         <Card>
-                            <CardSection>
-                                <Image
-                                    style={imageStyle}
-                                    source={this.props.imagePlaceHolder}
-                                />
-                                <View style={buttonContainer}>
-                                    <Button
-                                        onPress={() => this.props.expandNotification(null)}
-                                        title="x"
-                                    />
-                                </View>
-                            </CardSection>
                             {this.renderExpandedNotification()}
                             {this.renderNavButton()}
                         </Card>
