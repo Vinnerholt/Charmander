@@ -14,9 +14,7 @@ class ShopItemPreviewScreen extends Component {
 
     componentWillMount() {
         self = this;
-        console.log(this.props.navigation.getParam('product').name);
-        console.log("HÄÄÄÄÄÄR");
-        image = images[this.props.navigation.getParam('product').name];
+        image = images[this.props.navigation.getParam('product').key];
     }
 
     onChanged(text) {
