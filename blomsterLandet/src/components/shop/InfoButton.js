@@ -9,7 +9,7 @@ const InfoButton = (props) => {
         <View >
             <Button
                 title="Köp"
-                onPress={() => NavigationService.navigate('Details', { product: props.product })}
+                onPress={() => NavigationService.navigate('ShopDetails', { product: props.product })}
             />
         </View>
     );
