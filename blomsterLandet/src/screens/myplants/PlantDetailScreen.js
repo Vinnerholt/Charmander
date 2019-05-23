@@ -17,7 +17,6 @@ import SaveButton from '../../components/common/SaveButton';
 
 
 let self;
-let image;
 let nameLabel;
 let topRightButton;
 let deleteButton;
@@ -28,7 +27,6 @@ class PlantDetailScreen extends Component {
     componentWillMount() {
         self = this;
         self.loadPlant();
-        image = images[self.state.plant.name];
         self.value = 0;
         self.currentTime = Date.now() / 1000;
         self.value = calcVal(self.state.plant.lastWatered, self.state.plant.wateringInterval);
@@ -183,7 +181,7 @@ class PlantDetailScreen extends Component {
                             <View style={gaugeImageContainerStyle}>
                                 <Image
                                     style={imageStyle}
-                                    source={images[self.state.plant.type]}
+                                    source={images[self.state.plant.type.toLowerCase()]}
                                 />
                             </View>
                         </AnimatedGaugeProgress>

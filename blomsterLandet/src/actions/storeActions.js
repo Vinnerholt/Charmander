@@ -6,7 +6,9 @@ import firestoreHandler from '../services/firestoreHandler';
 export const initProducts = async () => {
     const products = await firestoreHandler.getCollection('products');
     const map = new Map();
+
     products.map(product => {
+        console.log(product);
         map.set(product.key, product);
     });
     console.log(map);
@@ -21,7 +23,7 @@ export const addCartItem = (item, amount) => {
         product: item,
         amount
     };
-    
+
     return {
         type: 'add_cart_item',
         payload: orderItem

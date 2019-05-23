@@ -16,7 +16,9 @@ class ShopItemPreviewScreen extends Component {
 
     componentWillMount() {
         self = this;
-        image = images[this.props.navigation.getParam('product').key];
+        console.log(this.props.navigation.getParam('product').name);
+        console.log("HÄÄÄÄÄÄR");
+        image = images[this.props.navigation.getParam('product').name];
     }
     
     /**
@@ -24,12 +26,12 @@ class ShopItemPreviewScreen extends Component {
      * 
      * @param {*} text The amount 
      */
-    onChanged(text){
+    onChanged(text) {
         let newText = '';
         let numbers = '0123456789';
-    
+
         for (let i = 0; i < text.length; i++) {
-            if (numbers.indexOf(text[i]) > -1 ) {
+            if (numbers.indexOf(text[i]) > -1) {
                 newText += text[i];
             } else {
             }
@@ -58,9 +60,9 @@ class ShopItemPreviewScreen extends Component {
                 </View>
                 <View style={scrollViewStyle}>
                     <View style={imageContainerStyle}>
-                        <Image 
+                        <Image
                             style={imageStyle}
-                            source={image} 
+                            source={image}
                         />
                     </View>
                 </View>
@@ -83,13 +85,13 @@ class ShopItemPreviewScreen extends Component {
                     </View>
                 </View>
                 <View style={styles.buyButtonStyle}>
-                    <TextInput 
+                    <TextInput
                         style={amountInput}
                         keyboardType='numeric'
                         onChangeText={(text) => this.onChanged(text)}
                         value={this.state.amountText}
                     />
-                    <BuyButton 
+                    <BuyButton
                         style={waterButtonStyle}
                         product={this.props.navigation.getParam('product')}
                         // eslint-disable-next-line radix

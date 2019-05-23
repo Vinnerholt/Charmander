@@ -57,6 +57,19 @@ export const waterPlant = (plant) => {
     };
 };
 
+export const waterAllPlants = () => {
+    return {
+        type: 'water_all_plants',
+        payload: null
+    };
+};
+export const addPlant = (plant) => {
+    return {
+        type: 'add_my_plant',
+        payload: plant
+    };
+};
+
 /**
  * Initializes the notifications in the notification list by
  * fetching them from a local json file.

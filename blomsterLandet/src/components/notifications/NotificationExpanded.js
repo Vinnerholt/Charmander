@@ -53,8 +53,8 @@ class NotificationExpanded extends Component {
                     <Button 
                         title='Gå till produkt'
                         onPress={() => {
+                            NavigationService.navigate('ShopDetails', { product: store.getState().products.get(refKey) });
                             this.props.expandNotification(null);
-
                             const product = store.getState().products.get(refKey);
                             if (typeof product === 'undefined') {
                                 Alert.alert('Produkten är inte tillgänglig just nu');

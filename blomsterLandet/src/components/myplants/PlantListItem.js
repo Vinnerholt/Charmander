@@ -1,14 +1,18 @@
 import React from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
 import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
 import { sendWaterNotification } from '../../services/notifHandler';
+import * as actions from './../../actions';
+import PlantListWaterButton from './PlantListWaterButton';
+
 
 const PlantListItem = (props) => {
 
-    var image = images[props.plant.type];
+    var image = images[props.plant.type.toLowerCase()];
     props.plant.image = image;
 
     function waterHighlightColor() {
@@ -32,13 +36,23 @@ const PlantListItem = (props) => {
             <Image
                 source={image}
                 style={{
-                    width: '10%',
-                    height: '100%'
-                }} 
+                    width: 40,
+                    height: 40,
+                    borderRadius: 40 / 2,
+                    borderWidth: 2,
+                    borderColor: '#3e5f36',
+                    overflow: 'hidden'
+                }}
             />
             <Text style={styles.textStyle}>
                 {props.plant.name}
             </Text>
+
+            <PlantListWaterButton
+                onPress={() => {
+                    props.waterPlant(props.plant);
+                }}
+            />
             <Progress.Bar
                 progress={calcVal(props.plant.lastWatered, props.plant.wateringInterval) / 100}
                 width={100}
@@ -54,21 +68,19 @@ const PlantListItem = (props) => {
 const styles = {
 
     textStyle: {
-        flex: 9,
+        flex: 1,
         color: 'black',
         fontSize: 16,
         paddingLeft: 5
     },
     arrowStyle: {
         fontSize: 30,
-        paddingRight: 5,
-        flex: 1,
         color: '#000'
     },
     itemStyle: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        flex: 1,
+        justifyContent: 'space-between',
+        flex: 4,
         alignSelf: 'stretch',
         backgroundColor: '#fff',
         marginBottom: 1,
@@ -80,4 +92,4 @@ const styles = {
     }
 };
 
-export default PlantListItem;
+export default connect(null, actions)(PlantListItem);
