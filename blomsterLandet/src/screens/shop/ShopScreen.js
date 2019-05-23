@@ -39,6 +39,7 @@ const AppNavigator = createStackNavigator(
     },
     {
         initialRouteName: "Home",
+        headerMode: 'none',
         cardStyle: {
             backgroundColor: 'transperent'
         }
@@ -47,28 +48,28 @@ const AppNavigator = createStackNavigator(
 
 const styles = StyleSheet.create({
     MainContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5F5F5',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5F5F5',
     },
-   
+
     TouchableOpacityStyle: {
-      position: 'absolute',
-      width: 50,
-      height: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
-      right: 30,
-      bottom: 30,
+        position: 'absolute',
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
     },
-   
+
     FloatingButtonStyle: {
-      resizeMode: 'contain',
-      width: 50,
-      height: 50,
-      //backgroundColor:'black'
+        resizeMode: 'contain',
+        width: 50,
+        height: 50,
+        //backgroundColor:'black'
     },
-  });
+});
 
 export default createAppContainer(AppNavigator);

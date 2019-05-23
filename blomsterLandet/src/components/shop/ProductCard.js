@@ -32,15 +32,6 @@ const ProductCard = (props) => {
 };
 
 const styles = {
-    productCardContainer: {
-        width: '90%',
-        minHeight: 200,
-        backgroundColor: '#AE2',
-        borderWidth: 3,
-        borderRadius: 2,
-        borderColor: '#333'
-
-    },
     productName: {
         fontSize: 20,
         fontWeight: 'bold',
