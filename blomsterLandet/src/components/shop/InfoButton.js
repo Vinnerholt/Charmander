@@ -6,10 +6,9 @@ import NavigationService from '../../services/NavigationService';
 
 const InfoButton = (props) => (
         <View >
-            <Button 
-                style={styles.BuyButtonStyle}
-                title="Köpppp"
-                onPress={() => NavigationService.navigate('Details', { product: props.product })}
+            <Button
+                title="Köp"
+                onPress={() => NavigationService.navigate('ShopDetails', { product: props.product })}
             />
         </View>
     );
