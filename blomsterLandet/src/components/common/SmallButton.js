@@ -7,7 +7,7 @@ const SmallButton = (props) => {
     } = styles;
 
     return (
-        <TouchableOpacity style={topButtonStyle} onPress={props.onPress}> 
+        <TouchableOpacity style={topButtonStyle} onPress={props.onPress}>
             {props.children}
         </TouchableOpacity>
     );

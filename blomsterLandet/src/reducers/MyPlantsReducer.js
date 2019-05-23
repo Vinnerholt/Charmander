@@ -1,5 +1,5 @@
 import plantHandler from './../services/plantHandler';
-import { overwritePlant, deletePlant, waterPlant } from './../services/plantHandlerHelperFunctions';
+import { overwritePlant, deletePlant, waterPlant, addPlant, waterAllPlants } from './../services/plantHandlerHelperFunctions';
 
 const data = {
     plantList: [{
@@ -23,7 +23,10 @@ export default (state = null, action) => {
             return overwritePlant(state, action.payload);
         case 'water_my_plant':
             return waterPlant(state, action.payload);
-
+        case 'add_my_plant':
+            return addPlant(state, action.payload);
+        case 'water_all_plants':
+            return waterAllPlants(state);
         default:
             return state;
     }

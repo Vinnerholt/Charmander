@@ -2,14 +2,14 @@ import jsonStorage from './jsonStorage';
 import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
-const plantPath = 'myPlants6';
+const plantPath = 'myPlants12';
 
 //used for testing
 const dummyPlantlist = {
     plantList: [{
-        key: "001",
-        name: "tomat",
-        type: "tomat",
+        key: 0,
+        name: "Tomat",
+        type: "Tomat",
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
         imageURL: "../../resources/images/tomat.jpg",
@@ -17,9 +17,9 @@ const dummyPlantlist = {
         wateringInterval: 12
     },
     {
-        key: "002",
+        key: 1,
         name: "Aron edited",
-        type: "slanggurka",
+        type: "Slanggurka",
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
         imageURL: "../../resources/images/tomat.jpg",

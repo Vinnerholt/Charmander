@@ -56,6 +56,18 @@ export const waterPlant = (plant) => {
         payload: plant
     };
 };
+export const waterAllPlants = () => {
+    return {
+        type: 'water_all_plants',
+        payload: null
+    };
+};
+export const addPlant = (plant) => {
+    return {
+        type: 'add_my_plant',
+        payload: plant
+    };
+};
 export const initNotifications = async () => {
     let notif = [];
     await jsonStorage.getItem('notifications').then(result => {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PlantListItem from './PlantListItem';
 import plantHandler from '../../services/plantHandler';
 import * as actions from '../../actions';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 let self;
@@ -39,34 +40,37 @@ class PlantList extends Component {
         return <PlantListItem plant={plant} navigation={self.props.navigation} key={plant.name} />;
     }
     renderPlants() {
-        console.log("renderPlants pPlantlist");
-        console.log(self.props.myPlants);
         return self.props.myPlants.plantList.map(plant =>
             <PlantListItem key={plant.name} plant={plant} navigation={self.props.navigation} />);
-
     }
 
     render() {
-        console.log(self.props.myPlants);
-
         if (self.props.myPlants) {
-            console.log(self.props.myPlants);
-            /*    return (
-                    <FlatList
-                        data={self.props.myPlants.plantList}
-                        renderItem={self.renderPlant}
-                        keyExtractor={(plant) => plant.key}
-                    />);*/
             return (<ScrollView>
+
                 {self.renderPlants()}
+                <TouchableOpacity
+                    style={styles.waterAllPlantsButtonStyle}
+                    onPress={() => {
+                        self.props.waterAllPlants();
+                    }}
+                >
+                    <Text style={styles.waterAllPlantsButtonTextStyle}>VATTNA ALLA PLANTOR</Text>
+                </TouchableOpacity>
+                <Button
+                    title="Lägg till planta"
+                    onPress={() => self.props.navigation.navigate('AddPlant')}
+                    color='#99CA3CEE'
+                ></Button>
 
             </ScrollView>)
         } else {
             return (
                 <ScrollView >
                     <Button
-                        title="add new plant"
+                        title="Lägg till planta"
                         onPress={() => self.props.navigation.navigate('AddPlant')}
+                        color='#99CA3CEE'
                     ></Button>
                 </ScrollView >
             );
@@ -87,6 +91,23 @@ const styles = {
         padding: 10,
         height: 50,
         alignItems: 'center'
+    },
+    waterAllPlantsButtonStyle: {
+        width: '100%',
+        backgroundColor: '#005496',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#050',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        elevation: 5
+    },
+    waterAllPlantsButtonTextStyle: {
+        fontSize: 14,
+        alignSelf: 'center',
+        color: '#fff',
+        paddingTop: 8,
+        paddingBottom: 8
     }
 }
 const mapStateToProps = (state, ownProps) => {

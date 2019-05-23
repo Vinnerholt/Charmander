@@ -45,6 +45,29 @@ export function waterPlant(db, plant) {
     }
     console.log("could not find plant key in database");
 }
+export function waterAllPlants(db) {
+    for (var i in db.plantList) {
+        db.plantList[i].lastWatered = Date.now() / 1000;
+    }
+    console.log("Watered all plants: PlanthandlerHelperFunctions");
+    return JSON.parse(JSON.stringify(db));
+}
+
+export function addPlant(db, plant) {
+    let newIndex;
+    console.log("IN PLANTHELPER")
+    if (db.plantList && db.plantList.length > 0) {
+        newIndex = db.plantList[db.plantList.length - 1].key + 1;
+    } else {
+        newIndex = 0;
+    }
+    console.log("new Index: " + newIndex);
+    plant.key = newIndex;
+    console.log(db.plantList);
+    db.plantList.push(plant);
+    console.log(db.plantList);
+    return JSON.parse(JSON.stringify(db));
+}
 
 export function calcVal(lastWatered, wateringInterval) {
     return 100 - (100 * ((Date.now() / 1000 - lastWatered)
@@ -52,9 +75,9 @@ export function calcVal(lastWatered, wateringInterval) {
 }
 
 export function daysUntilWater(lastWatered, wateringInterval) {
-    return Math.round((lastWatered 
-    - Date.now() / 1000) 
-    / (60 * 60 * 24)
-    + wateringInterval);
+    return Math.round((lastWatered
+        - Date.now() / 1000)
+        / (60 * 60 * 24)
+        + wateringInterval);
 }
 
