@@ -7,38 +7,50 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import firebase from 'firebase';
 import * as orderReader from '../orderReader';
 
 const CustomTableCell = withStyles(theme => ({
-  head: {
-	backgroundColor: theme.palette.common.black,
-	color: theme.palette.common.white,
-  },
-  body: {
-	fontSize: 14,
-  },
+	head: {
+		backgroundColor: theme.palette.common.black,
+		color: theme.palette.common.white,
+		fontSize: 18,
+	},
+	body: {
+		fontSize: 14,
+	},
 }))(TableCell);
 
 const styles = theme => ({
-  root: {
-	width: '100%',
-	marginTop: theme.spacing.unit * 3,
-	overflowX: 'auto',
-  },
-  table: {
-	minWidth: 700,
-  },
-  row: {
-	'&:nth-of-type(odd)': {
-	  backgroundColor: theme.palette.background.default,
+	root: {
+		width: '100%',
+		marginTop: theme.spacing.unit * 3,
+		overflowX: 'auto',
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
-  },
+	table: {
+		minWidth: 700,
+	},
+	row: {
+		'&:nth-of-type(odd)': {
+			backgroundColor: theme.palette.background.default,
+		}
+	},
+	progress: {
+		margin: theme.spacing.unit * 2,
+		alignSelf: 'center',
+	},
 });
 
 
 class CustomizedTable extends React.Component {
-	state = { rows: [] };
+	state = {
+		rows: [],
+		loading: true
+	};
 
 	componentWillMount() {
 		this.generateRows();
@@ -51,62 +63,134 @@ class CustomizedTable extends React.Component {
 	listenForChanges() {
 		// re-generates rows whenever something in the collection 'orders' changes.
 		firebase.firestore().collection('orders').onSnapshot(r => {
-				this.generateRows();
+			this.generateRows();
 		});
 	}
-	generateRows = async() => {
+	generateRows = async () => {
 		//Creates a unique key for each row
 		let rowKey = 0;
 		//Fetches the orders from firebase
 		let orders = await orderReader.fetchData();
 
-		for(let i in orders) {
+		for (let i in orders) {
 			orders[i].rowKey = rowKey;
 			rowKey++;
-			//Since the product in the order is a reference to a product, the product
+			//Since the product(s) in the order is a reference to a product, the product
 			//in question must be fetched from firebase aswell.
 			try {
-				const productSnapshot = await orders[i].product.get();
-				const productData = await productSnapshot.data();
-				const productName = productData.name;
-				orders[i].product = productName;
+				for (let j in orders[i].order) {
+					//For every product in the order
+					const productSnapshot = await orders[i].order[j].product.get();
+					const productData = await productSnapshot.data();
+					const productName = productData.name;
+					orders[i].order[j].product = productName;
+				}
 			} catch (err) {
-				
+				console.log(err);
 			}
-			
 		}
 		this.setState({ rows: orders });
 	}
-	
+
+	//Sorts the orders by postalCode
+	sortByPostalCode(orders) {
+		let sorted = {};
+		for (let i in orders) {
+			let postalCode = orders[i].postalCode;
+			if (sorted[postalCode] != null) {
+				sorted[postalCode].push(orders[i]);
+			} else {
+				sorted[postalCode] = [orders[i]];
+			}
+		}
+		return sorted;
+	}
+
+	renderProductList(orders) {
+		if (orders == null)
+			return;
+		if (orders != null) {
+			if (orders.length > 0) {
+				return (
+					orders.map(order => (
+						<CustomTableCell align="right">{order.amount + " st. " + order.product}</CustomTableCell>
+					))
+				);
+			}
+		}
+	}
+
+	renderRow(row) {
+		if (row.rowKey != null) {
+			return (<TableRow className={this.props.classes.row} key={row.rowKey}>
+				<CustomTableCell align="right">
+					{this.renderProductList(row.order)}
+				</CustomTableCell>
+				<CustomTableCell align="right">{row.buyer}</CustomTableCell>
+				<CustomTableCell align="right">{row.amount}</CustomTableCell>
+				<CustomTableCell align="right">{row.postalCode}</CustomTableCell>
+			</TableRow>);
+		}
+	}
+
+	renderRows(rows) {
+		if (rows == null) {
+			return;
+		}
+		if (rows.length <= 0) {
+			return;
+		}
+		let sortedRows = this.sortByPostalCode(rows);
+		return Object.values(sortedRows).map(postalCode => (
+			postalCode.map(row => (
+				this.renderRow(row)
+			))
+		));
+	}
+
+	renderLoader() {
+		if (this.state.loading) {
+			if (this.state.rows.length > 0) {
+				this.setState({ loading: false });
+			}
+			return <CircularProgress
+				className={this.props.classes.progress}
+				size={40}
+				left={-20}
+				top={10}
+				status={'loading'}
+				style={{ marginLeft: '50%' }} />
+		}
+	}
+
 	render() {
 		return (
-			<Paper className={this.props.classes.root}>
-			  <Table className={this.props.classes.table}>
-				<TableHead>
-				  <TableRow>
-					<CustomTableCell align="right">Product</CustomTableCell>
-					<CustomTableCell align="right">Buyer</CustomTableCell>
-					<CustomTableCell align="right">Amount</CustomTableCell>
-				  </TableRow>
-				</TableHead>
-				<TableBody>
-				  {this.state.rows.map(row => (
-					<TableRow className={this.props.classes.row} key={row.rowKey}>
-						<CustomTableCell align="right">{row.product}</CustomTableCell>
-					  <CustomTableCell align="right">{row.buyer}</CustomTableCell>
-					  <CustomTableCell align="right">{row.amount}</CustomTableCell>
-					</TableRow>
-				  ))}
-				</TableBody>
-			  </Table>
-			</Paper>
-		  );
+			<React.Fragment>
+				<Paper className={this.props.classes.root}>
+					<Table className={this.props.classes.table}>
+						<TableHead>
+							<TableRow>
+								<CustomTableCell align="center">Product(s)</CustomTableCell>
+								<CustomTableCell align="right">Buyer</CustomTableCell>
+								<CustomTableCell align="right">Amount</CustomTableCell>
+								<CustomTableCell align="right">Postal Code</CustomTableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{this.renderRows(this.state.rows)}
+						</TableBody>
+					</Table>
+					{this.renderLoader()}
+				</Paper>
+
+			</React.Fragment>
+		);
 	}
-	
+
 }
 
 CustomizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CustomizedTable);
