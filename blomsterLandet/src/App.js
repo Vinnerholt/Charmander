@@ -4,7 +4,6 @@ import { Image, ImageBackground, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import BackgroundTask from 'react-native-background-task'
 
 import reducers from './reducers';
 import { Header } from './components/common/index';
@@ -77,13 +76,11 @@ export const store = createStore(reducers);
 //The main application
 class App extends React.Component {
     componentDidMount() {
-        console.disableYellowBox = true;
         this.initializeApp();    
     }
 
     initializeApp() {
         notifHandler.initNotifications();
-        this.startBackgroundTask();
         this.initStore();
     }
 
@@ -91,21 +88,6 @@ class App extends React.Component {
         store.dispatch(await storeActions.initProducts());
     }
 
-    startBackgroundTask() {
-        BackgroundTask.define(() => {
-            const myPlants = store.getState().myPlants;
-            
-            for (let i = 0; i < myPlants.length; i++) {
-                const plant = myPlants[i];
-                if (daysUntilWater(plant.lastWatered, plant.wateringInterval) <= 1) {
-                    notifHandler.sendWaterNotification();
-                    break;
-                }
-            }
-            BackgroundTask.finish();  
-        });
-        BackgroundTask.schedule();
-    }
 
     render() {
         return (
