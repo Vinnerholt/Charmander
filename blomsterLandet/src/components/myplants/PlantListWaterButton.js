@@ -1,5 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from 'react-native';
 
 const PlantListWaterButton = (props) => {
     return (
@@ -7,15 +8,20 @@ const PlantListWaterButton = (props) => {
             onPress={props.onPress}
             style={styles.plantListWaterButtonStyle}
         >
-            <Text style={styles.waterButtonTextStyle}>VATTNA</Text>
+            <Icon 
+                name="water"
+                style={styles.wateringStyle}
+                color="#005496"
+            />
         </TouchableOpacity>
     );
 };
 
 const styles = {
     plantListWaterButtonStyle: {
-        width: 80,
-        backgroundColor: '#005496',
+        //width: 40,
+        height: '90%',
+        backgroundColor: '#ffffff',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#3e5f36',
@@ -28,11 +34,13 @@ const styles = {
         shadowOpacity: 0.2,
         elevation: 5
     },
-    waterButtonTextStyle: {
-        fontSize: 15,
-        color: '#fff',
-        paddingTop: 2,
-        paddingBottom: 2
+    wateringStyle: {
+        fontSize: 30,
+        paddingTop: 3,
+        paddingBottom: 3
+    },
+    foo: {
+        backgroundColor: '#005496'
     }
 
 };

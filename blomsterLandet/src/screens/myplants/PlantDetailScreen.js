@@ -60,14 +60,19 @@ class PlantDetailScreen extends Component {
                 </MyTextInput>);
             topRightButton = (
                 <SaveButton
-                    title="Spara"
                     onPress={() => {
                         self.props.editMyPlantsData(self.state.plant);
                         self.props.toggleMyPlantsEditMode();
                         plantHandler.createFile(self.props.myPlants);
-                    }
-                    }
-                />);
+
+                    }}
+                >
+                    <Icon 
+                        name="save"
+                        style={styles.iconStyle} 
+                    />
+                </SaveButton>    
+            );
             deleteButton = (
                 <DeleteButton
                     title="Ta bort växt"
@@ -347,7 +352,7 @@ const styles = {
         fontSize: 30,
         fontWeight: 'bold',
         color: '#ff0000'
-    }
+    },
 
 };
 

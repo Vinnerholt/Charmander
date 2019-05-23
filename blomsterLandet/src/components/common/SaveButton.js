@@ -8,8 +8,7 @@ const SaveButton = (props) => {
     } = styles;
 
     return (
-        <TouchableOpacity style={topButtonStyle} onPress={props.onPress} title={props.title}>
-            <Text style={{ color: '#3e5f36', fontWeight: 'bold' }}> {props.title}</Text>
+        <TouchableOpacity style={topButtonStyle} onPress={props.onPress}>
             {props.children}
         </TouchableOpacity>
 
@@ -18,9 +17,9 @@ const SaveButton = (props) => {
 
 const styles = {
     topButtonStyle: {
-        width: 100,
-        height: 40,
-        backgroundColor: '#fff',
+        width: '80%',
+        height: '100%',
+        backgroundColor: '#99CA3CEE',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#3e5f36',
@@ -36,7 +35,7 @@ const styles = {
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         elevation: 20
-    }
+    },
 };
 
 
