@@ -47,15 +47,16 @@ class PlantList extends Component {
     render() {
         if (self.props.myPlants) {
             return (<ScrollView>
+
+                {self.renderPlants()}
                 <TouchableOpacity
                     style={styles.waterAllPlantsButtonStyle}
                     onPress={() => {
-                        console.log('@@@@@@@ FIXA VATTNING PÅ ALLA PLANTOR @@@@@@@');
+                        self.props.waterAllPlants();
                     }}
                 >
                     <Text style={styles.waterAllPlantsButtonTextStyle}>VATTNA ALLA PLANTOR</Text>
                 </TouchableOpacity>
-                {self.renderPlants()}
                 <Button
                     title="Lägg till planta"
                     onPress={() => self.props.navigation.navigate('AddPlant')}
@@ -102,11 +103,11 @@ const styles = {
         elevation: 5
     },
     waterAllPlantsButtonTextStyle: {
-        //fontFamily: 'Comic Sans',
-        fontSize: 20,
+        fontSize: 14,
+        alignSelf: 'center',
         color: '#fff',
-        paddingTop: 2,
-        paddingBottom: 2
+        paddingTop: 8,
+        paddingBottom: 8
     }
 }
 const mapStateToProps = (state, ownProps) => {

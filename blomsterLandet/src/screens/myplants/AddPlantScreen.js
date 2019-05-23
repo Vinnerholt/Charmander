@@ -47,7 +47,6 @@ class AddPlantScreen extends React.Component {
     }
 
     renderPlantTypes() {
-        console.log('renderPlantTypes');
         return self.props.plantTypes.map(plant =>
             <Picker.Item label={plant.type} value={plant.type} plant={plant} />);
     }
