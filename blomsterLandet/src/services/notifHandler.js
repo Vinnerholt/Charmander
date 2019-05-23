@@ -113,7 +113,7 @@ const convertNotification = (notification) => {
         title: notification.title,
         description: notification.body,
         icon: 'default',
-        imageURL: `../../resources/images/${notification.data.imageURL}`,
+        imageURL: notification.data.imageURL,
         type: notification.data.type,
         refKey: notification.data.refKey,
         read: false
@@ -121,7 +121,10 @@ const convertNotification = (notification) => {
     return notif;
 };
 
-export const sendWaterNotification = (daysUntilWater, plantKey) => {
+/**
+ * Notification to send when a plant needs to be watered.
+ */
+export const sendWaterNotification = () => {
     //const plant = findPlant(store.getState().myPlants, plantKey);
     const randomNotifId = Math.floor(Math.random() * 10000).toString();
     const localNotification = new firebase.notifications.Notification()
@@ -129,7 +132,7 @@ export const sendWaterNotification = (daysUntilWater, plantKey) => {
         .setTitle('Dags att vattna plantor')
         .setBody('Du har plantor som snart behöver vattnas!')
         .setData({
-            imageURL: 'default',
+            imageURL: 'vattenkanna',
             type: 'water',
             refKey: 'default'
         })

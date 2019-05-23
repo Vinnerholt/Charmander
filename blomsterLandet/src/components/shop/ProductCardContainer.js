@@ -20,7 +20,8 @@ const styles = {
         borderWidth: 3,
         borderRadius: 2,
         borderColor: '#3e5f36',
-        marginBottom: 15,
+        marginBottom: 5,
+        marginTop: 5,
         padding: 10
 
     }

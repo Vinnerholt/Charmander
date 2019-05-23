@@ -7,6 +7,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 import ShoppingCartScreen from './ShoppingCartScreen';
 
+/**
+ * Screen that shows products available for purchase.
+ */
 class ShopScreen extends React.Component {
     render() {
         return (

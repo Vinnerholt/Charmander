@@ -107,8 +107,6 @@ class NotificationScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-    //Its actually very weird to save this here, We have to find a better place
-    jsonStorage.setItem('notifications', state.notifications);
     return { notifications: state.notifications };
 };
 

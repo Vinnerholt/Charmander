@@ -19,6 +19,11 @@ class ShopItemPreviewScreen extends Component {
         image = images[this.props.navigation.getParam('product').key];
     }
     
+    /**
+     * Checks whether the text inputted is an integer. If it is, it is accepted
+     * 
+     * @param {*} text The amount 
+     */
     onChanged(text){
         let newText = '';
         let numbers = '0123456789';
@@ -34,7 +39,7 @@ class ShopItemPreviewScreen extends Component {
 
     render() {
         const { amountInput, nameStyle, imageContainerStyle, viewCenterStyle,
-            imageStyle, waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle, speciesStyle,
+            imageStyle, waterButtonStyle, bottomButtonsContainerStyle, speciesStyle,
             scrollViewStyle, topButtonsContainerStyle, iconStyle } = styles;
 
         console.log(this.state.amountText);

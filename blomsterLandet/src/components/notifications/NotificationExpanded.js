@@ -17,13 +17,13 @@ class NotificationExpanded extends Component {
     renderExpandedNotification() {
         const { titleStyle, descriptionStyle, imageStyle, buttonContainer } = styles;
         if (this.props.modalVisible) {
-            const { title, description, refKey } = this.props.notification;
+            const { title, description, imageURL } = this.props.notification;
             return (
                 <React.Fragment>
                     <CardSection>
                         <Image
                             style={imageStyle}
-                            source={images[refKey]}
+                            source={images[imageURL]}
                         />
                         <View style={buttonContainer}>
                             <Button

@@ -1,6 +1,12 @@
 import firestoreHandler from '../services/firestoreHandler';
 
 export default {
+    /**
+     * Takes in an order const and creates a final order in 
+     * the correct format for the database. 
+     * 
+     * @param {*} order
+     */
     async finalizeOrder(order) {
         const finalOrder = {
             buyer: 'Kalle Kuling',
