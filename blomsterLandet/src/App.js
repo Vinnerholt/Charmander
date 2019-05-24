@@ -17,11 +17,11 @@ import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
 
 export const TabNavigator = createBottomTabNavigator({
-    Plants: MyPlantScreen,
-    Shop: ShopScreen,
+    Växter: MyPlantScreen,
+    Handla: ShopScreen,
     //BYT TILLBAKA
-    Notifications: NotificationScreen,
-    Profile: ProfileScreen,
+    Notiser: NotificationScreen,
+    Profil: ProfileScreen,
     Dev: DevScreen
 },
     // Adding icons to the navigation bar.
@@ -33,16 +33,16 @@ export const TabNavigator = createBottomTabNavigator({
                 const { routeName } = navigation.state;
                 let iconName;
                 switch (routeName) {
-                    case 'Shop':
+                    case 'Handla':
                         iconName = 'local-grocery-store';
                         break;
-                    case 'Plants':
+                    case 'Växter':
                         iconName = 'local-florist';
                         break;
-                    case 'Notifications':
+                    case 'Notiser':
                         iconName = 'notifications';
                         break;
-                    case 'Profile':
+                    case 'Profil':
                         iconName = 'person';
                         break;
                     case 'Dev':
