@@ -27,7 +27,7 @@ class ProfileScreen extends React.Component {
                         <Image
                             style={imageStyle}
                             // eslint-disable-next-line global-require
-                            source={require('../resources/images/ros.jpg')}
+                            source={require('../resources/images/scooby-doo-picture.jpeg')}
                         />
                     </View>
                 </View>
@@ -62,7 +62,7 @@ Andra relevanta saker.`}
                     </View>
                 </View>
             </ScrollView>
-    
+
         );
     }
 }
