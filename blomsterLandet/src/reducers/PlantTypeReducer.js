@@ -2,12 +2,12 @@ const types = [{
     type: "Tomat",
     advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
     extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
-    wateringInterval: 1
+    wateringInterval: 3
 },
 {
     type: "Slanggurka",
-    advice: "Gurky/Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
-    extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+    advice: "Att vattna jämnt och rikligt är viktigt för smaken. Bind upp plantan vid t.ex. en ståltrådsställning eller spaljé. Skörda gurkorna så fort de mognar. Om man låter dem sitta kvar hindrar det vidare fruktsättning.",
+    extendedDescription: "Minislanggurka som trivs i växthus och ger rikligt med små, goda gurkor",
     wateringInterval: 4
 },
 {

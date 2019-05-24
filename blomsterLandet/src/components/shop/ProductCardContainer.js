@@ -14,27 +14,13 @@ const ProductCardContainer = (props) => {
 
 const styles = {
     productCardContainer: {
-        width: '90%',
+        width: '100%',
         minHeight: 200,
-        backgroundColor: '#AE2',
-        borderWidth: 3,
+        backgroundColor: '#FFF',
+        borderWidth: 0,
         borderRadius: 2,
-        borderColor: '#333'
-
-    },
-    productName: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    productDescription: {
-        marginLeft: 3,
-        marginRight: 3
-    },
-    priceTag: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        alignSelf: 'center'
+        borderColor: '#06470c',
+        borderBottomWidth: 0,
     }
 };
 

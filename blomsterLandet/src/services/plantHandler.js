@@ -2,28 +2,28 @@ import jsonStorage from './jsonStorage';
 import { overwritePlant, findPlant } from './plantHandlerHelperFunctions';
 
 
-const plantPath = 'myPlants12';
+const plantPath = 'myPlants12312312221';
 
 //used for testing
 const dummyPlantlist = {
     plantList: [{
         key: 0,
-        name: "Tomat",
+        name: "Tomat Köket",
         type: "Tomat",
         advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
         extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
         imageURL: "../../resources/images/tomat.jpg",
-        lastWatered: 1557996093,
+        lastWatered: Date.now() / 1000,
         wateringInterval: 12
     },
     {
         key: 1,
-        name: "Aron edited",
+        name: "Gurka - Altan",
         type: "Slanggurka",
-        advice: "Annamay innehåller extra mycket av den nyttiga antioxidanten lykopen! Söt-syrlig smak.",
-        extendedDescription: "Bind vid behov upp plantan efterhand som den växer. För mycket vatten och näring ger mer blad och mindre smak. Ska tjuvas. Vattnas rikligt men låt torka upp mellan vattningarna. Skall tjuvas.",
+        advice: "Att vattna jämnt och rikligt är viktigt för smaken. Bind upp plantan vid t.ex. en ståltrådsställning eller spaljé. Skörda gurkorna så fort de mognar. Om man låter dem sitta kvar hindrar det vidare fruktsättning.",
+        extendedDescription: "Minislanggurka som trivs i växthus och ger rikligt med små, goda gurkor",
         imageURL: "../../resources/images/tomat.jpg",
-        lastWatered: 1557741000,
+        lastWatered: Date.now() / 1000,
         wateringInterval: 2
     }
     ]
@@ -38,8 +38,7 @@ export default {
             return item;
 
         }).catch(() => {
-            console.log("errror");
-            return "error";
+            return null;
         });
     },
     //returns a plant based on the key value 

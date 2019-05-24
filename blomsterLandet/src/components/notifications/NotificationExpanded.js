@@ -1,27 +1,42 @@
 /**
  * This is a notification that "pops-up" with the help of modal, with a card with a close button.
- * It's triggered with a "notis-button"
- * Last Modified: 2019-04-16
- * Authors: Jonathan Köre, Liwia Larsson
  */
 
 import React, { Component } from 'react';
-import { Text, Image, Modal, Button, View } from 'react-native';
+import { Text, Image, Modal, Button, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection } from '../common/index';
-import InfoButton from '../shop/InfoButton';
 import * as actions from '../../actions';
 import { store } from '../../App';
 import NavigationService from '../../services/NavigationService';
+import images from '../../resources/images/index';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
 
 class NotificationExpanded extends Component {
 
     renderExpandedNotification() {
-        const { titleStyle, descriptionStyle } = styles;
+        const { titleStyle, descriptionStyle, imageStyle, buttonContainer } = styles;
         if (this.props.modalVisible) {
-            const { title, description } = this.props.notification;
+            const { title, description, imageURL } = this.props.notification;
             return (
                 <React.Fragment>
+                    <CardSection>
+                        <Image
+                            style={imageStyle}
+                            source={images[imageURL]}
+                        />
+                        <View style={buttonContainer}>
+                            <TouchableOpacity>
+                                <Text
+                                    onPress={() => {
+                                        this.props.expandNotification(null)
+                                        console.log("click");
+                                    }} style={{ color: 'red', fontSize: 20, paddingRight: 5 }}>x</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </CardSection>
                     <CardSection>
                         <Text style={titleStyle}>{title}</Text>
                     </CardSection>
@@ -29,27 +44,46 @@ class NotificationExpanded extends Component {
                     <CardSection>
                         <Text style={descriptionStyle}>{description}</Text>
                     </CardSection>
-                </React.Fragment>
+                </React.Fragment >
             );
         }
     }
 
     renderNavButton() {
         if (this.props.notification !== null) {
-           const { type, refKey } = this.props.notification;
+            const { type, refKey } = this.props.notification;
             switch (type) {
             case 'product':
                  return (
                     <Button 
                         title='Gå till produkt'
+                        color='#99CA3C'
                         onPress={() => {
                             NavigationService.navigate('ShopDetails', { product: store.getState().products.get(refKey) });
                             this.props.expandNotification(null);
-                        }}
+                            const product = store.getState().products.get(refKey);
+                            if (typeof product === 'undefined') {
+                                Alert.alert('Produkten är inte tillgänglig just nu');
+                            } else {
+                                NavigationService.navigate('ShopDetails', { product });
+                            }
+                                                }}
                     />);
+            case 'water':
+                return (
+                    <Button 
+                        title='Gå till din plantlista'
+                        onPress={() => {
+                            NavigationService.navigate('Plants');
+                            this.props.expandNotification(null);
+                        }}
+                        color='#99CA3C'
+                    /> 
+                );
             }  
         }
     }
+
 
     render() {
         const { imageStyle, buttonContainer } = styles;
@@ -63,18 +97,6 @@ class NotificationExpanded extends Component {
                 >
                     <View style={{ marginTop: 20 }}>
                         <Card>
-                            <CardSection>
-                                <Image
-                                    style={imageStyle}
-                                    source={this.props.imagePlaceHolder}
-                                />
-                                <View style={buttonContainer}>
-                                    <Button
-                                        onPress={() => this.props.expandNotification(null)}
-                                        title="x"
-                                    />
-                                </View>
-                            </CardSection>
                             {this.renderExpandedNotification()}
                             {this.renderNavButton()}
                         </Card>

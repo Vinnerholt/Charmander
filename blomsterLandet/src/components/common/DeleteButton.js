@@ -35,9 +35,9 @@ const styles = {
         paddingLeft: 8,
         paddingRight: 8,
         shadowColor: '#050',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.2,
-        elevation: 20
+        elevation: 5
     }
 };
 

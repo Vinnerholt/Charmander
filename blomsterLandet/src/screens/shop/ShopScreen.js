@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import ProductList from '../../components/shop/ProductList';
 import { createStackNavigator, createAppContainer } from "react-navigation";
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 import ShoppingCartScreen from './ShoppingCartScreen';
+//import FloatingButton from '../../components/common/FloatingButton';
 
+/**
+ * Screen that shows products available for purchase.
+ */
 class ShopScreen extends React.Component {
     render() {
         return (
@@ -17,15 +21,12 @@ class ShopScreen extends React.Component {
                     activeOpacity={0.7}
                     style={styles.TouchableOpacityStyle}
                 >
-                    <Image
-                        //We are making FAB using TouchableOpacity with an image
-                        //We are using online image here
-                        // eslint-disable-next-line global-require
-                        source={require('../../resources/images/kundvagn.jpg')}
-                        //You can use you project image Example below
-                        //source={require('./images/float-add-icon.png')}
-                        style={styles.FloatingButtonStyle}
+                    <Icon
+                        name='local-grocery-store'
+                        style={styles.iconStyle}
+                        color="#000000"
                     />
+
                 </TouchableOpacity>
             </View>
         );
@@ -39,36 +40,37 @@ const AppNavigator = createStackNavigator(
     },
     {
         initialRouteName: "Home",
+        headerMode: 'none',
         cardStyle: {
             backgroundColor: 'transperent'
-        }
+        },
+        headerMode: 'none'
     }
 );
 
 const styles = StyleSheet.create({
     MainContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5F5F5',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5F5F5',
     },
-   
+
     TouchableOpacityStyle: {
-      position: 'absolute',
-      width: 50,
-      height: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
-      right: 30,
-      bottom: 30,
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        borderRadius: 60 / 2,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+        elevation: 10
     },
-   
-    FloatingButtonStyle: {
-      resizeMode: 'contain',
-      width: 50,
-      height: 50,
-      //backgroundColor:'black'
-    },
-  });
+    iconStyle: {
+        fontSize: 40,
+    }
+});
 
 export default createAppContainer(AppNavigator);

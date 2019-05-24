@@ -9,20 +9,24 @@ import reducers from './reducers';
 import { Header } from './components/common/index';
 import * as notifHandler from './services/notifHandler';
 import NavigationService from './services/NavigationService';
+import { daysUntilWater } from './services/plantHandlerHelperFunctions';
+import * as storeActions from './actions/storeActions';
 
 import NotificationScreen from './screens/NotificationScreen';
 import MyPlantScreen from './screens/myplants/MyPlantScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShopScreen from './screens/shop/ShopScreen';
 import DevScreen from './screens/DevScreen';
+import InfoScreen from './screens/InfoScreen';
 
 export const TabNavigator = createBottomTabNavigator({
-    Plants: MyPlantScreen,
-    Shop: ShopScreen,
+    Växter: MyPlantScreen,
+    Handla: ShopScreen,
     //BYT TILLBAKA
-    Notifications: NotificationScreen,
-    Profile: ProfileScreen,
-    Dev: DevScreen
+    Notiser: NotificationScreen,
+    Profil: ProfileScreen,
+    Dev: DevScreen,
+    Info: InfoScreen
 },
     // Adding icons to the navigation bar.
     // Might have to change the cases if languaged in the app is changed to swedish as
@@ -33,17 +37,20 @@ export const TabNavigator = createBottomTabNavigator({
                 const { routeName } = navigation.state;
                 let iconName;
                 switch (routeName) {
-                    case 'Shop':
+                    case 'Handla':
                         iconName = 'local-grocery-store';
                         break;
-                    case 'Plants':
+                    case 'Växter':
                         iconName = 'local-florist';
                         break;
-                    case 'Notifications':
+                    case 'Notiser':
                         iconName = 'notifications';
                         break;
-                    case 'Profile':
+                    case 'Profil':
                         iconName = 'person';
+                        break;
+                    case 'Info':
+                        iconName = 'info';
                         break;
                     case 'Dev':
                         iconName = 'developer-mode';
@@ -69,8 +76,20 @@ export const store = createStore(reducers);
 //The main application
 class App extends React.Component {
     componentDidMount() {
-        notifHandler.initNotifications();
+        this.initializeApp();    
     }
+
+    initializeApp() {
+        notifHandler.initNotifications();
+        console.disableYellowBox = true;
+        this.initStore();
+    }
+
+    initStore = async () => {
+        store.dispatch(await storeActions.initProducts());
+    }
+
+
     render() {
         return (
             <Provider store={store}>
