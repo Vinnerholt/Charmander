@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AnimatedGaugeProgress } from 'react-native-simple-gauge';
 import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
+import AwesomeButton from "react-native-really-awesome-button";
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 import { findPlant, calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
@@ -209,11 +210,15 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <TouchableOpacity
+                    <AwesomeButton
                         onPress={self.waterButtonPressed}
-                        style={waterButtonStyle}>
-                        <Text style={waterButtonTextStyle}>VATTNA</Text>
-                    </TouchableOpacity>
+                        backgroundColor='#005496'
+                        backgroundDarker='#b0c4de'
+                        width={150}
+                        textSize={18}
+                    >
+                        VATTNA
+                    </AwesomeButton>
                 </View>
 
                 <View style={bottomButtonsContainerStyle}>
