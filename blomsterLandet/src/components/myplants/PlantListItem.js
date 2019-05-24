@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text, TouchableOpacity, Image } from 'react-native';
+import { Text, TouchableOpacity, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
 import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
+import { sendWaterNotification } from '../../services/notifHandler';
 import * as actions from './../../actions';
 import PlantListWaterButton from './PlantListWaterButton';
+
 
 const PlantListItem = (props) => {
 
@@ -22,6 +24,7 @@ const PlantListItem = (props) => {
 
     function waterBackgroundColor() {
         if (daysUntilWater(props.plant.lastWatered, props.plant.wateringInterval) <= 1) {
+            sendWaterNotification(1, props.plant.key);
             return '#ff9494';
         }
         return '#b0c4de';
@@ -30,17 +33,19 @@ const PlantListItem = (props) => {
 
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Details', { plant: props.plant })} style={styles.itemStyle}>
-            <Image
-                source={image}
-                style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 40 / 2,
-                    borderWidth: 2,
-                    borderColor: '#3e5f36',
-                    overflow: 'hidden'
-                }}
-            />
+            <View style={{ elevation: 100, shadowColor: '#000', width: 40, height: 40, borderRadius: 40 / 2}}>
+                <Image
+                    source={image}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 40 / 2,
+                        borderWidth: 2,
+                        borderColor: '#DDDDDD',
+                    }}
+                />
+            </View>
+
             <Text style={styles.textStyle}>
                 {props.plant.name}
             </Text>

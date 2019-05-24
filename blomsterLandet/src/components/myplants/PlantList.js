@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Button, FlatList } from 'react-native';
+import { ScrollView, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import PlantListItem from './PlantListItem';
@@ -31,8 +31,17 @@ class PlantList extends Component {
     async getPlants() {
         await plantHandler.getFile().then(item => {
             return item;
-        }).then(item => {
-            self.props.loadMyPlantsData(item);
+        }).then(async (item) => {
+            console.log(Date.now() / 1000);
+            if (item) {
+                self.props.loadMyPlantsData(item);
+            } else {
+                await plantHandler.createDummyFile().then(() => {
+                    plantHandler.getFile().then(dummyList => {
+                        self.props.loadMyPlantsData(dummyList);
+                    });
+                });
+            }
         });
     }
 
@@ -46,32 +55,14 @@ class PlantList extends Component {
 
     render() {
         if (self.props.myPlants) {
-            return (<ScrollView>
-
-                {self.renderPlants()}
-                <TouchableOpacity
-                    style={styles.waterAllPlantsButtonStyle}
-                    onPress={() => {
-                        self.props.waterAllPlants();
-                    }}
-                >
-                    <Text style={styles.waterAllPlantsButtonTextStyle}>VATTNA ALLA PLANTOR</Text>
-                </TouchableOpacity>
-                <Button
-                    title="Lägg till planta"
-                    onPress={() => self.props.navigation.navigate('AddPlant')}
-                    color='#99CA3CEE'
-                ></Button>
-
-            </ScrollView>)
+            return (
+                <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+                    {self.renderPlants()}
+                </ScrollView>)
         } else {
             return (
                 <ScrollView >
-                    <Button
-                        title="Lägg till planta"
-                        onPress={() => self.props.navigation.navigate('AddPlant')}
-                        color='#99CA3CEE'
-                    ></Button>
+
                 </ScrollView >
             );
         }

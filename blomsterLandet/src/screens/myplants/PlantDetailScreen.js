@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AnimatedGaugeProgress } from 'react-native-simple-gauge';
 import SmallButton from '../../components/common/SmallButton';
 import CollapseButton from '../../components/common/CollapseButton';
+import AwesomeButton from "react-native-really-awesome-button";
 import images from '../../resources/images/index';
 import plantHandler from '../../services/plantHandler';
 import { findPlant, calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
@@ -60,14 +61,20 @@ class PlantDetailScreen extends Component {
                 </MyTextInput>);
             topRightButton = (
                 <SaveButton
-                    title="Spara"
                     onPress={() => {
                         self.props.editMyPlantsData(self.state.plant);
                         self.props.toggleMyPlantsEditMode();
                         plantHandler.createFile(self.props.myPlants);
-                    }
-                    }
-                />);
+
+                    }}
+                >
+                    <Icon
+                        name="save"
+                        style={styles.iconStyle}
+                        color='white'
+                    />
+                </SaveButton>
+            );
             deleteButton = (
                 <DeleteButton
                     title="Ta bort växt"
@@ -203,11 +210,15 @@ class PlantDetailScreen extends Component {
                 </View>
 
                 <View style={viewCenterStyle}>
-                    <TouchableOpacity
+                    <AwesomeButton
                         onPress={self.waterButtonPressed}
-                        style={waterButtonStyle}>
-                        <Text style={waterButtonTextStyle}>VATTNA</Text>
-                    </TouchableOpacity>
+                        backgroundColor='#005496'
+                        backgroundDarker='#b0c4de'
+                        width={150}
+                        textSize={18}
+                    >
+                        VATTNA
+                    </AwesomeButton>
                 </View>
 
                 <View style={bottomButtonsContainerStyle}>
@@ -263,12 +274,11 @@ const styles = {
         elevation: 20,
     },
     imageStyle: {
-        height: 200,
-        width: 200,
+        height: 190,
+        width: 190,
         overflow: 'hidden',
-        borderRadius: 200 / 2,
-        borderWidth: 4,
-        borderColor: '#3e5f36',
+        borderRadius: 190 / 2,
+
     },
     viewCenterStyle: {
         flex: 1,
@@ -290,8 +300,6 @@ const styles = {
         height: 55,
         backgroundColor: '#005496',
         borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#3e5f36',
         marginLeft: 5,
         marginRight: 5,
         justifyContent: 'center',
@@ -318,7 +326,7 @@ const styles = {
         alignItems: 'center',
     },
     iconStyle: {
-        fontSize: 30,
+        fontSize: 40,
         paddingRight: 5,
         flex: 1,
         color: '#3e5f36',
@@ -347,7 +355,7 @@ const styles = {
         fontSize: 30,
         fontWeight: 'bold',
         color: '#ff0000'
-    }
+    },
 
 };
 

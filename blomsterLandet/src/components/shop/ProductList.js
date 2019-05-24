@@ -12,11 +12,6 @@ class ProductList extends Component {
 
     componentWillMount() {
         self = this;
-        self.initStore();
-    }
-
-    initStore = async () => {
-        store.dispatch(await storeActions.initProducts());
     }
 
     renderProducts() {
