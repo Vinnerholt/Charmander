@@ -46,32 +46,14 @@ class PlantList extends Component {
 
     render() {
         if (self.props.myPlants) {
-            return (<ScrollView>
-
-                {self.renderPlants()}
-                <TouchableOpacity
-                    style={styles.waterAllPlantsButtonStyle}
-                    onPress={() => {
-                        self.props.waterAllPlants();
-                    }}
-                >
-                    <Text style={styles.waterAllPlantsButtonTextStyle}>VATTNA ALLA PLANTOR</Text>
-                </TouchableOpacity>
-                <Button
-                    title="Lägg till planta"
-                    onPress={() => self.props.navigation.navigate('AddPlant')}
-                    color='#99CA3CEE'
-                ></Button>
-
-            </ScrollView>)
+            return (
+                <ScrollView>
+                    {self.renderPlants()}
+                </ScrollView>)
         } else {
             return (
                 <ScrollView >
-                    <Button
-                        title="Lägg till planta"
-                        onPress={() => self.props.navigation.navigate('AddPlant')}
-                        color='#99CA3CEE'
-                    ></Button>
+
                 </ScrollView >
             );
         }

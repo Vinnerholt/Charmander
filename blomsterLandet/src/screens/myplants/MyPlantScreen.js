@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Button, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { connect } from 'react-redux';
 
-
+import * as actions from '../../actions';
 import PlantList from '../../components/myplants/PlantList';
 import plantHandler from './../../services/plantHandler';
 import PlantDetailScreen from './PlantDetailScreen';
 import AddPlantScreen from './AddPlantScreen';
 //import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 
 let self;
@@ -24,7 +26,7 @@ class MyPlantScreen extends React.Component {
             <View style={{ flexDirection: 'row', height: '100%' }}>
                 <PlantList navigation={self.props.navigation} />
                 <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('ShoppingCart')}
+                    onPress={() => this.props.navigation.navigate('AddPlant')}
                     activeOpacity={0.7}
                     style={[styles.TouchableOpacityStyle, styles.bottomRight]}
                 >
@@ -32,14 +34,17 @@ class MyPlantScreen extends React.Component {
                         name="plus"
                         style={styles.iconStyle}
                         color="#99CA3C"
-                    
+
                     />
 
                 </TouchableOpacity>
 
-    
+
                 <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('ShoppingCart')}
+                    onPress={() => {
+                        self.props.screenProps.waterAllPlants();
+                        plantHandler.createFile(self.props.myPlants);
+                    }}
                     activeOpacity={0.7}
                     style={[styles.TouchableOpacityStyle, styles.bottomLeft]}
                 >
@@ -98,5 +103,23 @@ const AppNavigator = createStackNavigator(
     }
 
 );
+const mergeProps = (state, ownProps) => {
+    return ({
+        ...ownProps,
+        screenProps: {
+            ...ownProps,
+            ...state
+        }
+    });
+};
 
-export default createAppContainer(AppNavigator);
+
+const AppContainer = createAppContainer(AppNavigator);
+
+const mapStateToProps = (state) => {
+    return {
+        myPlants: state.myPlants
+    };
+};
+
+export default connect(mapStateToProps, actions, mergeProps)(AppContainer);
