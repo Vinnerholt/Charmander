@@ -4,6 +4,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import CollapseButton from '../../components/common/CollapseButton';
 import images from '../../resources/images/index';
 import BuyButton from '../../components/shop/BuyButton';
+import SmallButton from '../../components/common/SmallButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 let self;
 let image;
@@ -38,6 +40,14 @@ class ShopItemPreviewScreen extends Component {
         console.log(this.state.amountText);
         return (
             <ScrollView contentContainerStyle={scrollViewStyle}>
+                <View>
+                    <SmallButton>
+                        <Icon
+                            style={iconStyle}
+                            name="arrow-back"
+                        />
+                    </SmallButton>
+                </View>
                 <View style={scrollViewStyle}>
                     <View style={imageContainerStyle}>
                         <Image
