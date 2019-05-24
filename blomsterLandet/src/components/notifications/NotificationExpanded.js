@@ -52,6 +52,7 @@ class NotificationExpanded extends Component {
                  return (
                     <Button 
                         title='Gå till produkt'
+                        color='#99CA3C'
                         onPress={() => {
                             NavigationService.navigate('ShopDetails', { product: store.getState().products.get(refKey) });
                             this.props.expandNotification(null);
@@ -61,7 +62,7 @@ class NotificationExpanded extends Component {
                             } else {
                                 NavigationService.navigate('ShopDetails', { product });
                             }
-                        }}
+                                                }}
                     />);
             case 'water':
                 return (
@@ -71,6 +72,7 @@ class NotificationExpanded extends Component {
                             NavigationService.navigate('Plants');
                             this.props.expandNotification(null);
                         }}
+                        color='#99CA3C'
                     /> 
                 );
             }  

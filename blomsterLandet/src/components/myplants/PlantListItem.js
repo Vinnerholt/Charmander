@@ -42,10 +42,6 @@ const PlantListItem = (props) => {
                         borderRadius: 40 / 2,
                         borderWidth: 2,
                         borderColor: '#DDDDDD',
-                        shadowColor: '#050',
-                        shadowOffset: { width: 100, height: 100 },
-                        shadowOpacity: 0.5,
-                        elevation: 2000,
                     }}
                 />
             </View>
