@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import NavigationService from '../services/NavigationService';
 import { store } from '../App';
 import * as actions from '../actions';
+import { findPlant } from './plantHandlerHelperFunctions';
 
 export const initNotifications = async() => {
     //Loads initial notifications
@@ -112,13 +113,37 @@ const convertNotification = (notification) => {
         title: notification.title,
         description: notification.body,
         icon: 'default',
-        imageURL: `../../resources/images/${notification.data.imageURL}`,
+        imageURL: notification.data.imageURL,
         type: notification.data.type,
         refKey: notification.data.refKey,
         read: false
     };
     return notif;
 };
+
+/**
+ * Notification to send when a plant needs to be watered.
+ */
+export const sendWaterNotification = () => {
+    //const plant = findPlant(store.getState().myPlants, plantKey);
+    const randomNotifId = Math.floor(Math.random() * 10000).toString();
+    const localNotification = new firebase.notifications.Notification()
+        .setNotificationId(randomNotifId)
+        .setTitle('Dags att vattna plantor')
+        .setBody('Du har plantor som snart behöver vattnas!')
+        .setData({
+            imageURL: 'vattenkanna',
+            type: 'water',
+            refKey: 'default'
+        })
+        .android.setChannelId('test-channel')
+        .android.setSmallIcon('ic_launcher')
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+        console.log('Yes whathappen??');
+    firebase.notifications().displayNotification(localNotification);
+};
+
 /*export function unmountNotifListeners() {
     this.notificationDisplayedListener();
     this.notificationListener();  

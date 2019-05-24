@@ -18,14 +18,15 @@ const styles = {
         backgroundColor: '#99CA3CEE',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 40,
+        height: 50,
         /*shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         elevation: 2, */
-        borderBottomColor: '#42673D',
-        borderBottomWidth: 3,
-        position: 'relative'
+        //borderBottomColor: '#42673D',
+        //borderBottomWidth: 3,
+        position: 'relative',
+        elevation: 5
     }
 };
 
