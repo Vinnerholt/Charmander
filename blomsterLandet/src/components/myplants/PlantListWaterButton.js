@@ -19,7 +19,6 @@ const PlantListWaterButton = (props) => {
 
 const styles = {
     plantListWaterButtonStyle: {
-        //width: 40,
         height: '90%',
         backgroundColor: '#ffffff',
         borderRadius: 5,
@@ -39,9 +38,6 @@ const styles = {
         paddingTop: 3,
         paddingBottom: 3
     },
-    foo: {
-        backgroundColor: '#005496'
-    }
 
 };
 

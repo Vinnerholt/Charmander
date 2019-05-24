@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 import ShoppingCartScreen from './ShoppingCartScreen';
+//import FloatingButton from '../../components/common/FloatingButton';
 
 class ShopScreen extends React.Component {
     render() {
@@ -18,12 +19,12 @@ class ShopScreen extends React.Component {
                     activeOpacity={0.7}
                     style={styles.TouchableOpacityStyle}
                 >
-                    <Icon 
-                        name='local-grocery-store' //FIXA DETTA, VARFÖR FUNGERAR DET INTE
+                    <Icon
+                        name='local-grocery-store'
                         style={styles.iconStyle}
                         color="#000000"
                     />
-                    
+
                 </TouchableOpacity>
             </View>
         );
@@ -45,27 +46,27 @@ const AppNavigator = createStackNavigator(
 
 const styles = StyleSheet.create({
     MainContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5F5F5',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5F5F5',
     },
-   
+
     TouchableOpacityStyle: {
-      position: 'absolute',
-      width: 60,
-      height: 60,
-      borderRadius: 60 / 2,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      right: 30,
-      bottom: 30,
-      elevation: 10
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        borderRadius: 60 / 2,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+        elevation: 10
     },
     iconStyle: {
         fontSize: 30,
     }
-  });
+});
 
 export default createAppContainer(AppNavigator);
