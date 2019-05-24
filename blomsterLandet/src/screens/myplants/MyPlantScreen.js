@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Button, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { connect } from 'react-redux';
 
-import * as actions from '../../actions';
+
 import PlantList from '../../components/myplants/PlantList';
 import plantHandler from './../../services/plantHandler';
 import PlantDetailScreen from './PlantDetailScreen';
@@ -101,13 +100,4 @@ const AppNavigator = createStackNavigator(
 
 );
 
-const mapStateToProps = (state,ownProps) => {
-
-    return {
-        myPlants: state.myPlants,
-        navigation: ownProps.navigation
-    };
-};
-
-
-export default connect(mapStateToProps, actions)(createAppContainer(AppNavigator));
+export default createAppContainer(AppNavigator);
