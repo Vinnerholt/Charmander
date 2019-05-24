@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Button, FlatList } from 'react-native';
+import { ScrollView, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import PlantListItem from './PlantListItem';
@@ -47,7 +47,7 @@ class PlantList extends Component {
     render() {
         if (self.props.myPlants) {
             return (
-                <ScrollView>
+                <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
                     {self.renderPlants()}
                 </ScrollView>)
         } else {

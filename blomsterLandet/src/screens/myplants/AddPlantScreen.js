@@ -13,42 +13,40 @@ let eD;
 let wI;
 class AddPlantScreen extends React.Component {
 
-    state = { type: '', plantName: '' }
+    state = { newPlant: { type: '', name: '', advice: '', extendedDescription: '', wateringInterval: 5 } }
 
     componentWillMount() {
         self = this;
-        self.setState({ type: self.props.plantTypes[0].type });
+        self.updateType(self.props.plantTypes[0].type);
     }
 
     updateType = (type) => {
-        self.props.plantTypes.map(plant => {
-            if (plant.type === type) {
-                bigAdvice = plant.advice;
-                eD = plant.extendedDescription;
-                wI = plant.wateringInterval;
-                return [bigAdvice, eD];
+        console.log(type);
+        self.props.plantTypes.map(typeObject => {
+            if (typeObject.type === type) {
+                let tempNewPlant = self.state.newPlant;
+                tempNewPlant.type = type;
+                tempNewPlant.advice = typeObject.advice;
+                tempNewPlant.extendedDescription = typeObject.extendedDescription;
+                tempNewPlant.wateringInterval = typeObject.wateringInterval;
+                console.log(self.state.newPlant);
+                self.setState({ newPlant: tempNewPlant });
+                console.log(self.state.newPlant);
             }
         });
-        self.setState({ type: type });
-    }
+    };
 
     addPlantPressed() {
-        let newPlant = {
-            name: self.state.plantName,
-            type: self.state.type,
-            advice: bigAdvice,
-            extendedDescription: eD,
-            lastWatered: Date.now() / 1000,
-            wateringInterval: wI
-        };
-        self.props.addPlant(newPlant);
+        console.log(self.state.newPlant);
+        self.state.newPlant.lastWatered = Date.now() / 1000;
+        self.props.addPlant(self.state.newPlant);
         self.props.navigation.navigate('Home');
         plantHandler.createFile(self.props.myPlants);
     }
 
     renderPlantTypes() {
-        return self.props.plantTypes.map(plant =>
-            <Picker.Item label={plant.type} value={plant.type} plant={plant} />);
+        return self.props.plantTypes.map(typeObject =>
+            <Picker.Item label={typeObject.type} value={typeObject.type} typeObject={typeObject} />);
     }
     render() {
 
@@ -58,18 +56,25 @@ class AddPlantScreen extends React.Component {
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', height: 60, justifyContent: 'space-between' }}>
                     <Text>Namn:</Text>
                     <MyTextInput
-                        onChangeText={(plantName) => {
-                            this.setState({ plantName });
+                        onChangeText={(name) => {
+                            let tempNewPlant = self.state.newPlant;
+                            tempNewPlant.name = name;
+
+                            this.setState({ newPlant: tempNewPlant });
                         }}
-                        value={self.state.plantName}
+                        value={self.state.newPlant.name}
                     />
                 </View>
                 <View style={{ backgroundColor: '#fff', flexDirection: 'row', height: 60, justifyContent: 'space-between' }}>
                     <Text>Typ:</Text>
                     <Picker
-                        selectedValue={self.state.type}
+                        selectedValue={self.state.newPlant.type}
                         style={{ height: 50, width: '80%' }}
-                        onValueChange={self.updateType}>
+                        onValueChange={(newValue) => {
+                            console.log("hej")
+
+                            self.updateType(newValue);
+                        }}>
                         {self.renderPlantTypes()}
                     </Picker>
                 </View>
