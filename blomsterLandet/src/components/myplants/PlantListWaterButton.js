@@ -4,11 +4,11 @@ import { TouchableOpacity } from 'react-native';
 
 const PlantListWaterButton = (props) => {
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             onPress={props.onPress}
             style={styles.plantListWaterButtonStyle}
         >
-            <Icon 
+            <Icon
                 name="water"
                 style={styles.wateringStyle}
                 color="#005496"
@@ -21,9 +21,8 @@ const styles = {
     plantListWaterButtonStyle: {
         height: '90%',
         backgroundColor: '#ffffff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#3e5f36',
+        borderRadius: 50,
+        borderColor: '#005496',
         marginLeft: 5,
         marginRight: 15,
         justifyContent: 'center',
@@ -31,7 +30,7 @@ const styles = {
         shadowColor: '#050',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
-        elevation: 5
+        elevation: 15
     },
     wateringStyle: {
         fontSize: 30,

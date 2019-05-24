@@ -67,12 +67,12 @@ class PlantDetailScreen extends Component {
 
                     }}
                 >
-                    <Icon 
+                    <Icon
                         name="save"
-                        style={styles.iconStyle} 
+                        style={styles.iconStyle}
                         color='white'
                     />
-                </SaveButton>    
+                </SaveButton>
             );
             deleteButton = (
                 <DeleteButton
@@ -269,12 +269,11 @@ const styles = {
         elevation: 20,
     },
     imageStyle: {
-        height: 200,
-        width: 200,
+        height: 190,
+        width: 190,
         overflow: 'hidden',
-        borderRadius: 200 / 2,
-        borderWidth: 4,
-        borderColor: '#3e5f36',
+        borderRadius: 190 / 2,
+
     },
     viewCenterStyle: {
         flex: 1,
@@ -296,8 +295,6 @@ const styles = {
         height: 55,
         backgroundColor: '#005496',
         borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#3e5f36',
         marginLeft: 5,
         marginRight: 5,
         justifyContent: 'center',
