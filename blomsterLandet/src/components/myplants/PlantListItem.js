@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, Image } from 'react-native';
+import { Text, TouchableOpacity, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import images from '../../resources/images';
@@ -33,17 +33,23 @@ const PlantListItem = (props) => {
 
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate('Details', { plant: props.plant })} style={styles.itemStyle}>
-            <Image
-                source={image}
-                style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 40 / 2,
-                    borderWidth: 2,
-                    borderColor: '#3e5f36',
-                    overflow: 'hidden'
-                }}
-            />
+            <View style={{ elevation: 100, shadowColor: '#000', width: 40, height: 40, borderRadius: 40 / 2}}>
+                <Image
+                    source={image}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 40 / 2,
+                        borderWidth: 2,
+                        borderColor: '#DDDDDD',
+                        shadowColor: '#050',
+                        shadowOffset: { width: 100, height: 100 },
+                        shadowOpacity: 0.5,
+                        elevation: 2000,
+                    }}
+                />
+            </View>
+
             <Text style={styles.textStyle}>
                 {props.plant.name}
             </Text>
