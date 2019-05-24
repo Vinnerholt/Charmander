@@ -31,8 +31,17 @@ class PlantList extends Component {
     async getPlants() {
         await plantHandler.getFile().then(item => {
             return item;
-        }).then(item => {
-            self.props.loadMyPlantsData(item);
+        }).then(async (item) => {
+            console.log(Date.now() / 1000);
+            if (item) {
+                self.props.loadMyPlantsData(item);
+            } else {
+                await plantHandler.createDummyFile().then(() => {
+                    plantHandler.getFile().then(dummyList => {
+                        self.props.loadMyPlantsData(dummyList);
+                    });
+                });
+            }
         });
     }
 
