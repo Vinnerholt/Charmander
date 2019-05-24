@@ -122,7 +122,7 @@ const styles = {
         alignItems: 'center',
     },
     iconStyle: {
-        fontSize: 30,
+        fontSize: 40,
         paddingRight: 5,
         flex: 1,
         color: '#3e5f36',

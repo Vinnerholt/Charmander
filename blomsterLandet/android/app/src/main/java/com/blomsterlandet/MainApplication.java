@@ -3,8 +3,8 @@ package com.blomsterlandet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.rnfs.RNFSPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; // <-- Add this line
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
@@ -32,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new AsyncStoragePackage(),
-            new RNFSPackage(),
             new RNFirebasePackage(),
             new RNGestureHandlerPackage(),
             new RNFirebaseMessagingPackage(),

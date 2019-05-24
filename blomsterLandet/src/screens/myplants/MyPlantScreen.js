@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         bottom: 30,
     },
     iconStyle: {
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: 'bold'
     }
 });

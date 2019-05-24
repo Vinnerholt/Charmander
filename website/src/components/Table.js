@@ -127,7 +127,6 @@ class CustomizedTable extends React.Component {
 					{this.renderProductList(row.order)}
 				</CustomTableCell>
 				<CustomTableCell align="right">{row.buyer}</CustomTableCell>
-				<CustomTableCell align="right">{row.amount}</CustomTableCell>
 				<CustomTableCell align="right">{row.postalCode}</CustomTableCell>
 			</TableRow>);
 		}
@@ -172,7 +171,6 @@ class CustomizedTable extends React.Component {
 							<TableRow>
 								<CustomTableCell align="center">Product(s)</CustomTableCell>
 								<CustomTableCell align="right">Buyer</CustomTableCell>
-								<CustomTableCell align="right">Amount</CustomTableCell>
 								<CustomTableCell align="right">Postal Code</CustomTableCell>
 							</TableRow>
 						</TableHead>

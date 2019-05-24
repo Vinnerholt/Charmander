@@ -35,7 +35,7 @@ const styles = {
         elevation: 10
       },
       iconStyle: {
-          fontSize: 30,
+          fontSize: 40,
       }
 };
 

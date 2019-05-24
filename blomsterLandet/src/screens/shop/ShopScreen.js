@@ -1,14 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import ProductList from '../../components/shop/ProductList';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 
 import ShopItemPreviewScreen from './ShopItemPreviewScreen';
 import ShoppingCartScreen from './ShoppingCartScreen';
 //import FloatingButton from '../../components/common/FloatingButton';
 
+/**
+ * Screen that shows products available for purchase.
+ */
 class ShopScreen extends React.Component {
     render() {
         return (
@@ -41,7 +43,8 @@ const AppNavigator = createStackNavigator(
         headerMode: 'none',
         cardStyle: {
             backgroundColor: 'transperent'
-        }
+        },
+        headerMode: 'none'
     }
 );
 
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
         elevation: 10
     },
     iconStyle: {
-        fontSize: 30,
+        fontSize: 40,
     }
 });
 

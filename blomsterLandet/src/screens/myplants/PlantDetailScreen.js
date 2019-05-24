@@ -70,6 +70,7 @@ class PlantDetailScreen extends Component {
                     <Icon 
                         name="save"
                         style={styles.iconStyle} 
+                        color='white'
                     />
                 </SaveButton>    
             );
@@ -323,7 +324,7 @@ const styles = {
         alignItems: 'center',
     },
     iconStyle: {
-        fontSize: 30,
+        fontSize: 40,
         paddingRight: 5,
         flex: 1,
         color: '#3e5f36',

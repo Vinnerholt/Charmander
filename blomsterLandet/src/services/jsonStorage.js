@@ -1,6 +1,11 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { store } from '../App';
 
+/**
+ * The jsonStorage saves a json file locally on the device.
+ * 
+ * The key is the name of the json file.
+ */
 export default {
     async setItem(key, value) {
         try {

@@ -56,6 +56,7 @@ export const waterPlant = (plant) => {
         payload: plant
     };
 };
+
 export const waterAllPlants = () => {
     return {
         type: 'water_all_plants',
@@ -68,6 +69,11 @@ export const addPlant = (plant) => {
         payload: plant
     };
 };
+
+/**
+ * Initializes the notifications in the notification list by
+ * fetching them from a local json file.
+ */
 export const initNotifications = async () => {
     let notif = [];
     await jsonStorage.getItem('notifications').then(result => {

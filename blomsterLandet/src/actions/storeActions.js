@@ -1,5 +1,8 @@
 import firestoreHandler from '../services/firestoreHandler';
 
+/**
+ * initializes the products in the store by fetching them from firebase
+ */
 export const initProducts = async () => {
     const products = await firestoreHandler.getCollection('products');
     const map = new Map();

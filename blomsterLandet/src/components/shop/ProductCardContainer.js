@@ -20,22 +20,7 @@ const styles = {
         borderWidth: 0,
         borderRadius: 2,
         borderColor: '#06470c',
-        borderTopWidth: 3
-
-    },
-    productName: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    productDescription: {
-        marginLeft: 3,
-        marginRight: 3
-    },
-    priceTag: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        alignSelf: 'center'
+        borderBottomWidth: 1,
     }
 };
 

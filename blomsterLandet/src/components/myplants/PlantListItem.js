@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import images from '../../resources/images';
 import * as Progress from 'react-native-progress';
 import { calcVal, daysUntilWater } from '../../services/plantHandlerHelperFunctions';
+import { sendWaterNotification } from '../../services/notifHandler';
 import * as actions from './../../actions';
 import PlantListWaterButton from './PlantListWaterButton';
+
 
 const PlantListItem = (props) => {
 
@@ -22,6 +24,7 @@ const PlantListItem = (props) => {
 
     function waterBackgroundColor() {
         if (daysUntilWater(props.plant.lastWatered, props.plant.wateringInterval) <= 1) {
+            sendWaterNotification(1, props.plant.key);
             return '#ff9494';
         }
         return '#b0c4de';

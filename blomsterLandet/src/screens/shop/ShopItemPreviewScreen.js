@@ -18,7 +18,12 @@ class ShopItemPreviewScreen extends Component {
         self = this;
         image = images[this.props.navigation.getParam('product').key];
     }
-
+    
+    /**
+     * Checks whether the text inputted is an integer. If it is, it is accepted
+     * 
+     * @param {*} text The amount 
+     */
     onChanged(text) {
         let newText = '';
         let numbers = '0123456789';
@@ -34,14 +39,17 @@ class ShopItemPreviewScreen extends Component {
 
     render() {
         const { amountInput, nameStyle, imageContainerStyle, viewCenterStyle,
-            imageStyle, waterButtonStyle, waterButtonTextStyle, bottomButtonsContainerStyle, speciesStyle,
-            scrollViewStyle } = styles;
+            imageStyle, waterButtonStyle, bottomButtonsContainerStyle, speciesStyle,
+            scrollViewStyle, topButtonsContainerStyle, iconStyle } = styles;
 
         console.log(this.state.amountText);
         return (
             <ScrollView contentContainerStyle={scrollViewStyle}>
-                <View>
-                    <SmallButton>
+                <View style={topButtonsContainerStyle}>
+                    <SmallButton onPress={() => {
+                        self.props.navigation.navigate('Home');
+                    }}>
+
                         <Icon
                             style={iconStyle}
                             name="arrow-back"
@@ -101,10 +109,25 @@ const styles = {
         backgroundColor: 'white',
         borderWidth: 3
     },
+    topButtonsContainerStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 4,
+        paddingBottom: 4,
+        width: '100%'
+    },
+    iconStyle: {
+        fontSize: 40,
+        paddingRight: 5,
+        flex: 1,
+        color: '#3e5f36',
+    },
     buyButtonStyle: {
         justifyContent: 'center',
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingBottom: 20
     },
     nameStyle: {
         fontSize: 40,
@@ -147,18 +170,10 @@ const styles = {
         justifyContent: 'center',
         paddingTop: 10,
     },
-    topButtonsContainerStyle: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: 4,
-        paddingBottom: 4,
-        width: '100%'
-    },
     waterButtonStyle: {
         width: 150,
         height: 55,
-        backgroundColor: '#005496',
+        backgroundColor: '#3e5f36',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#3e5f36',
@@ -186,12 +201,6 @@ const styles = {
     },
     scrollViewStyle: {
         alignItems: 'center',
-    },
-    iconStyle: {
-        fontSize: 30,
-        paddingRight: 5,
-        flex: 1,
-        color: '#3e5f36',
     },
     gaugeImageContainerStyle: {
         position: 'absolute',

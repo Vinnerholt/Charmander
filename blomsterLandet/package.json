@@ -12,7 +12,6 @@
     "react": "16.8.3",
     "react-native": "^0.59.6",
     "react-native-firebase": "^5.3.1",
-    "react-native-fs": "^2.13.3",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-progress": "^3.6.0",
     "react-native-simple-gauge": "^0.1.11",

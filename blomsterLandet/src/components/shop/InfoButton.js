@@ -5,8 +5,7 @@ import { View, Button, Text } from 'react-native';
 import NavigationService from '../../services/NavigationService';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const InfoButton = (props) => {
-    return (
+const InfoButton = (props) => (
         <View >
             <TouchableOpacity
                 style={styles.buyButtonStyle}
@@ -17,7 +16,6 @@ const InfoButton = (props) => {
             </TouchableOpacity>
         </View>
     );
-};
 
 const styles = {
     buyButtonStyle: {
