@@ -19,7 +19,7 @@ class InfoScreen extends React.Component {
                             width: '100%',
                             height: 200,
                             marginTop: 10,
-                            marginBottom: 10
+                            marginBottom: 10 
                         }}
                     />
                         <Text style={styles.fatText}>Krukväxterna behöver näring</Text>
