@@ -12,7 +12,7 @@ const InfoButton = (props) => {
                 style={styles.buyButtonStyle}
                 onPress={() => NavigationService.navigate('ShopDetails', { product: props.product })}
             >
-                <Text style={styles.textStyle}>Välj</Text>
+                <Text style={styles.textStyle}>Köp</Text>
 
             </TouchableOpacity>
         </View>

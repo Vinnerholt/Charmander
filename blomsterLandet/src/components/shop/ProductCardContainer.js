@@ -16,12 +16,11 @@ const styles = {
     productCardContainer: {
         width: '100%',
         minHeight: 200,
-        backgroundColor: '#AE2',
+        backgroundColor: '#FFF',
         borderWidth: 0,
         borderRadius: 2,
         borderColor: '#06470c',
-        marginTop: 35,
-        marginBotton: 35
+        borderTopWidth: 3
 
     },
     productName: {
