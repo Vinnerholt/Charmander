@@ -10,6 +10,8 @@ import * as actions from '../../actions';
 import { store } from '../../App';
 import NavigationService from '../../services/NavigationService';
 import images from '../../resources/images/index';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 
 class NotificationExpanded extends Component {
@@ -26,10 +28,13 @@ class NotificationExpanded extends Component {
                             source={images[imageURL]}
                         />
                         <View style={buttonContainer}>
-                            <Button
-                                onPress={() => this.props.expandNotification(null)}
-                                title="x"
-                            />
+                            <TouchableOpacity>
+                                <Text
+                                    onPress={() => {
+                                        this.props.expandNotification(null)
+                                        console.log("click");
+                                    }} style={{ color: 'red', fontSize: 20, paddingRight: 5 }}>x</Text>
+                            </TouchableOpacity>
                         </View>
                     </CardSection>
                     <CardSection>
@@ -39,14 +44,14 @@ class NotificationExpanded extends Component {
                     <CardSection>
                         <Text style={descriptionStyle}>{description}</Text>
                     </CardSection>
-                </React.Fragment>
+                </React.Fragment >
             );
         }
     }
 
     renderNavButton() {
         if (this.props.notification !== null) {
-           const { type, refKey } = this.props.notification;
+            const { type, refKey } = this.props.notification;
             switch (type) {
             case 'product':
                  return (
