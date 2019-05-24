@@ -20,7 +20,7 @@ const styles = {
         borderWidth: 0,
         borderRadius: 2,
         borderColor: '#06470c',
-        borderBottomWidth: 1,
+        borderBottomWidth: 0,
     }
 };
 

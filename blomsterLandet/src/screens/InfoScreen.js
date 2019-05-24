@@ -9,7 +9,7 @@ class InfoScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }} >
-                <ScrollView>
+                <ScrollView contentContainerStyle={{ paddingBottom: 10, backgroundColor: 'white' }}>
                     <ProductCardContainer>
                     <Text style={styles.titleText}>Trädgårdskalender - maj</Text>
                     <Text style={styles.titleSubText}>Med trädgårdskalendern håller du koll på vad som behöver göras i trädgården månad för månad.</Text>
