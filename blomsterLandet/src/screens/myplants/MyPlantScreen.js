@@ -8,7 +8,6 @@ import PlantList from '../../components/myplants/PlantList';
 import plantHandler from './../../services/plantHandler';
 import PlantDetailScreen from './PlantDetailScreen';
 import AddPlantScreen from './AddPlantScreen';
-import FloatingButton from '../../components/common/FloatingButton';
 //import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
