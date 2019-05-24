@@ -16,11 +16,10 @@ const ProductCard = (props) => {
                 source={image}
                 style={{
                     width: '100%',
-                    height: 150
+                    height: 200
                 }}
             />
             <Text style={styles.productName}>{props.product.name}</Text>
-            <Text style={styles.productDescription}>{props.product.description}</Text>
             <Text style={styles.priceTag}>{props.product.price}kr St </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                 <InfoButton
@@ -32,28 +31,26 @@ const ProductCard = (props) => {
 };
 
 const styles = {
-    productCardContainer: {
-        width: '90%',
-        minHeight: 200,
-        backgroundColor: '#AE2',
-        borderWidth: 3,
-        borderRadius: 2,
-        borderColor: '#333'
-
-    },
     productName: {
         fontSize: 20,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        color: '#000',
+        marginTop: 5
     },
     productDescription: {
         marginLeft: 3,
-        marginRight: 3
+        marginRight: 3,
+        alignSelf: 'center',
+        textAlign: 'center',
+        color: '#000'
     },
     priceTag: {
         fontSize: 16,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        color: '#000',
+        marginTop: 5
     }
 };
 

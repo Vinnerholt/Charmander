@@ -14,12 +14,13 @@ const ProductCardContainer = (props) => {
 
 const styles = {
     productCardContainer: {
-        width: '90%',
+        width: '100%',
         minHeight: 200,
-        backgroundColor: '#AE2',
-        borderWidth: 3,
+        backgroundColor: '#FFF',
+        borderWidth: 0,
         borderRadius: 2,
-        borderColor: '#333'
+        borderColor: '#06470c',
+        borderTopWidth: 3
 
     },
     productName: {

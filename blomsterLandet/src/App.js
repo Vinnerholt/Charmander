@@ -70,6 +70,7 @@ export const store = createStore(reducers);
 class App extends React.Component {
     componentDidMount() {
         notifHandler.initNotifications();
+        console.disableYellowBox = true;
     }
     render() {
         return (
