@@ -1,8 +1,20 @@
 ﻿# DAT256 Software engineering project (Grupp Charmander)
 Under kursen DAT256 Software engineering project VT19 har vi i grupp Charmander utvecklat en app som inspiration till Blomsterlandet.
 
+## Innehåll
+* [Intro](#intro)
+  * [Namnförtydligande](#namnförtydligande)
+  * [Vad ligger vart](#vad-ligger-vart)
+  * [Demos](#demos)
+* [Projektet](#projektet)
+  * [Scrum](#scrum)
+  * [Huvudsakliga teknologier som använts under utvecklingen](#huvudsakliga-teknologier-som-använts-under-utvecklingen)
+  * [Appen](#appen)
+  * [Webbsidan](#webbsidan)
+
 # Intro
-## Namnförtydligande (Riktigt namn: github-user)
+## Namnförtydligande
+(Riktigt namn: github-user)
 * Andrea Wester: andreawester
 * Aron Sjöberg: AronSeamountain, Aron Sjöberg
 * Benjamin Vinnerholt: Vinnerholt
@@ -23,6 +35,7 @@ Programmeringsparen var:
 
 ## Vad ligger vart
 I Deliverables återfinns:
+* final report
 * de individuella reflektionerna, som har en mapp per person i gruppen
 * team reflections
 * en version av Acceptansflödet
@@ -30,10 +43,22 @@ I Deliverables återfinns:
 * en version av mockup
 * en screenshot av gitinspector
 
-## Innehåll
-* [Projektet](#projektet)
-  * [Appen](#appen)
-  * [Webbsidan](#webbsidan)
+## Demos
+En demo av att lägga till, och sedan ta bort en växt
+
+![A gif showing how to add and remove a plant](https://github.com/Vinnerholt/Charmander/blob/master/demo/make_delete.gif)
+
+En demo av att lägga en order ifrån en rekommendationsnotis
+
+![A gif showing a user placing an order](https://github.com/Vinnerholt/Charmander/blob/master/demo/order_from_notification.gif)
+
+En demo av att vattna alla plantor samtidigt
+
+![A gif showing a user watering all the plants at the same time](https://github.com/Vinnerholt/Charmander/blob/master/demo/water_all_plants.gif)
+
+Här är en screenshot ifrån webbplatsen som visar ordrar sorterade efter postnummer. Man kan bland annat se ordern som lades i en av gif:sen ovan
+
+![A screenshot of the orders website](https://github.com/Vinnerholt/Charmander/blob/master/demo/website.png)
   
 # Projektet
  Under projektet har vi utvecklat en Android-app i react-native för att ge inspiration till Blomsterlandet med inriktning mot yngre användare. Vi har också haft ett fokus på transport och hållbarhet.
@@ -53,6 +78,7 @@ I Deliverables återfinns:
    * cloud notifications
  * Redux
  * React-redux
+ * React Navigation
 ## Appen
 För att starta appen använder du dig av npm och react-native cli:
 ```
