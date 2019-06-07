@@ -43,6 +43,10 @@ I Deliverables återfinns:
 * en version av mockup
 * en screenshot av gitinspector
 
+[Här är en länk till Trello.](https://trello.com/invite/b/qjjAUtbW/c4ef5e9462e65ab8b3fd0ed6aee292ce/projectupdated)
+
+[Här är en länk till vår Google Drive.](https://drive.google.com/drive/folders/12bnt-R1mBYcD_Dz36Fxzx5llZF2U73Kh?usp=sharing)
+
 ## Demos
 En demo av att lägga till, och sedan ta bort en växt
 
