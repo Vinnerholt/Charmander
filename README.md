@@ -35,7 +35,7 @@ Programmeringsparen var:
 
 ## Vad ligger vart
 I Deliverables återfinns:
-* final report
+* [final report](https://github.com/Vinnerholt/Charmander/blob/master/Deliverables/Slutrapport%20Charmander.pdf)
 * de individuella reflektionerna, som har en mapp per person i gruppen
 * team reflections
 * en version av Acceptansflödet
@@ -84,7 +84,7 @@ Här är en screenshot ifrån webbplatsen som visar ordrar sorterade efter postn
  * React-redux
  * React Navigation
 ## Appen
-För att starta appen använder du dig av npm och react-native cli:
+För att starta appen använder du dig av npm och [react-native cli](https://facebook.github.io/react-native/docs/getting-started.html) (alltså INTE expo CLI):
 ```
 cd blomsterLandet
 npm install
